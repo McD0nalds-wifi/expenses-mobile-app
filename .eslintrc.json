@@ -1,0 +1,74 @@
+{
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:typescript-sort-keys/recommended",
+    "plugin:storybook/recommended",
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "./"
+  },
+  "plugins": ["formatjs", "@typescript-eslint", "sort-keys-fix", "typescript-sort-keys", "@typescript-eslint", "import"],
+  "rules": {
+    "quotes": ["warn", "single"],
+    "react/react-in-jsx-scope": "off",
+    "jsx-quotes": ["warn", "prefer-single"],
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-floating-promises": "warn",
+    "@typescript-eslint/no-misused-promises": "warn",
+    "import/no-unresolved": "error",
+    "import/default": "error",
+    "import/no-self-import": "error",
+    "max-len": [
+      "warn",
+      {
+        "code": 120
+      }
+    ],
+    "comma-dangle": ["error", "always-multiline"],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always",
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"]
+      }
+    ],
+    "sort-imports": ["error", { "allowSeparatedGroups": true, "ignoreDeclarationSort": true }],
+    "formatjs/enforce-id": [
+      "error",
+      {
+        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
+      }
+    ],
+    "react/jsx-sort-props": "warn",
+    "sort-keys-fix/sort-keys-fix": "warn"
+  },
+  "settings": {
+    "import/ignore": ["node_modules/react-native/index\\.js$"],
+    "import/resolver": {
+      "typescript": {},
+      "node": {
+        "paths": ["./"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}

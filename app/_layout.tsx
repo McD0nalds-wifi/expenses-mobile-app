@@ -1,56 +1,123 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { useEffect } from 'react'
+
+import { ClerkProvider, useAuth } from '@clerk/clerk-expo'
+import { Ionicons } from '@expo/vector-icons'
+import { useFonts } from 'expo-font'
+import { SplashScreen, Stack, router, useRouter } from 'expo-router'
+import * as SecureStore from 'expo-secure-store'
+import { TouchableOpacity } from 'react-native'
+
+const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
+
+//getToken(key: string): Promise<string | null>;     saveToken(key: string, value: string): Promise<void | null>
+
+const tokenCache = {
+    async getToken(key: string) {
+        try {
+            return SecureStore.getItemAsync(key)
+        } catch {
+            return null
+        }
+    },
+    async saveToken(key: string, value: string) {
+        return SecureStore.setItemAsync(key, value)
+    },
+}
 
 export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+    // Catch any errors thrown by the _layout component.
+    ErrorBoundary,
+} from 'expo-router'
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
+    // Ensure that reloading on `/modal` keeps a back button present.
+    initialRouteName: '(tabs)',
+}
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
+    const [loaded, error] = useFonts({
+        mon: require('../assets/fonts/Montserrat-Regular.ttf'),
+        'mon-b': require('../assets/fonts/Montserrat-Bold.ttf'),
+        'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
+    })
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+    // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+    useEffect(() => {
+        if (error) throw error
+    }, [error])
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    useEffect(() => {
+        if (loaded) {
+            SplashScreen.hideAsync()
+        }
+    }, [loaded])
+
+    if (!loaded) {
+        return null
     }
-  }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
-
-  return <RootLayoutNav />;
+    return (
+        <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+            <RootLayoutNav />
+        </ClerkProvider>
+    )
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+    // const colorScheme = useColorScheme();
+    const { back } = useRouter()
+    const { isLoaded, isSignedIn } = useAuth()
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
-  );
+    useEffect(() => {
+        if (isLoaded && !isSignedIn) {
+            router.push('/(modals)/login')
+        }
+    }, [isLoaded])
+
+    return (
+        // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+            <Stack.Screen name={'(tabs)'} options={{ headerShown: false }} />
+
+            <Stack.Screen
+                name={'(modals)/login'}
+                options={{
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={back}>
+                            <Ionicons name={'close-outline'} size={28} />
+                        </TouchableOpacity>
+                    ),
+                    headerTitleStyle: {
+                        fontFamily: 'mon-sb',
+                    },
+                    presentation: 'modal',
+                    title: 'Log in or sign up',
+                }}
+            />
+
+            <Stack.Screen
+                name={'listing/[id]'}
+                options={{
+                    headerTitle: '',
+                }}
+            />
+
+            <Stack.Screen
+                name={'(modals)/booking'}
+                options={{
+                    animation: 'fade',
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={back}>
+                            <Ionicons name={'close-outline'} size={28} />
+                        </TouchableOpacity>
+                    ),
+                    presentation: 'transparentModal',
+                }}
+            />
+        </Stack>
+        // </ThemeProvider>
+    )
 }
