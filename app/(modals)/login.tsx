@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-import { colors } from '@/shared/constants'
+import { COLORS } from '@/shared/constants'
 import { useWarmUpBrowser } from '@/shared/hooks'
 import { baseStyles } from '@/shared/styles'
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     btnOutline: {
         alignItems: 'center',
         backgroundColor: '#fff',
-        borderColor: colors.grey,
+        // borderColor: colors.grey,
         borderRadius: 8,
         borderWidth: 1,
         flexDirection: 'row',
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     },
     btnOutlineText: {
         color: '#000',
-        fontFamily: 'mon-sb',
+        // fontFamily: 'mon-sb',
         fontSize: 16,
     },
     container: {
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
         padding: 26,
     },
     seperator: {
-        color: colors.grey,
-        fontFamily: 'mon-sb',
+        // color: colors.grey,
+        // fontFamily: 'mon-sb',
         fontSize: 16,
     },
     seperatorView: {

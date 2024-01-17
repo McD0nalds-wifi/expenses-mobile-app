@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
 
-import { colors } from '../constants'
+import { COLORS } from '../constants'
 
 export const baseStyles = StyleSheet.create({
     btn: {
         alignItems: 'center',
-        backgroundColor: colors.primary,
+        // backgroundColor: colors.primary,
         borderRadius: 8,
         height: 50,
         justifyContent: 'center',
@@ -16,7 +16,7 @@ export const baseStyles = StyleSheet.create({
     },
     btnText: {
         color: '#fff',
-        fontFamily: 'mon-b',
+        // fontFamily: 'mon-b',
         fontSize: 16,
     },
     container: {
@@ -25,7 +25,7 @@ export const baseStyles = StyleSheet.create({
     },
     footer: {
         backgroundColor: '#fff',
-        borderTopColor: colors.grey,
+        // borderTopColor: colors.grey,
         borderTopWidth: StyleSheet.hairlineWidth,
         bottom: 0,
         height: 100,

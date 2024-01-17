@@ -1,41 +1,46 @@
-import { Ionicons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import { Tabs } from 'expo-router'
 
-import { colors } from '@/shared/constants'
+import { COLORS } from '@/shared/constants'
+
+const TABS = [
+    {
+        iconName: 'search1',
+        name: 'index',
+        title: 'Поиск',
+    },
+    {
+        iconName: 'hearto',
+        name: 'favourites',
+        title: 'Избранное',
+    },
+    {
+        iconName: 'user',
+        name: 'profile',
+        title: 'Профиль',
+    },
+] as const
 
 const Layout = () => {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: colors.primary,
+                tabBarActiveTintColor: COLORS.primary01,
                 tabBarLabelStyle: {
-                    fontFamily: 'mon-sb',
+                    fontFamily: 'sf-sb',
                 },
             }}
         >
-            <Tabs.Screen
-                name={'index'}
-                options={{
-                    tabBarIcon: ({ color, size }) => <Ionicons color={color} name={'search'} size={size} />,
-                    tabBarLabel: 'Explore',
-                }}
-            />
-
-            <Tabs.Screen
-                name={'favourites'}
-                options={{
-                    tabBarIcon: ({ color, size }) => <Ionicons color={color} name={'heart-outline'} size={size} />,
-                    tabBarLabel: 'Favourites',
-                }}
-            />
-
-            <Tabs.Screen
-                name={'profile'}
-                options={{
-                    tabBarIcon: ({ color, size }) => <Ionicons color={color} name={'heart-outline'} size={size} />,
-                    tabBarLabel: 'Profile',
-                }}
-            />
+            {TABS.map(({ iconName, name, title }) => (
+                <Tabs.Screen
+                    key={name}
+                    name={name}
+                    options={{
+                        tabBarIcon: ({ color, size }) => <AntDesign color={color} name={iconName} size={size} />,
+                        tabBarLabel: title,
+                    }}
+                />
+            ))}
         </Tabs>
     )
 }

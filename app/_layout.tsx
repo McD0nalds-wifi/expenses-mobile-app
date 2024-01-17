@@ -2,14 +2,16 @@ import { useEffect } from 'react'
 
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons'
-import { useFonts } from 'expo-font'
+import { FontSource, useFonts } from 'expo-font'
 import { SplashScreen, Stack, router, useRouter } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import { TouchableOpacity } from 'react-native'
 
-const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
+import sfProTextMedium from '@/assets/fonts/SFProText-Medium.ttf'
+import sfProTextRegular from '@/assets/fonts/SFProText-Regular.ttf'
+import sfProTextSemibold from '@/assets/fonts/SFProText-Semibold.ttf'
 
-//getToken(key: string): Promise<string | null>;     saveToken(key: string, value: string): Promise<void | null>
+const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
 
 const tokenCache = {
     async getToken(key: string) {
@@ -39,9 +41,9 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
-        mon: require('../assets/fonts/Montserrat-Regular.ttf'),
-        'mon-b': require('../assets/fonts/Montserrat-Bold.ttf'),
-        'mon-sb': require('../assets/fonts/Montserrat-SemiBold.ttf'),
+        sf: sfProTextRegular as FontSource,
+        'sf-m': sfProTextMedium as FontSource,
+        'sf-sb': sfProTextSemibold as FontSource,
     })
 
     // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -91,7 +93,7 @@ function RootLayoutNav() {
                         </TouchableOpacity>
                     ),
                     headerTitleStyle: {
-                        fontFamily: 'mon-sb',
+                        // fontFamily: 'mon-sb',
                     },
                     presentation: 'modal',
                     title: 'Log in or sign up',
