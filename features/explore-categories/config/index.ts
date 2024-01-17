@@ -10,3 +10,5 @@ export const CATEGORIES = [
         title: 'Спорт',
     },
 ] as const
+
+export const DEFAULT_ACTIVE_INDEX = 0

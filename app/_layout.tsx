@@ -10,6 +10,7 @@ import { TouchableOpacity } from 'react-native'
 import sfProTextMedium from '@/assets/fonts/SFProText-Medium.ttf'
 import sfProTextRegular from '@/assets/fonts/SFProText-Regular.ttf'
 import sfProTextSemibold from '@/assets/fonts/SFProText-Semibold.ttf'
+import { StoreProvider } from '@/shared/providers'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
 
@@ -62,9 +63,11 @@ export default function RootLayout() {
     }
 
     return (
-        <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-            <RootLayoutNav />
-        </ClerkProvider>
+        <StoreProvider>
+            <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+                <RootLayoutNav />
+            </ClerkProvider>
+        </StoreProvider>
     )
 }
 

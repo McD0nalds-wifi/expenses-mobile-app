@@ -6,15 +6,19 @@ import { Link } from 'expo-router'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import { COLORS } from '@/shared/constants'
+import { useTypedDispatch } from '@/shared/hooks'
 import { typographyStyles } from '@/shared/styles'
 
-import { CATEGORIES } from '../config'
+import { CATEGORIES, DEFAULT_ACTIVE_INDEX } from '../config'
+import { setCategory } from '../model'
 
 export const ExploreCategories = () => {
     const scrollRef = useRef<ScrollView>(null)
     const itemsRef = useRef<Array<TouchableOpacity | null>>([])
 
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(DEFAULT_ACTIVE_INDEX)
+
+    const dispatch = useTypedDispatch()
 
     const selectCategory = (index: number) => () => {
         const selected = itemsRef.current[index]
@@ -26,7 +30,8 @@ export const ExploreCategories = () => {
         })
 
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-        // onCategoryChanged(categories[index].name)
+
+        dispatch(setCategory(CATEGORIES[index]))
     }
 
     return (
