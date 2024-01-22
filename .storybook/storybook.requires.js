@@ -6,30 +6,30 @@ import {
   addParameters,
   addArgsEnhancer,
   clearDecorators,
-} from '@storybook/react-native';
+} from "@storybook/react-native";
 
 global.STORIES = [
   {
-    titlePrefix: '',
-    directory: './.storybook/stories',
-    files: '**/*.stories.?(ts|tsx|js|jsx)',
+    titlePrefix: "",
+    directory: ".",
+    files: "**/*.stories.?(ts|tsx|js|jsx)",
     importPathMatcher:
-      '^\\.[\\\\/](?:\\.storybook\\/stories(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(?:ts|tsx|js|jsx)?)$',
+      "^\\.(?:(?:^|\\/|(?:(?:(?!(?:^|\\/)\\.).)*?)\\/)(?!\\.)(?=.)[^/]*?\\.stories\\.(?:ts|tsx|js|jsx)?)$",
   },
 ];
 
-import '@storybook/addon-ondevice-controls/register';
-import '@storybook/addon-ondevice-actions/register';
+import "@storybook/addon-ondevice-controls/register";
+import "@storybook/addon-ondevice-actions/register";
 
-import { argsEnhancers } from '@storybook/addon-actions/dist/modern/preset/addArgs';
+import { argsEnhancers } from "@storybook/addon-actions/dist/modern/preset/addArgs";
 
-import { decorators, parameters } from './preview';
+import { decorators, parameters } from "./preview";
 
 if (decorators) {
   if (__DEV__) {
     // stops the warning from showing on every HMR
-    require('react-native').LogBox.ignoreLogs([
-      '`clearDecorators` is deprecated and will be removed in Storybook 7.0',
+    require("react-native").LogBox.ignoreLogs([
+      "`clearDecorators` is deprecated and will be removed in Storybook 7.0",
     ]);
   }
   // workaround for global decorators getting infinitely applied on HMR, see https://github.com/storybookjs/react-native/issues/185
@@ -47,7 +47,14 @@ try {
 
 const getStories = () => {
   return {
-    './.storybook/stories/Button/Button.stories.js': require('./stories/Button/Button.stories.js'),
+    "./node_modules/@storybook/react-native/scripts/mocks/all-config-files/FakeStory.stories.tsx": require("../node_modules/@storybook/react-native/scripts/mocks/all-config-files/FakeStory.stories.tsx"),
+    "./node_modules/@storybook/react-native/scripts/mocks/configuration-objects/components/FakeStory.stories.tsx": require("../node_modules/@storybook/react-native/scripts/mocks/configuration-objects/components/FakeStory.stories.tsx"),
+    "./node_modules/@storybook/react-native/scripts/mocks/exclude-config-files/exclude-components/FakeStory.stories.tsx": require("../node_modules/@storybook/react-native/scripts/mocks/exclude-config-files/exclude-components/FakeStory.stories.tsx"),
+    "./node_modules/@storybook/react-native/scripts/mocks/exclude-config-files/include-components/FakeStory.stories.tsx": require("../node_modules/@storybook/react-native/scripts/mocks/exclude-config-files/include-components/FakeStory.stories.tsx"),
+    "./node_modules/@storybook/react-native/scripts/mocks/file-extensions/FakeStory.stories.tsx": require("../node_modules/@storybook/react-native/scripts/mocks/file-extensions/FakeStory.stories.tsx"),
+    "./node_modules/@storybook/react-native/scripts/mocks/no-preview/FakeStory.stories.tsx": require("../node_modules/@storybook/react-native/scripts/mocks/no-preview/FakeStory.stories.tsx"),
+    "./node_modules/@storybook/react-native/scripts/mocks/wrong-extension-preview/FakeStory.stories.tsx": require("../node_modules/@storybook/react-native/scripts/mocks/wrong-extension-preview/FakeStory.stories.tsx"),
+    "./node_modules/@storybook/react-native/template/cli/stories/Button/Button.stories.js": require("../node_modules/@storybook/react-native/template/cli/stories/Button/Button.stories.js"),
   };
 };
 

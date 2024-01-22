@@ -18,7 +18,7 @@ export interface IError {
 
 export const APP_REDUCER_PATH = 'app'
 
-export const SERVER_API_URL = 'http://localhost:5000/'
+export const SERVER_API_URL = 'http://192.168.0.109:3004/'
 
 const TOKEN_NAME = 'token'
 
