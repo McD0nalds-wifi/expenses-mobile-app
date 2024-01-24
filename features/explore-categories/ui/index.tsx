@@ -8,6 +8,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } fr
 import { COLORS } from '@/shared/constants'
 import { useTypedDispatch } from '@/shared/hooks'
 import { typographyStyles } from '@/shared/styles'
+import { FontelloIcon } from '@/shared/uikit'
 
 import { CATEGORIES, DEFAULT_ACTIVE_INDEX } from '../config'
 import { setCategory } from '../model'
@@ -62,16 +63,16 @@ export const ExploreCategories = () => {
                     ref={scrollRef}
                     showsHorizontalScrollIndicator={false}
                 >
-                    {CATEGORIES.map(({ iconName, name, title }, index) => (
+                    {CATEGORIES.map(({ icon, name, title }, index) => (
                         <TouchableOpacity
                             key={name}
                             onPress={selectCategory(index)}
                             ref={(el) => (itemsRef.current[index] = el)}
                             style={activeIndex === index ? styles.categoriesBtnActive : styles.categoriesBtn}
                         >
-                            <AntDesign
+                            <FontelloIcon
                                 color={activeIndex === index ? COLORS.shade02 : COLORS.neutral06}
-                                name={iconName}
+                                name={icon}
                                 size={24}
                             />
 
