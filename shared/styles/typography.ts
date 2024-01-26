@@ -1,84 +1,34 @@
 import { StyleSheet } from 'react-native'
 
 export const typographyStyles = StyleSheet.create({
-    body12Bold: {
-        fontFamily: 'sf-sb',
-        fontSize: 12,
-        lineHeight: 14,
-    },
-    body12Medium: {
-        fontFamily: 'sf-m',
-        fontSize: 12,
-        lineHeight: 14,
-    },
-    body12Regular: {
-        fontFamily: 'sf',
-        fontSize: 12,
-        lineHeight: 14,
-    },
-    body13Bold: {
-        fontFamily: 'sf-sb',
-        fontSize: 13,
-        lineHeight: 16,
-    },
-    body13Regular: {
-        fontFamily: 'sf',
-        fontSize: 13,
-        lineHeight: 16,
-    },
-    body14Bold: {
-        fontFamily: 'sf-sb',
-        fontSize: 14,
-        lineHeight: 17,
-    },
-    body14Regular: {
-        fontFamily: 'sf',
-        fontSize: 14,
-        lineHeight: 17,
-    },
-    body16Bold: {
-        fontFamily: 'sf-sb',
-        fontSize: 16,
-        lineHeight: 19,
-    },
-    body16Medium: {
-        fontFamily: 'sf-m',
-        fontSize: 16,
-        lineHeight: 19,
-    },
-    body16Regular: {
-        fontFamily: 'sf',
-        fontSize: 16,
-        lineHeight: 19,
-    },
-    body18Bold: {
-        fontFamily: 'sf-sb',
-        fontSize: 18,
+    body: {
+        fontFamily: 'sf-r',
+        fontSize: 17,
         lineHeight: 24,
     },
-    body18Medium: {
-        fontFamily: 'sf-m',
-        fontSize: 18,
+    headline: {
+        fontFamily: 'sf-sb',
+        fontSize: 17,
         lineHeight: 24,
     },
-    body18Regular: {
-        fontFamily: 'sf',
-        fontSize: 18,
-        lineHeight: 24,
+    subhedline: {
+        fontFamily: 'sf-r',
+        fontSize: 15,
+        lineHeight: 20,
     },
-    caption: {
-        fontFamily: 'sf-sb',
-        fontSize: 10,
-        lineHeight: 12,
+    title1: {
+        fontFamily: 'sf-b',
+        fontSize: 27,
+        lineHeight: 32,
     },
-    headerBold: {
-        fontFamily: 'sf-sb',
+    title2: {
+        fontFamily: 'sf-b',
         fontSize: 22,
-        lineHeight: 26,
+        lineHeight: 28,
     },
-    headerRegular: {
-        fontFamily: 'sf',
-        fontSize: 22,
-        lineHeight: 26,
+    title3: {
+        fontFamily: 'sf-sb',
+        fontSize: 19,
+        lineHeight: 24,
     },
 })

@@ -41,55 +41,55 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
-            <TextInput
-                autoCapitalize="none"
-                placeholder="Email"
-                style={[baseStyles.inputField, { marginBottom: 30 }]}
-            />
+            {/*<TextInput*/}
+            {/*    autoCapitalize="none"*/}
+            {/*    placeholder="Email"*/}
+            {/*    style={[baseStyles.inputField, { marginBottom: 30 }]}*/}
+            {/*/>*/}
 
-            <TouchableOpacity style={baseStyles.btn}>
-                <Text style={baseStyles.btnText}>Continue</Text>
-            </TouchableOpacity>
+            {/*<TouchableOpacity style={baseStyles.btn}>*/}
+            {/*    <Text style={baseStyles.btnText}>Continue</Text>*/}
+            {/*</TouchableOpacity>*/}
 
-            <View style={styles.seperatorView}>
-                <View
-                    style={{
-                        borderBottomColor: 'black',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                        flex: 1,
-                    }}
-                />
-                <Text style={styles.seperator}>or</Text>
-                <View
-                    style={{
-                        borderBottomColor: 'black',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                        flex: 1,
-                    }}
-                />
-            </View>
+            {/*<View style={styles.seperatorView}>*/}
+            {/*    <View*/}
+            {/*        style={{*/}
+            {/*            borderBottomColor: 'black',*/}
+            {/*            borderBottomWidth: StyleSheet.hairlineWidth,*/}
+            {/*            flex: 1,*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*    <Text style={styles.seperator}>or</Text>*/}
+            {/*    <View*/}
+            {/*        style={{*/}
+            {/*            borderBottomColor: 'black',*/}
+            {/*            borderBottomWidth: StyleSheet.hairlineWidth,*/}
+            {/*            flex: 1,*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*</View>*/}
 
-            <View style={{ gap: 20 }}>
-                <TouchableOpacity style={styles.btnOutline}>
-                    <Ionicons name={'call-outline'} size={24} style={baseStyles.btnIcon} />
-                    <Text style={styles.btnOutlineText}>Continue with Phone</Text>
-                </TouchableOpacity>
+            {/*<View style={{ gap: 20 }}>*/}
+            {/*    <TouchableOpacity style={styles.btnOutline}>*/}
+            {/*        <Ionicons name={'call-outline'} size={24} style={baseStyles.btnIcon} />*/}
+            {/*        <Text style={styles.btnOutlineText}>Continue with Phone</Text>*/}
+            {/*    </TouchableOpacity>*/}
 
-                <TouchableOpacity onPress={() => onSelectAuth(Strategy.Apple)} style={styles.btnOutline}>
-                    <Ionicons name={'md-logo-apple'} size={24} style={baseStyles.btnIcon} />
-                    <Text style={styles.btnOutlineText}>Continue with Apple</Text>
-                </TouchableOpacity>
+            {/*    <TouchableOpacity onPress={() => onSelectAuth(Strategy.Apple)} style={styles.btnOutline}>*/}
+            {/*        <Ionicons name={'md-logo-apple'} size={24} style={baseStyles.btnIcon} />*/}
+            {/*        <Text style={styles.btnOutlineText}>Continue with Apple</Text>*/}
+            {/*    </TouchableOpacity>*/}
 
-                <TouchableOpacity onPress={() => onSelectAuth(Strategy.Google)} style={styles.btnOutline}>
-                    <Ionicons name={'md-logo-google'} size={24} style={baseStyles.btnIcon} />
-                    <Text style={styles.btnOutlineText}>Continue with Google</Text>
-                </TouchableOpacity>
+            {/*    <TouchableOpacity onPress={() => onSelectAuth(Strategy.Google)} style={styles.btnOutline}>*/}
+            {/*        <Ionicons name={'md-logo-google'} size={24} style={baseStyles.btnIcon} />*/}
+            {/*        <Text style={styles.btnOutlineText}>Continue with Google</Text>*/}
+            {/*    </TouchableOpacity>*/}
 
-                {/*<TouchableOpacity onPress={() => onSelectAuth(Strategy.Facebook)} style={styles.btnOutline}>*/}
-                {/*    <Ionicons name="md-logo-facebook" size={24} style={defaultStyles.btnIcon} />*/}
-                {/*    <Text style={styles.btnOutlineText}>Continue with Facebook</Text>*/}
-                {/*</TouchableOpacity>*/}
-            </View>
+            {/*    /!*<TouchableOpacity onPress={() => onSelectAuth(Strategy.Facebook)} style={styles.btnOutline}>*!/*/}
+            {/*    /!*    <Ionicons name="md-logo-facebook" size={24} style={defaultStyles.btnIcon} />*!/*/}
+            {/*    /!*    <Text style={styles.btnOutlineText}>Continue with Facebook</Text>*!/*/}
+            {/*    /!*</TouchableOpacity>*!/*/}
+            {/*</View>*/}
         </View>
     )
 }

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "achievements",
-    "slug": "achievements",
+    "name": "investmentWallet",
+    "slug": "investmentWallet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
