@@ -1,12 +1,17 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { ReactNode } from 'react'
+
+import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native'
 
 import { COLORS } from '@/shared/constants'
 import { typographyStyles } from '@/shared/styles'
 
 interface IButtonProps {
     children: string
+    iconEnd?: ReactNode
+    iconStart?: ReactNode
     onPress?: () => void
     size: 'large' | 'medium' | 'small'
+    styles?: StyleProp<ViewStyle>
     type: 'primary' | 'secondary'
 }
 
@@ -15,10 +20,14 @@ const TEXT_COLOR_BY_TYPE = {
     secondary: COLORS.primary,
 } as const
 
-export const Button = ({ children, onPress, size, type }: IButtonProps) => {
+export const Button = ({ children, iconEnd, iconStart, onPress, size, styles, type }: IButtonProps) => {
     return (
-        <TouchableOpacity onPress={onPress} style={[buttonsStyles[type], buttonsStyles[size]]}>
+        <TouchableOpacity onPress={onPress} style={[buttonsStyles[type], buttonsStyles[size], styles]}>
+            {iconStart}
+
             <Text style={{ ...typographyStyles.headline, color: TEXT_COLOR_BY_TYPE[type] }}>{children}</Text>
+
+            {iconEnd}
         </TouchableOpacity>
     )
 }
@@ -36,15 +45,24 @@ const buttonsStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: COLORS.primary,
         borderRadius: 120,
-        boxShadow: '0px 10px 24px 0px rgba(43, 45, 51, 0.20)',
+        elevation: 20,
         flexDirection: 'row',
+        gap: 8,
         justifyContent: 'center',
+        shadowColor: COLORS.primary,
+        shadowOffset: {
+            height: 10,
+            width: 0,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 24,
     },
     secondary: {
         alignItems: 'center',
         backgroundColor: COLORS.background,
         borderRadius: 120,
         flexDirection: 'row',
+        gap: 8,
         justifyContent: 'center',
     },
     small: {

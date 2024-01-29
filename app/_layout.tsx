@@ -7,10 +7,11 @@ import { SplashScreen, Stack, router, useRouter } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import { TouchableOpacity } from 'react-native'
 
-import sfProTextBold from '@/assets/fonts/SFProText-Bold.ttf'
-import sfProTextRegular from '@/assets/fonts/SFProText-Regular.ttf'
-import sfProTextSemibold from '@/assets/fonts/SFProText-Semibold.ttf'
-import { StoreProvider } from '@/shared/providers'
+import sfProTextBold from '@/assets/fonts/SF-Pro-Rounded-Bold.ttf'
+import sfProTextHeavy from '@/assets/fonts/SF-Pro-Rounded-Heavy.ttf'
+import sfProTextRegular from '@/assets/fonts/SF-Pro-Rounded-Regular.ttf'
+import sfProTextSemibold from '@/assets/fonts/SF-Pro-Rounded-Semibold.ttf'
+import { IntlProvider, StoreProvider } from '@/shared/providers'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
 
@@ -43,6 +44,7 @@ SplashScreen.preventAutoHideAsync()
 export default function RootLayout() {
     const [loaded, error] = useFonts({
         'sf-b': sfProTextBold as FontSource,
+        'sf-h': sfProTextHeavy as FontSource,
         'sf-r': sfProTextRegular as FontSource,
         'sf-sb': sfProTextSemibold as FontSource,
     })
@@ -65,7 +67,9 @@ export default function RootLayout() {
     return (
         <StoreProvider>
             <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-                <RootLayoutNav />
+                <IntlProvider>
+                    <RootLayoutNav />
+                </IntlProvider>
             </ClerkProvider>
         </StoreProvider>
     )

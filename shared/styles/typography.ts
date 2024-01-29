@@ -6,13 +6,28 @@ export const typographyStyles = StyleSheet.create({
         fontSize: 17,
         lineHeight: 24,
     },
+    footnote: {
+        fontFamily: 'sf-r',
+        fontSize: 13,
+        lineHeight: 18,
+    },
     headline: {
         fontFamily: 'sf-sb',
         fontSize: 17,
         lineHeight: 24,
     },
+    largeTitle: {
+        fontFamily: 'sf-h',
+        fontSize: 36,
+        lineHeight: 43,
+    },
     subhedline: {
         fontFamily: 'sf-r',
+        fontSize: 15,
+        lineHeight: 20,
+    },
+    subhedlineBold: {
+        fontFamily: 'sf-b',
         fontSize: 15,
         lineHeight: 20,
     },

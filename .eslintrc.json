@@ -13,7 +13,7 @@
     "project": "./tsconfig.json",
     "tsconfigRootDir": "./"
   },
-  "plugins": ["formatjs", "@typescript-eslint", "sort-keys-fix", "typescript-sort-keys", "@typescript-eslint", "import"],
+  "plugins": ["@typescript-eslint", "sort-keys-fix", "typescript-sort-keys", "@typescript-eslint", "import"],
   "rules": {
     "quotes": ["warn", "single"],
     "react/react-in-jsx-scope": "off",
@@ -54,12 +54,6 @@
       }
     ],
     "sort-imports": ["error", { "allowSeparatedGroups": true, "ignoreDeclarationSort": true }],
-    "formatjs/enforce-id": [
-      "error",
-      {
-        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
-      }
-    ],
     "react/jsx-sort-props": "warn",
     "sort-keys-fix/sort-keys-fix": "warn"
   },

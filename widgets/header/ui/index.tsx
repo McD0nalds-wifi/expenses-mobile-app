@@ -17,7 +17,7 @@ export const Header = () => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={baseStyles.iconButton}>
-                    <AntDesign color={COLORS.primary} name={'qrcode'} size={20} />
+                    <AntDesign color={COLORS.primary} name={'scan1'} size={20} />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
