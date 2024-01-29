@@ -2,7 +2,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { FormattedMessage, FormattedNumber } from 'react-intl'
 import { StyleSheet, Text, View } from 'react-native'
 
-import { COLORS } from '@/shared/constants'
+import { COLORS, CURRENT_CURRENCY } from '@/shared/constants'
 import { baseStyles, typographyStyles } from '@/shared/styles'
 import { Button } from '@/shared/uikit'
 
@@ -22,7 +22,7 @@ export const Balance = () => {
 
             <View style={styles.amount}>
                 <Text style={typographyStyles.largeTitle}>
-                    <FormattedNumber currency={'RUB'} style={'currency'} value={54292.79} />
+                    <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={54292.79} />
                 </Text>
 
                 <Pnl value={0.12} />
