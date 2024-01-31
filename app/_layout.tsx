@@ -7,6 +7,7 @@ import { SplashScreen, Stack, router, useRouter } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import { TouchableOpacity } from 'react-native'
 
+import fontelloIcons from '@/assets/fonts/fontello.ttf'
 import sfProTextBold from '@/assets/fonts/SF-Pro-Rounded-Bold.ttf'
 import sfProTextHeavy from '@/assets/fonts/SF-Pro-Rounded-Heavy.ttf'
 import sfProTextRegular from '@/assets/fonts/SF-Pro-Rounded-Regular.ttf'
@@ -43,6 +44,7 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
+        fontello: fontelloIcons as FontSource,
         'sf-b': sfProTextBold as FontSource,
         'sf-h': sfProTextHeavy as FontSource,
         'sf-r': sfProTextRegular as FontSource,

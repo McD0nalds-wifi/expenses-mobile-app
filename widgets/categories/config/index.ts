@@ -1,0 +1,80 @@
+export const CATEGORIES = {
+    barsAndRestaurants: {
+        color: '#E8C872',
+        icon: 'chef-hat',
+        id: 'barsAndRestaurants',
+        title: 'Бары и рестораны',
+    },
+    cafe: {
+        color: '#C9D7DD',
+        icon: 'tea-cup',
+        id: 'cafe',
+        title: 'Кафе',
+    },
+    car: {
+        color: '#637A9F',
+        icon: 'wheel',
+        id: 'car',
+        title: 'Автомобиль',
+    },
+    clothes: {
+        color: '#561C24',
+        icon: 'hanger',
+        id: 'clothes',
+        title: 'Одежда',
+    },
+    education: {
+        color: '#A94438',
+        icon: 'academic-cap',
+        id: 'education',
+        title: 'Образование',
+    },
+    entertainments: {
+        color: '#3652AD',
+        icon: 'masks',
+        id: 'entertainments',
+        title: 'Развлечения',
+    },
+    gifts: {
+        color: '#40A2D8',
+        icon: 'confetti',
+        id: 'gifts',
+        title: 'Подарки',
+    },
+    health: {
+        color: '#FC6736',
+        icon: 'pills',
+        id: 'health',
+        title: 'Здоровье',
+    },
+    house: {
+        color: '#747264',
+        icon: 'home',
+        id: 'house',
+        title: 'Дом',
+    },
+    other: {
+        color: '#12372A',
+        icon: 'bag',
+        id: 'other',
+        title: 'Прочее',
+    },
+    products: {
+        color: '#85586F',
+        icon: 'cart',
+        id: 'products',
+        title: 'Продукты',
+    },
+    regular: {
+        color: '#EBD9B4',
+        icon: 'menu-dots',
+        id: 'regular',
+        title: 'Регулярные',
+    },
+    transport: {
+        color: '#332941',
+        icon: 'bus',
+        id: 'transport',
+        title: 'Транспорт',
+    },
+} as const

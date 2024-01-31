@@ -3,19 +3,13 @@ import { StyleSheet, Text, View } from 'react-native'
 import { COLORS } from '@/shared/constants'
 import { typographyStyles } from '@/shared/styles'
 
-interface IAddressProps {
-    value: string
+interface IBankNameProps {
+    name: string
 }
 
-const convertValue = (value: string) => {
-    const reverseValue = value.split('').reverse().join('')
-
-    return `${value.slice(0, 4)}...${reverseValue.slice(0, 4)}`
-}
-
-export const Address = ({ value }: IAddressProps) => (
+export const BankName = ({ name }: IBankNameProps) => (
     <View style={styles.container}>
-        <Text style={[typographyStyles.footnote, { color: COLORS.secondary }]}>{convertValue(value)}</Text>
+        <Text style={[typographyStyles.footnote, { color: COLORS.secondary }]}>{name}</Text>
     </View>
 )
 

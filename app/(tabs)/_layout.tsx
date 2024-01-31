@@ -5,14 +5,14 @@ import { COLORS } from '@/shared/constants'
 
 const TABS = [
     {
-        iconName: 'search1',
+        iconName: 'appstore-o',
         name: 'index',
-        title: 'Поиск',
+        title: 'Главная',
     },
     {
-        iconName: 'hearto',
-        name: 'favourites',
-        title: 'Избранное',
+        iconName: 'bars',
+        name: 'operations',
+        title: 'Операции',
     },
     {
         iconName: 'user',
