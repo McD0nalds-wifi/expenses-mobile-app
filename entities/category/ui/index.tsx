@@ -16,8 +16,6 @@ interface ICategoryProps {
 export const Category = ({ color, icon, limit, title, value }: ICategoryProps) => {
     const percent = limit ? Math.round(value / (limit * 0.01)) : 0
 
-    console.log(percent)
-
     return (
         <View style={styles.container}>
             <View style={[styles.icon, { backgroundColor: color }]}>
