@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { AntDesign } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 import {
+    Image,
     Keyboard,
     KeyboardAvoidingView,
     Platform,
@@ -17,7 +18,7 @@ import {
 
 import { COLORS } from '@/shared/constants'
 import { baseStyles, typographyStyles } from '@/shared/styles'
-import { Button } from '@/shared/uikit'
+import { Button, Chips } from '@/shared/uikit'
 
 const BalanceConfigurator = () => {
     const { back } = useRouter()
@@ -48,13 +49,7 @@ const BalanceConfigurator = () => {
                     </View>
 
                     <View style={styles.content}>
-                        <View style={styles.currency}>
-                            <View style={styles.currencySign}>
-                                <Text style={[typographyStyles.body, { color: COLORS.white }]}>₽</Text>
-                            </View>
-
-                            <Text style={[typographyStyles.title3, { color: COLORS.secondary }]}>РУБ</Text>
-                        </View>
+                        <Chips items={['🏦 Банковский счет', '💵 Наличные']} />
 
                         <TextInput
                             inputMode={'numeric'}
@@ -65,9 +60,34 @@ const BalanceConfigurator = () => {
                             value={balance.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         />
 
-                        <Button size={'small'} style={{ marginTop: 32 }} type={'secondary'}>
-                            Банковский счет
-                        </Button>
+                        <View style={{ flexDirection: 'row', gap: 12, marginTop: 40 }}>
+                            <Button
+                                iconStart={
+                                    <Image
+                                        source={{
+                                            uri: 'https://github.com/melpnz/rblp/blob/master/png/icon/vtb.png?raw=true',
+                                        }}
+                                        style={{ height: 24, width: 24 }}
+                                    />
+                                }
+                                size={'small'}
+                                type={'secondary'}
+                            >
+                                ВТБ
+                            </Button>
+
+                            <Button
+                                iconStart={
+                                    <View style={styles.currencySign}>
+                                        <Text style={[typographyStyles.body, { color: COLORS.white }]}>₽</Text>
+                                    </View>
+                                }
+                                size={'small'}
+                                type={'secondary'}
+                            >
+                                РУБ
+                            </Button>
+                        </View>
                     </View>
 
                     <Button size={'large'} style={{ marginTop: 'auto' }} type={'primary'}>
@@ -84,12 +104,10 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         flex: 1,
     },
-    content: { alignItems: 'center', justifyContent: 'center', marginTop: 88 },
-    currency: {
+    content: {
         alignItems: 'center',
-        flexDirection: 'row',
-        gap: 8,
-        marginBottom: 10,
+        justifyContent: 'center',
+        marginTop: 88,
     },
     currencySign: {
         alignItems: 'center',
@@ -121,6 +139,7 @@ const styles = StyleSheet.create({
         color: COLORS.primary,
         fontFamily: 'sf-b',
         fontSize: 42,
+        marginTop: 40,
     },
 })
 
