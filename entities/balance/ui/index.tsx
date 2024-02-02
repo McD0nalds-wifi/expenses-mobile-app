@@ -31,7 +31,7 @@ export const Balance = () => {
                 <Button
                     iconStart={<AntDesign color={COLORS.white} name={'minus'} size={24} />}
                     size={'medium'}
-                    styles={{ flexGrow: 1 }}
+                    style={{ flexGrow: 1 }}
                     type={'primary'}
                 >
                     Потратить
@@ -40,7 +40,7 @@ export const Balance = () => {
                 <Button
                     iconStart={<AntDesign color={COLORS.white} name={'plus'} size={24} />}
                     size={'medium'}
-                    styles={{ flexGrow: 1 }}
+                    style={{ flexGrow: 1 }}
                     type={'primary'}
                 >
                     Пополнить

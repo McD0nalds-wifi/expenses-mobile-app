@@ -16,22 +16,35 @@ export const Categories = () => {
                 <FormattedMessage defaultMessage={'Категории'} id={'categoriesTitle'} />
             </Text>
 
-            <FlatList
-                data={CATEGORIES_LIST}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <TouchableOpacity>
+            <View style={baseStyles.container}>
+                {CATEGORIES_LIST.map(({ color, icon, id, title }) => (
+                    <TouchableOpacity key={id}>
                         <Category
-                            color={item.color}
-                            icon={item.icon}
-                            limit={item.id === 'cafe' ? 20000 : undefined}
-                            title={item.title}
+                            color={color}
+                            icon={icon}
+                            limit={id === 'cafe' ? 20000 : undefined}
+                            title={title}
                             value={random(500, 100000, true)}
                         />
                     </TouchableOpacity>
-                )}
-                style={baseStyles.container}
-            />
+                ))}
+            </View>
+            {/*<FlatList*/}
+            {/*    data={CATEGORIES_LIST}*/}
+            {/*    keyExtractor={(item) => item.id}*/}
+            {/*    renderItem={({ item }) => (*/}
+            {/*        <TouchableOpacity>*/}
+            {/*            <Category*/}
+            {/*                color={item.color}*/}
+            {/*                icon={item.icon}*/}
+            {/*                limit={item.id === 'cafe' ? 20000 : undefined}*/}
+            {/*                title={item.title}*/}
+            {/*                value={random(500, 100000, true)}*/}
+            {/*            />*/}
+            {/*        </TouchableOpacity>*/}
+            {/*    )}*/}
+            {/*    style={baseStyles.container}*/}
+            {/*/>*/}
         </View>
     )
 }

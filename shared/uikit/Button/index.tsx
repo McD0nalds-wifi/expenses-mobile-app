@@ -11,7 +11,7 @@ interface IButtonProps {
     iconStart?: ReactNode
     onPress?: () => void
     size: 'large' | 'medium' | 'small'
-    styles?: StyleProp<ViewStyle>
+    style?: StyleProp<ViewStyle>
     type: 'primary' | 'secondary'
 }
 
@@ -20,9 +20,9 @@ const TEXT_COLOR_BY_TYPE = {
     secondary: COLORS.primary,
 } as const
 
-export const Button = ({ children, iconEnd, iconStart, onPress, size, styles, type }: IButtonProps) => {
+export const Button = ({ children, iconEnd, iconStart, onPress, size, style, type }: IButtonProps) => {
     return (
-        <TouchableOpacity onPress={onPress} style={[buttonsStyles[type], buttonsStyles[size], styles]}>
+        <TouchableOpacity onPress={onPress} style={[buttonsStyles[type], buttonsStyles[size], style]}>
             {iconStart}
 
             <Text style={{ ...typographyStyles.headline, color: TEXT_COLOR_BY_TYPE[type] }}>{children}</Text>

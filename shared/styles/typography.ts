@@ -6,8 +6,18 @@ export const typographyStyles = StyleSheet.create({
         fontSize: 17,
         lineHeight: 24,
     },
+    captionBold: {
+        fontFamily: 'sf-b',
+        fontSize: 12,
+        lineHeight: 16,
+    },
     footnote: {
         fontFamily: 'sf-r',
+        fontSize: 13,
+        lineHeight: 18,
+    },
+    footnoteBold: {
+        fontFamily: 'sf-sb',
         fontSize: 13,
         lineHeight: 18,
     },

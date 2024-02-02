@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
 
-import { COLORS } from '@/shared/constants'
+import { COLORS, CONTAINER_PADDING } from '@/shared/constants'
 
 export const baseStyles = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
+        paddingHorizontal: CONTAINER_PADDING,
     },
     iconButton: {
         alignItems: 'center',

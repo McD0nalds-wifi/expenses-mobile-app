@@ -36,6 +36,7 @@ const Layout = () => {
                     key={name}
                     name={name}
                     options={{
+                        headerShown: false,
                         tabBarIcon: ({ color, size }) => <AntDesign color={color} name={iconName} size={size} />,
                         tabBarLabel: title,
                     }}
