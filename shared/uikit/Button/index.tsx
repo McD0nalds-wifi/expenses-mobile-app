@@ -55,7 +55,7 @@ const buttonsStyles = StyleSheet.create({
             width: 0,
         },
         shadowOpacity: 0.2,
-        shadowRadius: 24,
+        shadowRadius: 20,
     },
     secondary: {
         alignItems: 'center',

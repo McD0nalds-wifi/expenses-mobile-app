@@ -1,16 +1,12 @@
-import { Stack } from 'expo-router'
 import { View } from 'react-native'
 
 import { Operation } from '@/entities/operation'
 import { baseStyles } from '@/shared/styles'
 import { CATEGORIES } from '@/widgets/categories/config'
-import { Header } from '@/widgets/header'
 
 const Operations = () => {
     return (
         <View style={{ flex: 1 }}>
-            <Stack.Screen options={{ header: () => <Header /> }} />
-
             <View style={[baseStyles.container, { backgroundColor: 'white' }]}>
                 <Operation
                     bankName={'Тинькофф'}

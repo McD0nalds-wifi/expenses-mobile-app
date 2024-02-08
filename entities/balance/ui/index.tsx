@@ -1,5 +1,5 @@
 import { AntDesign } from '@expo/vector-icons'
-import { FormattedMessage, FormattedNumber } from 'react-intl'
+import { FormattedNumber } from 'react-intl'
 import { StyleSheet, Text, View } from 'react-native'
 
 import { COLORS, CURRENT_CURRENCY } from '@/shared/constants'
@@ -8,20 +8,24 @@ import { Button } from '@/shared/uikit'
 
 import { BankName } from './BankName'
 
-export const Balance = () => {
+interface IBalanceProps {
+    amount: number
+    bank: string
+    title: string
+}
+
+export const Balance = ({ amount, bank, title }: IBalanceProps) => {
     return (
         <View style={[baseStyles.container, styles.container]}>
             <View style={styles.header}>
-                <Text style={[typographyStyles.subhedline, { color: COLORS.secondary }]}>
-                    <FormattedMessage defaultMessage={'Мой кошелек'} id={'myWallet'} />
-                </Text>
+                <Text style={[typographyStyles.subhedline, { color: COLORS.secondary }]}>{title}</Text>
 
-                <BankName name={'Тинькофф'} />
+                <BankName name={bank} />
             </View>
 
             <View style={styles.amount}>
                 <Text style={typographyStyles.largeTitle}>
-                    <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={54292.79} />
+                    <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={amount} />
                 </Text>
 
                 {/*<Pnl value={0.12} />*/}

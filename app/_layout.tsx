@@ -1,21 +1,17 @@
 import { useEffect } from 'react'
 
 import { ClerkProvider } from '@clerk/clerk-expo'
-import { AntDesign } from '@expo/vector-icons'
 import { FontSource, useFonts } from 'expo-font'
-import { SplashScreen, Stack, useRouter } from 'expo-router'
+import { SplashScreen, Stack } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
-import { TouchableOpacity, View } from 'react-native'
 
 import fontelloIcons from '@/assets/fonts/fontello.ttf'
 import sfProTextBold from '@/assets/fonts/SF-Pro-Rounded-Bold.ttf'
 import sfProTextHeavy from '@/assets/fonts/SF-Pro-Rounded-Heavy.ttf'
 import sfProTextRegular from '@/assets/fonts/SF-Pro-Rounded-Regular.ttf'
 import sfProTextSemibold from '@/assets/fonts/SF-Pro-Rounded-Semibold.ttf'
-import { COLORS } from '@/shared/constants'
 import { IntlProvider, StoreProvider } from '@/shared/providers'
 import { ROUTES } from '@/shared/routes'
-import { baseStyles } from '@/shared/styles'
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
 
@@ -81,22 +77,7 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-    // const colorScheme = useColorScheme();
-    const { push } = useRouter()
-    // const { isLoaded, isSignedIn } = useAuth()
-    //
-    // useEffect(() => {
-    //     if (isLoaded && !isSignedIn) {
-    //         router.push('/(modals)/login')
-    //     }
-    // }, [isLoaded])
-
-    useEffect(() => {
-        push(ROUTES.balanceConfigurator.route)
-    }, [])
-
     return (
-        // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
             <Stack.Screen name={'(tabs)'} options={{ headerShown: false }} />
 
@@ -104,27 +85,6 @@ function RootLayoutNav() {
                 name={ROUTES.balanceConfigurator.name}
                 options={{ headerShown: false, presentation: 'modal' }}
             />
-
-            {/*<Stack.Screen*/}
-            {/*    name={'listing/[id]'}*/}
-            {/*    options={{*/}
-            {/*        headerTitle: '',*/}
-            {/*    }}*/}
-            {/*/>*/}
-
-            {/*<Stack.Screen*/}
-            {/*    name={'(modals)/booking'}*/}
-            {/*    options={{*/}
-            {/*        animation: 'fade',*/}
-            {/*        headerLeft: () => (*/}
-            {/*            <TouchableOpacity onPress={back}>*/}
-            {/*                <Ionicons name={'close-outline'} size={28} />*/}
-            {/*            </TouchableOpacity>*/}
-            {/*        ),*/}
-            {/*        presentation: 'transparentModal',*/}
-            {/*    }}*/}
-            {/*/>*/}
         </Stack>
-        // </ThemeProvider>
     )
 }

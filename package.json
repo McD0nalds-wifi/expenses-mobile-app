@@ -1,5 +1,5 @@
 {
-  "name": "investmentWallet",
+  "name": "expenses",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -28,6 +28,7 @@
     "expo-router": "^2.0.0",
     "expo-secure-store": "~12.3.1",
     "expo-splash-screen": "~0.20.5",
+    "expo-sqlite": "~11.3.3",
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
     "expo-web-browser": "~12.3.2",
@@ -40,7 +41,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
     "react-redux": "^9.1.0",
-    "expo-sqlite": "~11.3.3"
+    "react-native-pager-view": "6.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

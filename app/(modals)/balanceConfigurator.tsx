@@ -38,7 +38,7 @@ const BalanceConfigurator = () => {
                 <View style={styles.inner}>
                     <View style={styles.header}>
                         <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>
-                            <FormattedMessage defaultMessage={'Добавление счета'} id={'addingInvoice'} />
+                            <FormattedMessage defaultMessage={'Настройка баланса'} id={'addingInvoice'} />
                         </Text>
 
                         <TouchableOpacity onPress={back} style={{ position: 'absolute', right: 0, top: 24 }}>
@@ -54,40 +54,40 @@ const BalanceConfigurator = () => {
                         <TextInput
                             inputMode={'numeric'}
                             onChangeText={handleBalanceInputChange}
-                            placeholder={'Введите сумму'}
+                            placeholder={'Текущий баланс'}
                             placeholderTextColor={COLORS.tertiary}
                             style={styles.input}
                             value={balance.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                         />
 
-                        <View style={{ flexDirection: 'row', gap: 12, marginTop: 40 }}>
-                            <Button
-                                iconStart={
-                                    <Image
-                                        source={{
-                                            uri: 'https://github.com/melpnz/rblp/blob/master/png/icon/vtb.png?raw=true',
-                                        }}
-                                        style={{ height: 24, width: 24 }}
-                                    />
-                                }
-                                size={'small'}
-                                type={'secondary'}
-                            >
-                                ВТБ
-                            </Button>
+                        {/*<View style={{ flexDirection: 'row', gap: 12, marginTop: 40 }}>*/}
+                        {/*    <Button*/}
+                        {/*        iconStart={*/}
+                        {/*            <Image*/}
+                        {/*                source={{*/}
+                        {/*                    uri: 'https://github.com/melpnz/rblp/blob/master/png/icon/vtb.png?raw=true',*/}
+                        {/*                }}*/}
+                        {/*                style={{ height: 24, width: 24 }}*/}
+                        {/*            />*/}
+                        {/*        }*/}
+                        {/*        size={'small'}*/}
+                        {/*        type={'secondary'}*/}
+                        {/*    >*/}
+                        {/*        Выберите банк*/}
+                        {/*    </Button>*/}
 
-                            <Button
-                                iconStart={
-                                    <View style={styles.currencySign}>
-                                        <Text style={[typographyStyles.body, { color: COLORS.white }]}>₽</Text>
-                                    </View>
-                                }
-                                size={'small'}
-                                type={'secondary'}
-                            >
-                                РУБ
-                            </Button>
-                        </View>
+                        {/*    <Button*/}
+                        {/*        iconStart={*/}
+                        {/*            <View style={styles.currencySign}>*/}
+                        {/*                <Text style={[typographyStyles.body, { color: COLORS.white }]}>₽</Text>*/}
+                        {/*            </View>*/}
+                        {/*        }*/}
+                        {/*        size={'small'}*/}
+                        {/*        type={'secondary'}*/}
+                        {/*    >*/}
+                        {/*        РУБ*/}
+                        {/*    </Button>*/}
+                        {/*</View>*/}
                     </View>
 
                     <Button size={'large'} style={{ marginTop: 'auto' }} type={'primary'}>
@@ -109,22 +109,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 88,
     },
-    currencySign: {
-        alignItems: 'center',
-        backgroundColor: COLORS.orange,
-        borderRadius: 40,
-        elevation: 12,
-        height: 24,
-        justifyContent: 'center',
-        shadowColor: COLORS.primary,
-        shadowOffset: {
-            height: 6,
-            width: 0,
-        },
-        shadowOpacity: 0.08,
-        shadowRadius: 16,
-        width: 24,
-    },
+    // currencySign: {
+    //     alignItems: 'center',
+    //     backgroundColor: COLORS.orange,
+    //     borderRadius: 40,
+    //     elevation: 12,
+    //     height: 24,
+    //     justifyContent: 'center',
+    //     shadowColor: COLORS.primary,
+    //     shadowOffset: {
+    //         height: 6,
+    //         width: 0,
+    //     },
+    //     shadowOpacity: 0.08,
+    //     shadowRadius: 16,
+    //     width: 24,
+    // },
     header: {
         alignItems: 'center',
         paddingBottom: 24,
