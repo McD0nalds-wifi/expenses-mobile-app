@@ -6,6 +6,11 @@ export const typographyStyles = StyleSheet.create({
         fontSize: 17,
         lineHeight: 24,
     },
+    caption: {
+        fontFamily: 'sf-r',
+        fontSize: 12,
+        lineHeight: 16,
+    },
     captionBold: {
         fontFamily: 'sf-b',
         fontSize: 12,

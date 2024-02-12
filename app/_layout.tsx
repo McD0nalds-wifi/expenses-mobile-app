@@ -81,10 +81,7 @@ function RootLayoutNav() {
         <Stack>
             <Stack.Screen name={'(tabs)'} options={{ headerShown: false }} />
 
-            <Stack.Screen
-                name={ROUTES.balanceConfigurator.name}
-                options={{ headerShown: false, presentation: 'modal' }}
-            />
+            <Stack.Screen name={ROUTES.addBalance.name} options={{ headerShown: false, presentation: 'modal' }} />
         </Stack>
     )
 }

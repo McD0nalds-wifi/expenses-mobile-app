@@ -1,6 +1,6 @@
 export const ROUTES = {
-    balanceConfigurator: {
-        name: '(modals)/balanceConfigurator',
-        route: '/(modals)/balanceConfigurator',
+    addBalance: {
+        name: '(modals)/addBalance',
+        route: '/(modals)/addBalance',
     },
 } as const

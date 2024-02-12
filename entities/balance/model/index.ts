@@ -6,7 +6,7 @@ interface ISliceState {
     balances: Array<IBalance>
 }
 
-const DEFAULT_BALANCE = { amount: 0, id: 1, title: 'Мой кошелек', type: 'bankAccount' } as const
+const DEFAULT_BALANCE = { amount: 0, id: 1, name: 'Мой кошелек', type: 'bankAccount' } as const
 
 const initialState: ISliceState = { balances: [{ ...DEFAULT_BALANCE }] }
 
@@ -22,5 +22,7 @@ export const balanceSlice = createSlice({
         selectBalances: ({ balances }) => balances,
     },
 })
+
+export const { addBalance } = balanceSlice.actions
 
 export const { selectBalances } = balanceSlice.selectors

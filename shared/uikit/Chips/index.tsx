@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react'
+import React, { ReactNode, useRef } from 'react'
 
 import * as Haptics from 'expo-haptics'
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
@@ -6,23 +6,30 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { COLORS } from '@/shared/constants'
 import { typographyStyles } from '@/shared/styles'
 
-interface IChipsProps {
-    items: Array<ReactNode>
+interface IChipItem<T> {
+    id: T
+    title: ReactNode
 }
 
-export const Chips = ({ items }: IChipsProps) => {
+interface IChipsProps<T> {
+    activeItem: IChipItem<T>
+    items: Array<IChipItem<T>>
+    onChange: (item: IChipItem<T>) => void
+}
+
+export const Chips = <T extends string>({ activeItem, items, onChange }: IChipsProps<T>) => {
     const scrollRef = useRef<ScrollView>(null)
     const itemsRef = useRef<Array<TouchableOpacity | null>>([])
-    const [activeIndex, setActiveIndex] = useState(0)
 
-    const selectCategory = (index: number) => {
+    const handleChipPress = (item: IChipItem<T>, index: number) => () => {
         const selected = itemsRef.current[index]
-        setActiveIndex(index)
+
         selected?.measure((x) => {
             scrollRef.current?.scrollTo({ animated: true, x: x - 16, y: 0 })
         })
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-        // onCategoryChanged(categories[index].name)
+
+        onChange(item)
     }
 
     return (
@@ -34,18 +41,18 @@ export const Chips = ({ items }: IChipsProps) => {
         >
             {items.map((item, index) => (
                 <TouchableOpacity
-                    key={index}
-                    onPress={() => selectCategory(index)}
+                    key={item.id}
+                    onPress={handleChipPress(item, index)}
                     ref={(el) => (itemsRef.current[index] = el)}
-                    style={activeIndex === index ? styles.chipActive : styles.chip}
+                    style={activeItem.id === item.id ? styles.chipActive : styles.chip}
                 >
                     <Text
                         style={[
                             typographyStyles.subhedlineBold,
-                            { color: activeIndex === index ? COLORS.white : COLORS.primary },
+                            { color: activeItem.id === item.id ? COLORS.white : COLORS.primary },
                         ]}
                     >
-                        {item}
+                        {item.title}
                     </Text>
                 </TouchableOpacity>
             ))}
