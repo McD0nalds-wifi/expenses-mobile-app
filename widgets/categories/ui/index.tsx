@@ -2,10 +2,8 @@ import { random } from 'lodash'
 import { FormattedMessage } from 'react-intl'
 import { Text, TouchableOpacity, View } from 'react-native'
 
-import { Category } from '@/entities/category'
+import { CATEGORIES, Category } from '@/entities/category'
 import { baseStyles, typographyStyles } from '@/shared/styles'
-
-import { CATEGORIES } from '../config'
 
 const CATEGORIES_LIST = Object.values(CATEGORIES).slice(0, 4)
 
