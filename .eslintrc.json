@@ -13,7 +13,7 @@
     "project": "./tsconfig.json",
     "tsconfigRootDir": "./"
   },
-  "plugins": ["@typescript-eslint", "sort-keys-fix", "typescript-sort-keys", "@typescript-eslint", "import"],
+  "plugins": ["formatjs", "@typescript-eslint", "sort-keys-fix", "typescript-sort-keys", "@typescript-eslint", "import"],
   "rules": {
     "quotes": ["warn", "single"],
     "react/react-in-jsx-scope": "off",

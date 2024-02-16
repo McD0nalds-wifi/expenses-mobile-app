@@ -1,8 +1,8 @@
 import { View } from 'react-native'
 
+import { CATEGORIES } from '@/entities/category'
 import { Operation } from '@/entities/operation'
 import { baseStyles } from '@/shared/styles'
-import { CATEGORIES } from '@/widgets/categories/config'
 
 const Operations = () => {
     return (

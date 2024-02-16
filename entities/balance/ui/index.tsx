@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import { AntDesign } from '@expo/vector-icons'
 import { FormattedNumber } from 'react-intl'
 import { StyleSheet, Text, View } from 'react-native'
@@ -11,10 +13,12 @@ import { BankName } from './BankName'
 interface IBalanceProps {
     amount: number
     bank: string
+    onAddExpense: () => void
+    onAddIncome: () => void
     title: string
 }
 
-export const Balance = ({ amount, bank, title }: IBalanceProps) => {
+export const Balance = memo(({ amount, bank, onAddExpense, onAddIncome, title }: IBalanceProps) => {
     return (
         <View style={[baseStyles.container, styles.container]}>
             <View style={styles.header}>
@@ -34,6 +38,7 @@ export const Balance = ({ amount, bank, title }: IBalanceProps) => {
             <View style={{ flexDirection: 'row', gap: 16, marginTop: 16 }}>
                 <Button
                     iconStart={<AntDesign color={COLORS.white} name={'minus'} size={24} />}
+                    onPress={onAddExpense}
                     size={'medium'}
                     style={{ flexGrow: 1 }}
                     type={'primary'}
@@ -43,6 +48,7 @@ export const Balance = ({ amount, bank, title }: IBalanceProps) => {
 
                 <Button
                     iconStart={<AntDesign color={COLORS.white} name={'plus'} size={24} />}
+                    onPress={onAddIncome}
                     size={'medium'}
                     style={{ flexGrow: 1 }}
                     type={'primary'}
@@ -52,7 +58,9 @@ export const Balance = ({ amount, bank, title }: IBalanceProps) => {
             </View>
         </View>
     )
-}
+})
+
+Balance.displayName = 'Balance'
 
 const styles = StyleSheet.create({
     amount: {

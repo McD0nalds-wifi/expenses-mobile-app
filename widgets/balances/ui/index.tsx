@@ -28,8 +28,22 @@ export const Balances = () => {
     )
 
     const handleAddBalancePress = () => {
-        push(ROUTES.addBalance.route)
+        push(ROUTES.addBalance.getRoute())
     }
+
+    const handleAddExpense = useCallback(
+        (balanceId: number) => () => {
+            push(ROUTES.addOperation.getRoute(balanceId, 'expenses'))
+        },
+        [],
+    )
+
+    const handleAddIncome = useCallback(
+        (balanceId: number) => () => {
+            push(ROUTES.addOperation.getRoute(balanceId, 'income'))
+        },
+        [],
+    )
 
     return (
         <View style={styles.wrapper}>
@@ -41,9 +55,15 @@ export const Balances = () => {
                 orientation={'horizontal'}
                 style={styles.pagerView}
             >
-                {balances.map(({ amount, name }, index) => (
+                {balances.map(({ amount, name, id }, index) => (
                     <View key={index} style={styles.page}>
-                        <Balance amount={amount} bank={'Тинькофф'} title={name} />
+                        <Balance
+                            amount={amount}
+                            bank={'Тинькофф'}
+                            onAddExpense={handleAddExpense(id)}
+                            onAddIncome={handleAddIncome(id)}
+                            title={name}
+                        />
                     </View>
                 ))}
 

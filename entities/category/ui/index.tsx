@@ -1,3 +1,4 @@
+import { isNumber } from 'lodash'
 import { FormattedNumber } from 'react-intl'
 import { StyleSheet, Text, View } from 'react-native'
 
@@ -10,11 +11,11 @@ interface ICategoryProps {
     icon: FontelloIconNameType
     limit?: number
     title: string
-    value: number
+    value?: number
 }
 
 export const Category = ({ color, icon, limit, title, value }: ICategoryProps) => {
-    const percent = limit ? Math.round(value / (limit * 0.01)) : 0
+    const percent = limit && value ? Math.round(value / (limit * 0.01)) : 0
 
     return (
         <View style={styles.container}>
@@ -25,9 +26,11 @@ export const Category = ({ color, icon, limit, title, value }: ICategoryProps) =
             <View style={styles.category}>
                 <Text style={[typographyStyles.headline, { color: COLORS.primary, paddingLeft: 4 }]}>{title}</Text>
 
-                <Text style={[typographyStyles.headline, { color: COLORS.primary, paddingRight: 4 }]}>
-                    <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={value} />
-                </Text>
+                {isNumber(value) && (
+                    <Text style={[typographyStyles.headline, { color: COLORS.primary, paddingRight: 4 }]}>
+                        <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={value} />
+                    </Text>
+                )}
 
                 <View
                     style={[

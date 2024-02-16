@@ -1,3 +1,3 @@
 export { Balance } from './ui'
 export { AddBalance } from './ui/AddBalance'
-export { balanceSlice, selectBalances, addBalance } from './model'
+export { balanceSlice, selectBalances, selectBalance, addBalance } from './model'

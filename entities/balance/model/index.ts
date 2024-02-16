@@ -19,10 +19,11 @@ export const balanceSlice = createSlice({
         },
     },
     selectors: {
+        selectBalance: ({ balances }, balanceId: number) => balances.find(({ id }) => id === balanceId),
         selectBalances: ({ balances }) => balances,
     },
 })
 
 export const { addBalance } = balanceSlice.actions
 
-export const { selectBalances } = balanceSlice.selectors
+export const { selectBalances, selectBalance } = balanceSlice.selectors

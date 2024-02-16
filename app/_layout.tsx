@@ -82,6 +82,10 @@ function RootLayoutNav() {
             <Stack.Screen name={'(tabs)'} options={{ headerShown: false }} />
 
             <Stack.Screen name={ROUTES.addBalance.name} options={{ headerShown: false, presentation: 'modal' }} />
+
+            <Stack.Screen name={ROUTES.addOperation.name} options={{ headerShown: false, presentation: 'modal' }} />
+
+            <Stack.Screen name={ROUTES.categoriesList.name} options={{ headerShown: false, presentation: 'modal' }} />
         </Stack>
     )
 }
