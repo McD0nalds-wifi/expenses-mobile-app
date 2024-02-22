@@ -1,43 +1,40 @@
-import { useOAuth } from '@clerk/clerk-expo'
-import { Ionicons } from '@expo/vector-icons'
-import { useRouter } from 'expo-router'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+// import { useOAuth } from '@clerk/clerk-expo'
+// import { useRouter } from 'expo-router'
+import { StyleSheet, View } from 'react-native'
 
-import { COLORS } from '@/shared/constants'
 import { useWarmUpBrowser } from '@/shared/hooks'
-import { baseStyles } from '@/shared/styles'
 
-enum Strategy {
-    Apple = 'oauth_apple',
-    Google = 'oauth_google',
-}
+// enum Strategy {
+//     Apple = 'oauth_apple',
+//     Google = 'oauth_google',
+// }
 
 const Login = () => {
     useWarmUpBrowser()
 
-    const { back } = useRouter()
-    const { startOAuthFlow: googleAuth } = useOAuth({ strategy: 'oauth_google' })
-    const { startOAuthFlow: appleAuth } = useOAuth({ strategy: 'oauth_apple' })
+    // const { back } = useRouter()
+    // const { startOAuthFlow: googleAuth } = useOAuth({ strategy: 'oauth_google' })
+    // const { startOAuthFlow: appleAuth } = useOAuth({ strategy: 'oauth_apple' })
     // const { startOAuthFlow: facebookAuth } = useOAuth({ strategy: 'oauth_facebook' })
 
-    const onSelectAuth = async (strategy: Strategy) => {
-        const selectedAuth = {
-            [Strategy.Google]: googleAuth,
-            [Strategy.Apple]: appleAuth,
-            // [Strategy.Facebook]: facebookAuth,
-        }[strategy]
-
-        try {
-            const { createdSessionId, setActive } = await selectedAuth()
-
-            if (createdSessionId && setActive) {
-                setActive({ session: createdSessionId })
-                back()
-            }
-        } catch (err) {
-            console.error('OAuth error', err)
-        }
-    }
+    // const onSelectAuth = async (strategy: Strategy) => {
+    //     const selectedAuth = {
+    //         [Strategy.Google]: googleAuth,
+    //         [Strategy.Apple]: appleAuth,
+    //         // [Strategy.Facebook]: facebookAuth,
+    //     }[strategy]
+    //
+    //     try {
+    //         const { createdSessionId, setActive } = await selectedAuth()
+    //
+    //         if (createdSessionId && setActive) {
+    //             setActive({ session: createdSessionId })
+    //             back()
+    //         }
+    //     } catch (err) {
+    //         console.error('OAuth error', err)
+    //     }
+    // }
 
     return (
         <View style={styles.container}>

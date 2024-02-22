@@ -8,12 +8,12 @@ export const BALANCE_TYPES: Record<BalanceType, { emoji: string; id: BalanceType
     bankAccount: {
         emoji: '🏦',
         id: 'bankAccount',
-        title: <FormattedMessage defaultMessage={'Банковский счет'} id={'bankAccountTitle'} />,
+        title: <FormattedMessage defaultMessage='Банковский счет' id='wyAH7q' />,
     },
     cash: {
         emoji: '💵',
         id: 'cash',
-        title: <FormattedMessage defaultMessage={'Наличные'} id={'cashTitle'} />,
+        title: <FormattedMessage defaultMessage='Наличные' id='yw0WbM' />,
     },
 }
 

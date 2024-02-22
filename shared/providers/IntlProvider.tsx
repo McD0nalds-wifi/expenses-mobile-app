@@ -9,7 +9,7 @@ interface IntlProviderProps {
 
 export const IntlProvider = ({ children }: IntlProviderProps) => (
     <IntlProviderBase
-        locale={'ru'}
+        locale='ru'
         onError={(error) => {
             // TODO Remove after translations adding
             if (error.code === IntlErrorCode.MISSING_TRANSLATION) {

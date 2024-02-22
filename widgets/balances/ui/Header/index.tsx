@@ -67,7 +67,7 @@ export const Header = ({ currentIndicatorDotIndex, indicatorDotsCount }: IHeader
 
             <View style={styles.iconButtonWrapper}>
                 <TouchableOpacity style={baseStyles.iconButton}>
-                    <AntDesign color={COLORS.primary} name={'scan1'} size={20} />
+                    <AntDesign color={COLORS.primary} name='scan1' size={20} />
                 </TouchableOpacity>
             </View>
         </Fragment>

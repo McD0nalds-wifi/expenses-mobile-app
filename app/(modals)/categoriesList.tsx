@@ -24,10 +24,7 @@ const CategoriesList = () => {
     return (
         <View style={{ backgroundColor: COLORS.white, flex: 1 }}>
             <View style={baseStyles.container}>
-                <ModalHeader
-                    onBack={back}
-                    title={<FormattedMessage defaultMessage={'Список категорий'} id={'categoriesList'} />}
-                />
+                <ModalHeader onBack={back} title={<FormattedMessage defaultMessage='Список категорий' id='T+wLZf' />} />
             </View>
 
             <FlatList

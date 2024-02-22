@@ -17,7 +17,7 @@ export const ModalHeader = ({ onBack, onClose, title }: IModalHeaderProps) => (
         {onBack && (
             <TouchableOpacity onPress={onBack} style={{ left: 0, position: 'absolute', top: 24 }}>
                 <View style={baseStyles.iconButton}>
-                    <AntDesign name={'left'} size={20} />
+                    <AntDesign name='left' size={20} />
                 </View>
             </TouchableOpacity>
         )}
@@ -27,7 +27,7 @@ export const ModalHeader = ({ onBack, onClose, title }: IModalHeaderProps) => (
         {onClose && (
             <TouchableOpacity onPress={onClose} style={{ position: 'absolute', right: 0, top: 24 }}>
                 <View style={baseStyles.iconButton}>
-                    <AntDesign name={'close'} size={20} />
+                    <AntDesign name='close' size={20} />
                 </View>
             </TouchableOpacity>
         )}

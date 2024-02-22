@@ -26,9 +26,9 @@ const AddOperation = () => {
                     onClose={back}
                     title={
                         operationType === 'expenses' ? (
-                            <FormattedMessage defaultMessage={'Добавить расход'} id={'addExpenses'} />
+                            <FormattedMessage defaultMessage='Добавить расход' id='NeCOyP' />
                         ) : (
-                            <FormattedMessage defaultMessage={'Добавить доход'} id={'addIncome'} />
+                            <FormattedMessage defaultMessage='Добавить доход' id='tOHzbF' />
                         )
                     }
                 />

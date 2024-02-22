@@ -7,10 +7,10 @@ import { typographyStyles } from '@/shared/styles'
 
 export const AddBalance = () => (
     <View style={styles.wrapper}>
-        <AntDesign color={COLORS.secondary} name={'plus'} size={34} />
+        <AntDesign color={COLORS.secondary} name='plus' size={34} />
 
         <Text style={[typographyStyles.headline, { color: COLORS.secondary }]}>
-            <FormattedMessage defaultMessage={'Добавить счет'} id={'addBalance'} />
+            <FormattedMessage defaultMessage='Добавить счет' id='HAxc4k' />
         </Text>
     </View>
 )

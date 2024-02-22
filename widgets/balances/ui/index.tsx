@@ -52,14 +52,14 @@ export const Balances = () => {
             <PagerView
                 initialPage={DEFAULT_PAGE_INDEX}
                 onPageScroll={handlePagerViewScroll}
-                orientation={'horizontal'}
+                orientation='horizontal'
                 style={styles.pagerView}
             >
                 {balances.map(({ amount, name, id }, index) => (
                     <View key={index} style={styles.page}>
                         <Balance
                             amount={amount}
-                            bank={'Тинькофф'}
+                            bank='Тинькофф'
                             onAddExpense={handleAddExpense(id)}
                             onAddIncome={handleAddIncome(id)}
                             title={name}

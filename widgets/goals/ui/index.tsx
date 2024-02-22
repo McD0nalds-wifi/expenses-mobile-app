@@ -15,7 +15,7 @@ export const Goals = () => {
     return (
         <View style={{ flex: 1 }}>
             <Text style={[typographyStyles.title2, baseStyles.container, { paddingVertical: 12 }]}>
-                <FormattedMessage defaultMessage={'Цели'} id={'goalsTitle'} />
+                <FormattedMessage defaultMessage='Цели' id='nm+Rrj' />
             </Text>
 
             <View
@@ -32,23 +32,23 @@ export const Goals = () => {
             >
                 <Goal
                     collected={20000}
-                    emoji={'🏠'}
+                    emoji='🏠'
                     gradientColors={['#15ABFF', '#00EE6E']}
                     gradientLocations={[0.9, 0.1]}
                     height={cardSize}
                     needToCollect={100000}
-                    title={'Новый дом'}
+                    title='Новый дом'
                     width={cardSize}
                 />
 
                 <Goal
                     collected={20000}
-                    emoji={'🏠'}
+                    emoji='🏠'
                     gradientColors={['#2173FF', '#FF1BE8', '#FF9D2F']}
                     gradientLocations={[0.1, 0.6, 1]}
                     height={cardSize}
                     needToCollect={100000}
-                    title={'Новый дом'}
+                    title='Новый дом'
                     width={cardSize}
                 />
 

@@ -53,19 +53,19 @@ export const Form = ({ headerSlot }: IFormProps) => {
 
                     <View style={styles.form}>
                         <TextInput
-                            autoCapitalize={'none'}
+                            autoCapitalize='none'
                             error={errors?.name?.message}
-                            label={'Название счета'}
-                            placeholder={'Мой счет'}
+                            label='Название счета'
+                            placeholder='Мой счет'
                             {...register('name')}
                             onChangeText={(value) => setValue('name', value, { shouldValidate: true })}
                         />
 
                         <TextInput
                             error={errors?.amount?.message}
-                            inputMode={'numeric'}
-                            label={'Текущий баланс'}
-                            placeholder={'0 руб'}
+                            inputMode='numeric'
+                            label='Текущий баланс'
+                            placeholder='0 руб'
                             {...register('amount')}
                             onChangeText={(value) => setValue('amount', Number(value), { shouldValidate: true })}
                         />
@@ -73,9 +73,9 @@ export const Form = ({ headerSlot }: IFormProps) => {
                         {balanceType === 'bankAccount' ? (
                             <TextInput
                                 editable={false}
-                                icon={<AntDesign color={COLORS.secondary} name={'down'} size={24} />}
-                                label={'Выберите банк'}
-                                placeholder={'Тинькофф'}
+                                icon={<AntDesign color={COLORS.secondary} name='down' size={24} />}
+                                label='Выберите банк'
+                                placeholder='Тинькофф'
                             />
                         ) : null}
                     </View>
@@ -89,9 +89,9 @@ export const Form = ({ headerSlot }: IFormProps) => {
                                 console.log('invalid')
                             },
                         )}
-                        size={'large'}
+                        size='large'
                         style={{ marginTop: 'auto' }}
-                        type={'primary'}
+                        type='primary'
                     >
                         Добавить счет
                     </Button>

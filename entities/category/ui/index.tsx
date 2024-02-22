@@ -20,7 +20,7 @@ export const Category = ({ color, icon, limit, title, value }: ICategoryProps) =
     return (
         <View style={styles.container}>
             <View style={[styles.icon, { backgroundColor: color }]}>
-                <FontelloIcon color={'white'} name={icon} size={24} />
+                <FontelloIcon color='white' name={icon} size={24} />
             </View>
 
             <View style={styles.category}>
@@ -28,7 +28,7 @@ export const Category = ({ color, icon, limit, title, value }: ICategoryProps) =
 
                 {isNumber(value) && (
                     <Text style={[typographyStyles.headline, { color: COLORS.primary, paddingRight: 4 }]}>
-                        <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={value} />
+                        <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={value} />
                     </Text>
                 )}
 

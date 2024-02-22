@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient'
 import { FormattedNumber } from 'react-intl'
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import { COLORS, CURRENT_CURRENCY } from '@/shared/constants'
 import { typographyStyles } from '@/shared/styles'
@@ -38,7 +38,7 @@ export const Goal = ({
             />
             <View style={styles.card}>
                 <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>
-                    <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={collected} />
+                    <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={collected} />
                 </Text>
 
                 <Text style={[typographyStyles.footnote, { color: COLORS.secondary }]}>{title}</Text>
@@ -46,7 +46,7 @@ export const Goal = ({
                 <View style={styles.footer}>
                     <View style={styles.chip}>
                         <Text style={[typographyStyles.captionBold, { color: COLORS.green }]}>
-                            <FormattedNumber minimumFractionDigits={2} style={'percent'} value={percent} />
+                            <FormattedNumber minimumFractionDigits={2} style='percent' value={percent} />
                         </Text>
                     </View>
 

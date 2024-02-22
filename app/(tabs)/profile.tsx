@@ -7,10 +7,10 @@ const Profile = () => {
 
     return (
         <View>
-            <Button onPress={() => signOut()} title={'Log out'} />
+            <Button onPress={() => signOut()} title='Log out' />
 
             {!isSignedIn ? (
-                <Link href={'/(modals)/login'}>
+                <Link href='/(modals)/login'>
                     <Text>Login</Text>
                 </Link>
             ) : null}

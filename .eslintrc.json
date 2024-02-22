@@ -57,7 +57,14 @@
     ],
     "sort-imports": ["error", { "allowSeparatedGroups": true, "ignoreDeclarationSort": true }],
     "react/jsx-sort-props": "warn",
-    "sort-keys-fix/sort-keys-fix": "warn"
+    "sort-keys-fix/sort-keys-fix": "warn",
+    "react/jsx-curly-brace-presence": "warn",
+    "formatjs/enforce-id": [
+      "error",
+      {
+        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
+      }
+    ]
   },
   "settings": {
     "import/ignore": ["node_modules/react-native/index\\.js$"],

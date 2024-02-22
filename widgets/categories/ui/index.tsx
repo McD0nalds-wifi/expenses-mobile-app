@@ -11,7 +11,7 @@ export const Categories = () => {
     return (
         <View style={{ flex: 1 }}>
             <Text style={[typographyStyles.title2, baseStyles.container, { paddingBottom: 12 }]}>
-                <FormattedMessage defaultMessage={'Категории'} id={'categoriesTitle'} />
+                <FormattedMessage defaultMessage='Категории' id='2hGz++' />
             </Text>
 
             <View style={baseStyles.container}>

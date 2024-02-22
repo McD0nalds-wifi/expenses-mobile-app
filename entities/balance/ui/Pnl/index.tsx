@@ -19,7 +19,7 @@ export const Pnl = ({ value }: IPnlProps) => {
             ]}
         >
             <Text style={[typographyStyles.subhedlineBold, { color: COLORS.white }]}>
-                {sign} <FormattedNumber style={'percent'} value={Math.abs(value)} />
+                {sign} <FormattedNumber style='percent' value={Math.abs(value)} />
             </Text>
         </View>
     )

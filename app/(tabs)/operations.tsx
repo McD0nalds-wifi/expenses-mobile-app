@@ -9,11 +9,11 @@ const Operations = () => {
         <View style={{ flex: 1 }}>
             <View style={[baseStyles.container, { backgroundColor: 'white' }]}>
                 <Operation
-                    bankName={'Тинькофф'}
+                    bankName='Тинькофф'
                     color={CATEGORIES.transport.color}
                     icon={CATEGORIES.transport.icon}
                     subtitle={CATEGORIES.transport.title}
-                    title={'Проезд в автобусе'}
+                    title='Проезд в автобусе'
                     value={200}
                 />
             </View>

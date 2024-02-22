@@ -68,17 +68,17 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                         {balance && (
                             <TextInput
                                 editable={false}
-                                label={'Название счета'}
-                                placeholder={'Мой счет'}
+                                label='Название счета'
+                                placeholder='Мой счет'
                                 value={balance.name}
                             />
                         )}
 
                         <TextInput
                             error={errors?.amount?.message}
-                            inputMode={'numeric'}
-                            label={'Сумма'}
-                            placeholder={'0 руб'}
+                            inputMode='numeric'
+                            label='Сумма'
+                            placeholder='0 руб'
                             {...register('amount')}
                             onChangeText={(value) => setValue('amount', Number(value), { shouldValidate: true })}
                         />
@@ -86,8 +86,8 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                         <TextInput
                             editable={false}
                             error={errors?.category?.message}
-                            icon={<AntDesign color={COLORS.secondary} name={'down'} size={24} />}
-                            label={'Выберите категорию'}
+                            icon={<AntDesign color={COLORS.secondary} name='down' size={24} />}
+                            label='Выберите категорию'
                             onTouchEnd={() => push(ROUTES.categoriesList.getRoute(balanceId, operationType))}
                             placeholder={CATEGORIES.car.title}
                             value={categoryValue}
@@ -95,8 +95,8 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
 
                         <DateInput
                             error={errors?.date?.message}
-                            icon={<AntDesign color={COLORS.secondary} name={'calendar'} size={24} />}
-                            label={'Укажите дату'}
+                            icon={<AntDesign color={COLORS.secondary} name='calendar' size={24} />}
+                            label='Укажите дату'
                             onChange={(value) => setValue('date', value, { shouldValidate: true })}
                             placeholder={formatDate(TODAY, { dateStyle: 'medium' })}
                             value={dateValue}
@@ -104,8 +104,8 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
 
                         <TextInput
                             editable={false}
-                            icon={<AntDesign color={COLORS.secondary} name={'clockcircleo'} size={24} />}
-                            label={'Укажите время'}
+                            icon={<AntDesign color={COLORS.secondary} name='clockcircleo' size={24} />}
+                            label='Укажите время'
                             placeholder={formatDate(TODAY, { timeStyle: 'short' })}
                         />
                     </View>
@@ -115,9 +115,9 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                             () => null,
                             () => null,
                         )}
-                        size={'large'}
+                        size='large'
                         style={{ marginTop: 'auto' }}
-                        type={'primary'}
+                        type='primary'
                     >
                         Добавить счет
                     </Button>

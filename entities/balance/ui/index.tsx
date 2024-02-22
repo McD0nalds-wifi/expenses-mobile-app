@@ -29,7 +29,7 @@ export const Balance = memo(({ amount, bank, onAddExpense, onAddIncome, title }:
 
             <View style={styles.amount}>
                 <Text style={typographyStyles.largeTitle}>
-                    <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={amount} />
+                    <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={amount} />
                 </Text>
 
                 {/*<Pnl value={0.12} />*/}
@@ -37,21 +37,21 @@ export const Balance = memo(({ amount, bank, onAddExpense, onAddIncome, title }:
 
             <View style={{ flexDirection: 'row', gap: 16, marginTop: 16 }}>
                 <Button
-                    iconStart={<AntDesign color={COLORS.white} name={'minus'} size={24} />}
+                    iconStart={<AntDesign color={COLORS.white} name='minus' size={24} />}
                     onPress={onAddExpense}
-                    size={'medium'}
+                    size='medium'
                     style={{ flexGrow: 1 }}
-                    type={'primary'}
+                    type='primary'
                 >
                     Потратить
                 </Button>
 
                 <Button
-                    iconStart={<AntDesign color={COLORS.white} name={'plus'} size={24} />}
+                    iconStart={<AntDesign color={COLORS.white} name='plus' size={24} />}
                     onPress={onAddIncome}
-                    size={'medium'}
+                    size='medium'
                     style={{ flexGrow: 1 }}
-                    type={'primary'}
+                    type='primary'
                 >
                     Пополнить
                 </Button>

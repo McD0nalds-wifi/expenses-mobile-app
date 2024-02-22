@@ -40,7 +40,7 @@ export const DateInput = ({ error, icon, label, onChange = noop, placeholder, va
             </Pressable>
 
             <Modal
-                animationType={'fade'}
+                animationType='fade'
                 onRequestClose={hideDatePicker}
                 transparent={true}
                 visible={datePickerVisible}
@@ -49,9 +49,9 @@ export const DateInput = ({ error, icon, label, onChange = noop, placeholder, va
                     <View style={styles.centeredView}>
                         <View ref={ref} style={styles.modalView}>
                             <DateTimePicker
-                                display={'spinner'}
-                                locale={'ru'}
-                                mode={'date'}
+                                display='spinner'
+                                locale='ru'
+                                mode='date'
                                 onChange={(_, date) => (date ? onChange(date) : null)}
                                 textColor={COLORS.primary}
                                 value={value ?? new Date()}

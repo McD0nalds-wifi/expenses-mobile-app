@@ -3,7 +3,6 @@ import React, { ReactNode, forwardRef } from 'react'
 import { StyleSheet, Text, TextInput as TextInputBase, TextInputProps as TextInputBaseProps, View } from 'react-native'
 
 import { COLORS } from '@/shared/constants'
-import { useBoolean } from '@/shared/hooks'
 import { typographyStyles } from '@/shared/styles'
 
 interface ITextInputProps extends TextInputBaseProps {
@@ -14,14 +13,15 @@ interface ITextInputProps extends TextInputBaseProps {
 }
 
 export const TextInput = forwardRef<TextInputBase, ITextInputProps>(({ error, icon, label, ...props }, ref) => {
-    const { value: focused, setTrue: setFocused, setFalse: setUnfocused } = useBoolean(false)
+    // const { value: focused, setTrue: setFocused, setFalse: setUnfocused } = useBoolean(false)
 
     return (
         <View style={styles.wrapper}>
             <Text
                 style={[
                     typographyStyles.caption,
-                    { color: focused ? COLORS.primary : COLORS.secondary, marginBottom: 6 },
+                    { color: COLORS.secondary, marginBottom: 6 },
+                    // { color: focused ? COLORS.primary : COLORS.secondary, marginBottom: 6 },
                 ]}
             >
                 {label}
@@ -35,7 +35,8 @@ export const TextInput = forwardRef<TextInputBase, ITextInputProps>(({ error, ic
                 style={[
                     typographyStyles.body,
                     styles.textInput,
-                    { borderBottomColor: focused ? COLORS.primary : COLORS.tertiary },
+                    { borderBottomColor: COLORS.tertiary },
+                    // { borderBottomColor: focused ? COLORS.primary : COLORS.tertiary },
                 ]}
                 {...props}
             />

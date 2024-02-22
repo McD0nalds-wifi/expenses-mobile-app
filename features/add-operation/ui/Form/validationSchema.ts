@@ -9,7 +9,7 @@ export interface IAddOperationFormData {
 
 export const generateValidationSchema = (formatMessage: IntlFormatters['formatMessage']) =>
     yup.object({
-        amount: yup.number().required(formatMessage({ defaultMessage: 'Укажите сумму', id: 'enterOperationAmount' })),
-        category: yup.string().required(formatMessage({ defaultMessage: 'Выберите категорию', id: 'chooseCategory' })),
-        date: yup.date().required(formatMessage({ defaultMessage: 'Укажите дату', id: 'enterDate' })),
+        amount: yup.number().required(formatMessage({ defaultMessage: 'Укажите сумму', id: 'JIpWcR' })),
+        category: yup.string().required(formatMessage({ defaultMessage: 'Выберите категорию', id: 'yKKamR' })),
+        date: yup.date().required(formatMessage({ defaultMessage: 'Укажите дату', id: 'UV2k83' })),
     })

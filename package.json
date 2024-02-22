@@ -10,7 +10,8 @@
     "test": "jest --watchAll",
     "mock-server": "json-server -w server/db.json --port 3004",
     "storybook-generate": "sb-rn-get-stories",
-    "storybook-watch": "sb-rn-watcher"
+    "storybook-watch": "sb-rn-watcher",
+    "lint:fix": "eslint --fix --ext .ts,.tsx ."
   },
   "jest": {
     "preset": "jest-expo"

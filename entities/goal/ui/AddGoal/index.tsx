@@ -13,10 +13,10 @@ interface IAddGoalProps {
 export const AddGoal = ({ height = 160, width = 160 }: IAddGoalProps) => {
     return (
         <View style={[styles.container, { height, width }]}>
-            <AntDesign color={COLORS.secondary} name={'plus'} size={24} />
+            <AntDesign color={COLORS.secondary} name='plus' size={24} />
 
             <Text style={[typographyStyles.footnoteBold, { color: COLORS.secondary }]}>
-                <FormattedMessage defaultMessage={'Добавить цель'} id={'addGoal'} />
+                <FormattedMessage defaultMessage='Добавить цель' id='mGmEiC' />
             </Text>
         </View>
     )

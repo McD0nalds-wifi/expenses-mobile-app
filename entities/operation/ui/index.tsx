@@ -18,7 +18,7 @@ export const Operation = ({ bankName, color, icon, subtitle, title, value }: IOp
     return (
         <View style={styles.container}>
             <View style={[styles.icon, { backgroundColor: color }]}>
-                <FontelloIcon color={'white'} name={icon} size={24} />
+                <FontelloIcon color='white' name={icon} size={24} />
             </View>
 
             <View style={{ flexDirection: 'column', flexGrow: 1, gap: 2 }}>
@@ -26,7 +26,7 @@ export const Operation = ({ bankName, color, icon, subtitle, title, value }: IOp
                     <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>{title}</Text>
 
                     <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>
-                        <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={value} />
+                        <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={value} />
                     </Text>
                 </View>
 

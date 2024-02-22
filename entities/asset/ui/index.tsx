@@ -25,7 +25,7 @@ export const Asset = ({ iconUrl, pnl, title, value }: IAssetProps) => {
                     <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>{title}</Text>
 
                     <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>
-                        <FormattedNumber currency={CURRENT_CURRENCY} style={'currency'} value={value} />
+                        <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={value} />
                     </Text>
                 </View>
 
@@ -38,7 +38,7 @@ export const Asset = ({ iconUrl, pnl, title, value }: IAssetProps) => {
                             { color: pnl > 0 ? COLORS.green : pnl < 0 ? COLORS.red : COLORS.secondary },
                         ]}
                     >
-                        {sign} <FormattedNumber style={'percent'} value={Math.abs(pnl)} />
+                        {sign} <FormattedNumber style='percent' value={Math.abs(pnl)} />
                     </Text>
                 </View>
             </View>

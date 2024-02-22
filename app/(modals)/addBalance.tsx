@@ -14,7 +14,7 @@ const AddBalance = () => {
             headerSlot={
                 <ModalHeader
                     onClose={back}
-                    title={<FormattedMessage defaultMessage={'Добавление счета'} id={'addingInvoice'} />}
+                    title={<FormattedMessage defaultMessage='Добавление счета' id='MJ3VMZ' />}
                 />
             }
         />
