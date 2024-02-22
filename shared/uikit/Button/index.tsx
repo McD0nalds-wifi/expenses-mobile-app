@@ -12,10 +12,11 @@ interface IButtonProps {
     onPress?: () => void
     size: 'large' | 'medium' | 'small'
     style?: StyleProp<ViewStyle>
-    type: 'primary' | 'secondary'
+    type: 'primary' | 'secondary' | 'danger'
 }
 
 const TEXT_COLOR_BY_TYPE = {
+    danger: COLORS.white,
     primary: COLORS.white,
     secondary: COLORS.primary,
 } as const
@@ -33,6 +34,14 @@ export const Button = ({ children, iconEnd, iconStart, onPress, size, style, typ
 }
 
 const buttonsStyles = StyleSheet.create({
+    danger: {
+        alignItems: 'center',
+        backgroundColor: COLORS.red,
+        borderRadius: 120,
+        flexDirection: 'row',
+        gap: 8,
+        justifyContent: 'center',
+    },
     large: {
         paddingHorizontal: 24,
         paddingVertical: 14,

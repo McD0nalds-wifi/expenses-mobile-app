@@ -14,7 +14,7 @@ import { COLORS } from '@/shared/constants'
 import { useTypedSelector } from '@/shared/hooks'
 import { ROUTES } from '@/shared/routes'
 import { baseStyles } from '@/shared/styles'
-import { Button, TextInput } from '@/shared/uikit'
+import { Button, DateInput, TextInput } from '@/shared/uikit'
 
 import { IAddOperationFormData, generateValidationSchema } from './validationSchema'
 import { useUpdateCategoryValue } from '../../hooks/useUpdateCategoryValue'
@@ -25,6 +25,8 @@ interface IFormProps {
     headerSlot?: ReactNode
     operationType: OperationType
 }
+
+const TODAY = new Date()
 
 export const Form = ({ balanceId, category, headerSlot, operationType }: IFormProps) => {
     const { push } = useRouter()
@@ -37,7 +39,11 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
         setValue,
         watch,
     } = useForm<IAddOperationFormData>({
-        defaultValues: { amount: undefined, category: category ? CATEGORIES[category].title : undefined },
+        defaultValues: {
+            amount: undefined,
+            category: category ? CATEGORIES[category].title : undefined,
+            date: TODAY,
+        },
         mode: 'onChange',
         resolver: yupResolver(generateValidationSchema(formatMessage)),
     })
@@ -45,6 +51,7 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
     const balance = useTypedSelector((state) => selectBalance(state, balanceId))
 
     const categoryValue = watch('category')
+    const dateValue = watch('date')
 
     useUpdateCategoryValue(category, setValue)
 
@@ -86,18 +93,20 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                             value={categoryValue}
                         />
 
-                        <TextInput
-                            editable={false}
+                        <DateInput
+                            error={errors?.date?.message}
                             icon={<AntDesign color={COLORS.secondary} name={'calendar'} size={24} />}
                             label={'Укажите дату'}
-                            placeholder={formatDate(new Date(), { dateStyle: 'medium' })}
+                            onChange={(value) => setValue('date', value, { shouldValidate: true })}
+                            placeholder={formatDate(TODAY, { dateStyle: 'medium' })}
+                            value={dateValue}
                         />
 
                         <TextInput
                             editable={false}
                             icon={<AntDesign color={COLORS.secondary} name={'clockcircleo'} size={24} />}
                             label={'Укажите время'}
-                            placeholder={formatDate(new Date(), { timeStyle: 'short' })}
+                            placeholder={formatDate(TODAY, { timeStyle: 'short' })}
                         />
                     </View>
 
