@@ -12,9 +12,8 @@ const openDatabase = () => {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return SQLite.openDatabase('app.db')
+    const db = SQLite.openDatabase('db.db')
+    return db
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 export const db = openDatabase()

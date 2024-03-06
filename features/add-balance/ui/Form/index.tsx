@@ -16,9 +16,10 @@ import { BALANCE_TYPES, CHIPS_ITEMS } from '../../config'
 
 interface IFormProps {
     headerSlot?: ReactNode
+    onSubmit: (data: IAddBalanceFormData) => void
 }
 
-export const Form = ({ headerSlot }: IFormProps) => {
+export const Form = ({ headerSlot, onSubmit }: IFormProps) => {
     const { formatMessage } = useIntl()
 
     const [balanceType, setBalanceType] = useState<BalanceType>('bankAccount')
@@ -80,19 +81,7 @@ export const Form = ({ headerSlot }: IFormProps) => {
                         ) : null}
                     </View>
 
-                    <Button
-                        onPress={handleSubmit(
-                            () => {
-                                console.log('valid')
-                            },
-                            () => {
-                                console.log('invalid')
-                            },
-                        )}
-                        size='large'
-                        style={{ marginTop: 'auto' }}
-                        type='primary'
-                    >
+                    <Button onPress={handleSubmit(onSubmit)} size='large' style={{ marginTop: 'auto' }} type='primary'>
                         Добавить счет
                     </Button>
                 </View>

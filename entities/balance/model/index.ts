@@ -6,9 +6,7 @@ interface ISliceState {
     balances: Array<IBalance>
 }
 
-const DEFAULT_BALANCE = { amount: 0, id: 1, name: 'Мой кошелек', type: 'bankAccount' } as const
-
-const initialState: ISliceState = { balances: [{ ...DEFAULT_BALANCE }] }
+const initialState: ISliceState = { balances: [] }
 
 export const balanceSlice = createSlice({
     initialState,
@@ -17,6 +15,9 @@ export const balanceSlice = createSlice({
         addBalance: (state, action: PayloadAction<IBalance>) => {
             state.balances.push(action.payload)
         },
+        initializeBalances: (state, action: PayloadAction<Array<IBalance>>) => {
+            state.balances = action.payload
+        },
     },
     selectors: {
         selectBalance: ({ balances }, balanceId: number) => balances.find(({ id }) => id === balanceId),
@@ -24,6 +25,6 @@ export const balanceSlice = createSlice({
     },
 })
 
-export const { addBalance } = balanceSlice.actions
+export const { addBalance, initializeBalances } = balanceSlice.actions
 
 export const { selectBalances, selectBalance } = balanceSlice.selectors
