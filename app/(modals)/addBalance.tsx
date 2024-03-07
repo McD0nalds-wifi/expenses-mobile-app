@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { addBalance, balanceDatabase } from '@/entities/balance'
 import { AddBalanceForm, IAddBalanceFormData } from '@/features/add-balance'
-import { useTypedDispatch } from '@/shared/hooks'
+import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { ModalHeader } from '@/shared/uikit'
 
 const AddBalance = () => {

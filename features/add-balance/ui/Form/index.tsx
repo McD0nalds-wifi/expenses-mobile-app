@@ -3,7 +3,7 @@ import React, { ReactNode, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 
 import { BalanceType } from '@/entities/balance/types'
@@ -82,7 +82,7 @@ export const Form = ({ headerSlot, onSubmit }: IFormProps) => {
                     </View>
 
                     <Button onPress={handleSubmit(onSubmit)} size='large' style={{ marginTop: 'auto' }} type='primary'>
-                        Добавить счет
+                        <FormattedMessage defaultMessage='Добавить счет' id='HAxc4k' />
                     </Button>
                 </View>
             </TouchableWithoutFeedback>

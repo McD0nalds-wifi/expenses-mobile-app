@@ -10,7 +10,7 @@ import { useBoolean } from '@/shared/hooks/useBoolean'
 
 import { TextInput } from '../TextInput'
 
-interface IDateInputProps {
+interface ITimeInputProps {
     error?: string
     icon?: ReactNode
     label: ReactNode
@@ -19,7 +19,7 @@ interface IDateInputProps {
     value?: Date
 }
 
-export const DateInput = ({ error, icon, label, onChange = noop, placeholder, value }: IDateInputProps) => {
+export const TimeInput = ({ error, icon, label, onChange = noop, placeholder, value }: ITimeInputProps) => {
     const { formatDate } = useIntl()
 
     const ref = useRef<View>(null)
@@ -44,7 +44,7 @@ export const DateInput = ({ error, icon, label, onChange = noop, placeholder, va
                     icon={icon}
                     label={label}
                     placeholder={placeholder}
-                    value={value ? formatDate(value, { dateStyle: 'medium' }) : undefined}
+                    value={value ? formatDate(value, { timeStyle: 'short' }) : undefined}
                 />
             </Pressable>
 
@@ -55,7 +55,7 @@ export const DateInput = ({ error, icon, label, onChange = noop, placeholder, va
                             <DateTimePicker
                                 display='spinner'
                                 locale='ru'
-                                mode='date'
+                                mode='time'
                                 onChange={(_, date) => (date ? onChange(date) : null)}
                                 textColor={COLORS.primary}
                                 value={value ?? new Date()}

@@ -10,7 +10,7 @@ import sfProTextBold from '@/assets/fonts/SF-Pro-Rounded-Bold.ttf'
 import sfProTextHeavy from '@/assets/fonts/SF-Pro-Rounded-Heavy.ttf'
 import sfProTextRegular from '@/assets/fonts/SF-Pro-Rounded-Regular.ttf'
 import sfProTextSemibold from '@/assets/fonts/SF-Pro-Rounded-Semibold.ttf'
-import { useDatabase } from '@/shared/hooks'
+import { useDatabase } from '@/shared/hooks/useDatabase'
 import { IntlProvider, StoreProvider } from '@/shared/providers'
 import { ROUTES } from '@/shared/routes'
 

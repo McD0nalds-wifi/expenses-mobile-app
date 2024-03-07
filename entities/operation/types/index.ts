@@ -8,6 +8,5 @@ export interface IOperation {
     category: CategoryType
     date: number
     id: number
-    name: string
     operationType: OperationType
 }

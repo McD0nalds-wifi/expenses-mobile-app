@@ -6,7 +6,8 @@ import { NativeSyntheticEvent, StyleSheet, TouchableOpacity, View } from 'react-
 import PagerView from 'react-native-pager-view'
 
 import { AddBalance, Balance, balanceDatabase, initializeBalances, selectBalances } from '@/entities/balance'
-import { useTypedDispatch, useTypedSelector } from '@/shared/hooks'
+import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
+import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ROUTES } from '@/shared/routes'
 import { baseStyles } from '@/shared/styles'
 

@@ -2,7 +2,7 @@
 // import { useRouter } from 'expo-router'
 import { StyleSheet, View } from 'react-native'
 
-import { useWarmUpBrowser } from '@/shared/hooks'
+import { useWarmUpBrowser } from '@/shared/hooks/useWarmUpBrowser'
 
 // enum Strategy {
 //     Apple = 'oauth_apple',

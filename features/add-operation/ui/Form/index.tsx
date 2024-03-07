@@ -4,14 +4,14 @@ import { AntDesign } from '@expo/vector-icons'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'expo-router'
 import { useForm } from 'react-hook-form'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 
 import { selectBalance } from '@/entities/balance'
 import { CATEGORIES, CategoryType } from '@/entities/category'
 import { OperationType } from '@/entities/operation'
 import { COLORS } from '@/shared/constants'
-import { useTypedSelector } from '@/shared/hooks'
+import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ROUTES } from '@/shared/routes'
 import { baseStyles } from '@/shared/styles'
 import { Button, DateInput, TextInput } from '@/shared/uikit'
@@ -23,12 +23,13 @@ interface IFormProps {
     balanceId: number
     category?: CategoryType
     headerSlot?: ReactNode
+    onSubmit: (data: IAddOperationFormData) => void
     operationType: OperationType
 }
 
 const TODAY = new Date()
 
-export const Form = ({ balanceId, category, headerSlot, operationType }: IFormProps) => {
+export const Form = ({ balanceId, category, headerSlot, onSubmit, operationType }: IFormProps) => {
     const { push } = useRouter()
     const { formatMessage, formatDate } = useIntl()
 
@@ -74,6 +75,8 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                             />
                         )}
 
+                        <View style={styles.space} />
+
                         <TextInput
                             error={errors?.amount?.message}
                             inputMode='numeric'
@@ -82,6 +85,8 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                             {...register('amount')}
                             onChangeText={(value) => setValue('amount', Number(value), { shouldValidate: true })}
                         />
+
+                        <View style={styles.space} />
 
                         <TextInput
                             editable={false}
@@ -93,6 +98,8 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                             value={categoryValue}
                         />
 
+                        <View style={styles.space} />
+
                         <DateInput
                             error={errors?.date?.message}
                             icon={<AntDesign color={COLORS.secondary} name='calendar' size={24} />}
@@ -101,25 +108,10 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
                             placeholder={formatDate(TODAY, { dateStyle: 'medium' })}
                             value={dateValue}
                         />
-
-                        <TextInput
-                            editable={false}
-                            icon={<AntDesign color={COLORS.secondary} name='clockcircleo' size={24} />}
-                            label='Укажите время'
-                            placeholder={formatDate(TODAY, { timeStyle: 'short' })}
-                        />
                     </View>
 
-                    <Button
-                        onPress={handleSubmit(
-                            () => null,
-                            () => null,
-                        )}
-                        size='large'
-                        style={{ marginTop: 'auto' }}
-                        type='primary'
-                    >
-                        Добавить счет
+                    <Button onPress={handleSubmit(onSubmit)} size='large' style={{ marginTop: 'auto' }} type='primary'>
+                        <FormattedMessage defaultMessage='Добавить операцию' id='txEjRe' />
                     </Button>
                 </View>
             </TouchableWithoutFeedback>
@@ -128,16 +120,12 @@ export const Form = ({ balanceId, category, headerSlot, operationType }: IFormPr
 }
 
 const styles = StyleSheet.create({
-    chips: {
-        marginTop: 40,
-    },
     container: {
         backgroundColor: COLORS.white,
         flex: 1,
     },
     form: {
         alignItems: 'center',
-        gap: 20,
         justifyContent: 'center',
         marginTop: 40,
     },
@@ -145,10 +133,5 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 74,
     },
-    input: {
-        color: COLORS.primary,
-        fontFamily: 'sf-b',
-        fontSize: 42,
-        marginTop: 40,
-    },
+    space: { height: 20 },
 })

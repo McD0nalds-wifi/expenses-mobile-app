@@ -6,7 +6,7 @@ import { COLORS } from '@/shared/constants'
 import { typographyStyles } from '@/shared/styles'
 
 interface IButtonProps {
-    children: string
+    children: ReactNode
     iconEnd?: ReactNode
     iconStart?: ReactNode
     onPress?: () => void

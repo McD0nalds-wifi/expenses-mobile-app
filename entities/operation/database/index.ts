@@ -16,20 +16,19 @@ const insertOperation = (
     balanceId: number,
     category: CategoryType,
     date: number,
-    name: string,
     operationType: OperationType,
     successFunc: (balance: IOperation) => void,
 ) => {
     db.transaction((tx) => {
         tx.executeSql(
-            'INSERT INTO operations (amount, balanceId, category, date, name, operationType) values (?,?,?,?,?,?)',
-            [amount, balanceId, category, date, name, operationType],
+            'INSERT INTO operations (amount, balanceId, category, date, operationType) values (?,?,?,?,?)',
+            [amount, balanceId, category, date, operationType],
             (_, { insertId }) => {
                 if (!insertId) {
                     return
                 }
 
-                successFunc({ amount, balanceId, category, date, id: insertId, name, operationType })
+                successFunc({ amount, balanceId, category, date, id: insertId, operationType })
             },
         )
     })
@@ -57,7 +56,7 @@ const setupDatabaseAsync = async () => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS operations (id INTEGER PRIMARY KEY AUTOINCREMENT, amount INT, balanceId INT, category TEXT, date INT, name TEXT, operationType TEXT)',
+                'CREATE TABLE IF NOT EXISTS operations (id INTEGER PRIMARY KEY AUTOINCREMENT, amount INT, balanceId INT, category TEXT, date INT, operationType TEXT)',
                 [],
                 (_, result) => {
                     resolve(result)

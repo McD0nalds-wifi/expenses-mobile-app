@@ -9,11 +9,11 @@ export const useDatabase = () => {
     useEffect(() => {
         async function loadDataAsync() {
             try {
-                await balanceDatabase.dropBalancesTablesAsync()
+                // await balanceDatabase.dropBalancesTablesAsync()
                 await balanceDatabase.setupDatabaseAsync()
-                await balanceDatabase.setupBalancesAsync()
+                // await balanceDatabase.setupBalancesAsync()
 
-                await operationDatabase.dropOperationsTablesAsync()
+                // await operationDatabase.dropOperationsTablesAsync()
                 await operationDatabase.setupDatabaseAsync()
 
                 setDBLoadingComplete(true)
