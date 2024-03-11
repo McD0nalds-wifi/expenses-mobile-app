@@ -2,8 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { startOfDay } from 'date-fns'
 import { uniqueId } from 'lodash'
 
-import { operationDatabase } from '@/entities/operation'
-
+import { operationDatabase } from '../database'
 import { IOperation } from '../types'
 
 interface ISliceState {

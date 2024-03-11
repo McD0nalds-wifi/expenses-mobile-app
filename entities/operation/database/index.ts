@@ -49,7 +49,7 @@ const setupDatabaseAsync = async () => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS operations (id INTEGER PRIMARY KEY NOT null, amount INT, balanceId INT, category TEXT, date INT, operationType TEXT)',
+                'CREATE TABLE IF NOT EXISTS operations (id TEXT PRIMARY KEY NOT null, amount INT, balanceId INT, category TEXT, date INT, operationType TEXT)',
                 [],
                 (_, result) => {
                     resolve(result)

@@ -1,8 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { uniqueId } from 'lodash'
 
-import { balanceDatabase } from '@/entities/balance'
-
+import { balanceDatabase } from '../database'
 import { IBalance } from '../types'
 
 interface ISliceState {
