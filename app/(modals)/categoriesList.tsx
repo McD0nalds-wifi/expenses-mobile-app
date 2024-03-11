@@ -33,7 +33,7 @@ const CategoriesList = () => {
                 renderItem={({ item, index }) => (
                     <TouchableOpacity
                         onPress={() => {
-                            push(ROUTES.addOperation.getRoute(Number(balanceId), operationType, item.id))
+                            push(ROUTES.addOperation.getRoute(balanceId, operationType, item.id))
                         }}
                         style={{
                             paddingBottom: index + 1 === CATEGORIES_LIST.length ? CONTAINER_PADDING : 0,

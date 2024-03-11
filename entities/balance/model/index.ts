@@ -1,4 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { uniqueId } from 'lodash'
+
+import { balanceDatabase } from '@/entities/balance'
 
 import { IBalance } from '../types'
 
@@ -12,19 +15,51 @@ export const balanceSlice = createSlice({
     initialState,
     name: 'balance',
     reducers: {
-        addBalance: (state, action: PayloadAction<IBalance>) => {
-            state.balances.push(action.payload)
+        addBalance: (state, { payload }: PayloadAction<Omit<IBalance, 'id'>>) => {
+            const id = uniqueId()
+
+            balanceDatabase.insertBalance(id, payload.amount, payload.name, payload.type)
+
+            state.balances.push({ ...payload, id })
         },
-        initializeBalances: (state, action: PayloadAction<Array<IBalance>>) => {
-            state.balances = action.payload
+        balanceDeposit: (state, { payload }: PayloadAction<{ amount: number; id: string }>) => {
+            state.balances = state.balances.map((balance) => {
+                if (payload.id !== balance.id) {
+                    return balance
+                }
+
+                balanceDatabase.updateBalanceAmount(balance.id, balance.amount + payload.amount)
+
+                return {
+                    ...balance,
+                    amount: balance.amount + payload.amount,
+                }
+            })
+        },
+        balanceWithdrawal: (state, { payload }: PayloadAction<{ amount: number; id: string }>) => {
+            state.balances = state.balances.map((balance) => {
+                if (payload.id !== balance.id) {
+                    return balance
+                }
+
+                balanceDatabase.updateBalanceAmount(balance.id, balance.amount - payload.amount)
+
+                return {
+                    ...balance,
+                    amount: balance.amount - payload.amount,
+                }
+            })
+        },
+        initializeBalances: (state, { payload }: PayloadAction<Array<IBalance>>) => {
+            state.balances = payload
         },
     },
     selectors: {
-        selectBalance: ({ balances }, balanceId: number) => balances.find(({ id }) => id === balanceId),
+        selectBalance: ({ balances }, balanceId: string) => balances.find(({ id }) => id === balanceId),
         selectBalances: ({ balances }) => balances,
     },
 })
 
-export const { addBalance, initializeBalances } = balanceSlice.actions
+export const { addBalance, balanceDeposit, balanceWithdrawal, initializeBalances } = balanceSlice.actions
 
 export const { selectBalances, selectBalance } = balanceSlice.selectors

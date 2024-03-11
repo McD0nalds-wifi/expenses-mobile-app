@@ -9,7 +9,7 @@ export const ROUTES = {
         name: '(modals)/addBalance',
     },
     addOperation: {
-        getRoute: (balanceId: number, operationType: OperationType, category?: CategoryType) =>
+        getRoute: (balanceId: string, operationType: OperationType, category?: CategoryType) =>
             ({
                 params: {
                     balanceId,
@@ -21,7 +21,7 @@ export const ROUTES = {
         name: '(modals)/addOperation',
     },
     categoriesList: {
-        getRoute: (balanceId: number, operationType: OperationType) =>
+        getRoute: (balanceId: string, operationType: OperationType) =>
             ({
                 params: {
                     balanceId,

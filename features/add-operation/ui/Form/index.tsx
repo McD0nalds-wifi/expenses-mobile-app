@@ -20,7 +20,7 @@ import { IAddOperationFormData, generateValidationSchema } from './validationSch
 import { useUpdateCategoryValue } from '../../hooks/useUpdateCategoryValue'
 
 interface IFormProps {
-    balanceId: number
+    balanceId: string
     category?: CategoryType
     headerSlot?: ReactNode
     onSubmit: (data: IAddOperationFormData) => void

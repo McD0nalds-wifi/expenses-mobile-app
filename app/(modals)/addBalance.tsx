@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 
-import { addBalance, balanceDatabase } from '@/entities/balance'
+import { addBalance } from '@/entities/balance'
 import { AddBalanceForm, IAddBalanceFormData } from '@/features/add-balance'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { ModalHeader } from '@/shared/uikit'
@@ -14,7 +14,7 @@ const AddBalance = () => {
     const dispatch = useTypedDispatch()
 
     const handleSubmit = ({ amount, name }: IAddBalanceFormData) => {
-        balanceDatabase.insertBalance(amount, name, 'bankAccount', (balance) => dispatch(addBalance(balance)))
+        dispatch(addBalance({ amount, name, type: 'bankAccount' }))
 
         back()
     }

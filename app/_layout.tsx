@@ -10,7 +10,8 @@ import sfProTextBold from '@/assets/fonts/SF-Pro-Rounded-Bold.ttf'
 import sfProTextHeavy from '@/assets/fonts/SF-Pro-Rounded-Heavy.ttf'
 import sfProTextRegular from '@/assets/fonts/SF-Pro-Rounded-Regular.ttf'
 import sfProTextSemibold from '@/assets/fonts/SF-Pro-Rounded-Semibold.ttf'
-import { useDatabase } from '@/shared/hooks/useDatabase'
+import { useInitializeValuesFromDatabase } from '@/shared/hooks/useInitializeValuesFromDatabase'
+import { useSetupDatabase } from '@/shared/hooks/useSetupDatabase'
 import { IntlProvider, StoreProvider } from '@/shared/providers'
 import { ROUTES } from '@/shared/routes'
 
@@ -51,7 +52,7 @@ export default function RootLayout() {
         'sf-sb': sfProTextSemibold as FontSource,
     })
 
-    const isDBLoadingComplete = useDatabase()
+    const isDBLoadingComplete = useSetupDatabase()
 
     // Expo Router uses Error Boundaries to catch errors in the navigation tree.
     useEffect(() => {
@@ -80,6 +81,8 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+    useInitializeValuesFromDatabase()
+
     return (
         <Stack>
             <Stack.Screen name='(tabs)' options={{ headerShown: false }} />

@@ -1,5 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { startOfDay } from 'date-fns'
+import { uniqueId } from 'lodash'
+
+import { operationDatabase } from '@/entities/operation'
 
 import { IOperation } from '../types'
 
@@ -13,15 +16,26 @@ export const operationSlice = createSlice({
     initialState,
     name: 'operation',
     reducers: {
-        addOperation: (state, action: PayloadAction<IOperation>) => {
-            state.operations.push(action.payload)
+        addOperation: (state, { payload }: PayloadAction<Omit<IOperation, 'id'>>) => {
+            const id = uniqueId()
+
+            operationDatabase.insertOperation(
+                id,
+                payload.amount,
+                payload.balanceId,
+                payload.category,
+                payload.date,
+                payload.operationType,
+            )
+
+            state.operations.push({ ...payload, id })
         },
-        initializeOperations: (state, action: PayloadAction<Array<IOperation>>) => {
-            state.operations = action.payload
+        initializeOperations: (state, { payload }: PayloadAction<Array<IOperation>>) => {
+            state.operations = payload
         },
     },
     selectors: {
-        selectOperation: ({ operations }, operationId: number) => operations.find(({ id }) => id === operationId),
+        selectOperation: ({ operations }, operationId: string) => operations.find(({ id }) => id === operationId),
         selectOperations: ({ operations }) => operations,
         selectOperationsByDays: ({ operations }) => {
             const operationsByDay: Record<number, Array<IOperation>> = {}

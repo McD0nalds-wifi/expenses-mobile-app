@@ -1,12 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { useRouter } from 'expo-router'
-import { isEmpty } from 'lodash'
 import { NativeSyntheticEvent, StyleSheet, TouchableOpacity, View } from 'react-native'
 import PagerView from 'react-native-pager-view'
 
-import { AddBalance, Balance, balanceDatabase, initializeBalances, selectBalances } from '@/entities/balance'
-import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
+import { AddBalance, Balance, selectBalances } from '@/entities/balance'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ROUTES } from '@/shared/routes'
 import { baseStyles } from '@/shared/styles'
@@ -17,19 +15,10 @@ const DEFAULT_PAGE_INDEX = 0
 
 export const Balances = () => {
     const { push } = useRouter()
-    const dispatch = useTypedDispatch()
 
     const [currentPageIndex, setCurrentPageIndex] = useState(DEFAULT_PAGE_INDEX)
 
     const balances = useTypedSelector(selectBalances)
-
-    useEffect(() => {
-        if (!isEmpty(balances)) {
-            return
-        }
-
-        balanceDatabase.getBalances((balances) => dispatch(initializeBalances(balances)))
-    }, [balances])
 
     const handlePagerViewScroll = useCallback(
         ({ nativeEvent }: NativeSyntheticEvent<Readonly<{ offset: number; position: number }>>) => {
@@ -43,14 +32,14 @@ export const Balances = () => {
     }
 
     const handleAddExpense = useCallback(
-        (balanceId: number) => () => {
+        (balanceId: string) => () => {
             push(ROUTES.addOperation.getRoute(balanceId, 'expenses'))
         },
         [],
     )
 
     const handleAddIncome = useCallback(
-        (balanceId: number) => () => {
+        (balanceId: string) => () => {
             push(ROUTES.addOperation.getRoute(balanceId, 'income'))
         },
         [],

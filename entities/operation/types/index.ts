@@ -4,9 +4,9 @@ export type OperationType = 'expenses' | 'income'
 
 export interface IOperation {
     amount: number
-    balanceId: number
+    balanceId: string
     category: CategoryType
     date: number
-    id: number
+    id: string
     operationType: OperationType
 }

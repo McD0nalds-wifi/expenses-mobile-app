@@ -1,3 +1,5 @@
+import { uniqueId } from 'lodash'
+
 import { db } from '@/shared/db'
 
 import { BalanceType, IBalance } from '../types'
@@ -10,19 +12,15 @@ const getBalances = (setBalancesFunc: (balances: Array<IBalance>) => void) => {
     })
 }
 
-const insertBalance = (amount: number, name: string, type: BalanceType, successFunc: (balance: IBalance) => void) => {
+const insertBalance = (id: string, amount: number, name: string, type: BalanceType) => {
     db.transaction((tx) => {
-        tx.executeSql(
-            'INSERT INTO balances (amount, name, type) values (?,?,?)',
-            [amount, name, type],
-            (_, { insertId }) => {
-                if (!insertId) {
-                    return
-                }
+        tx.executeSql('INSERT INTO balances (id, amount, name, type) values (?,?,?,?)', [id, amount, name, type])
+    })
+}
 
-                successFunc({ amount, id: insertId, name, type })
-            },
-        )
+const updateBalanceAmount = (id: string, amount: number) => {
+    db.transaction((tx) => {
+        tx.executeSql('UPDATE balances SET amount = ? WHERE id = ?', [amount, id])
     })
 }
 
@@ -48,7 +46,7 @@ const setupDatabaseAsync = async () => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS balances (id INTEGER PRIMARY KEY AUTOINCREMENT, amount INT, name TEXT, type TEXT)',
+                'CREATE TABLE IF NOT EXISTS balances (id INTEGER PRIMARY KEY NOT null, amount INT, name TEXT, type TEXT)',
                 [],
                 (_, result) => {
                     resolve(result)
@@ -66,8 +64,8 @@ const setupBalancesAsync = async () => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                'INSERT INTO balances (amount, name, type) values (?,?,?)',
-                [0, 'Мой кошелек', 'bankAccount'],
+                'INSERT INTO balances (id, amount, name, type) values (?,?,?,?)',
+                [uniqueId(), 0, 'Мой кошелек', 'bankAccount'],
                 (_, result) => {
                     resolve(result)
                 },
@@ -86,4 +84,5 @@ export const balanceDatabase = {
     insertBalance,
     setupBalancesAsync,
     setupDatabaseAsync,
+    updateBalanceAmount,
 }

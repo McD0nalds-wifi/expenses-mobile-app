@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { balanceDatabase } from '@/entities/balance'
 import { operationDatabase } from '@/entities/operation'
 
-export const useDatabase = () => {
+export const useSetupDatabase = () => {
     const [isDBLoadingComplete, setDBLoadingComplete] = useState(false)
 
     useEffect(() => {

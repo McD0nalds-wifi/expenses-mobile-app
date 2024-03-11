@@ -1,36 +1,16 @@
-import { useEffect } from 'react'
-
 import { isToday, isYesterday } from 'date-fns'
-import { isEmpty } from 'lodash'
 import { FormattedDate, FormattedMessage } from 'react-intl'
 import { FlatList, Text, View } from 'react-native'
 
 import { CATEGORIES } from '@/entities/category'
-import { Operation, initializeOperations, operationDatabase, selectOperationsByDays } from '@/entities/operation'
+import { Operation, selectOperationsByDays } from '@/entities/operation'
 import { COLORS } from '@/shared/constants'
-import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { baseStyles, typographyStyles } from '@/shared/styles'
 
 export const Operations = () => {
     // TODO Add pagination
     const { days, operationsByDay } = useTypedSelector(selectOperationsByDays)
-
-    const dispatch = useTypedDispatch()
-
-    useEffect(() => {
-        if (!isEmpty(days)) {
-            return
-        }
-
-        operationDatabase.getOperations((operations) => {
-            if (isEmpty(operations)) {
-                return
-            }
-
-            dispatch(initializeOperations(operations))
-        })
-    }, [days])
 
     return (
         <FlatList

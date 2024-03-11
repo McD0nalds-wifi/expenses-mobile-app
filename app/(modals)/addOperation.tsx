@@ -3,6 +3,7 @@ import React from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 
+import { balanceDeposit, balanceWithdrawal } from '@/entities/balance'
 import { CategoryType } from '@/entities/category'
 import { OperationType, addOperation, operationDatabase } from '@/entities/operation'
 import { AddOperationForm, IAddOperationFormData } from '@/features/add-operation'
@@ -25,23 +26,28 @@ const AddOperation = () => {
             return
         }
 
-        const fullDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0)
-
-        operationDatabase.insertOperation(
-            amount,
-            Number(balanceId),
-            category,
-            fullDate.getTime(),
-            operationType,
-            (operation) => dispatch(addOperation(operation)),
+        dispatch(
+            addOperation({
+                amount,
+                balanceId,
+                category,
+                date: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0).getTime(),
+                operationType,
+            }),
         )
+
+        if (operationType === 'income') {
+            dispatch(balanceDeposit({ amount, id: balanceId }))
+        } else {
+            dispatch(balanceWithdrawal({ amount, id: balanceId }))
+        }
 
         back()
     }
 
     return (
         <AddOperationForm
-            balanceId={Number(balanceId)}
+            balanceId={balanceId}
             category={category}
             headerSlot={
                 <ModalHeader
