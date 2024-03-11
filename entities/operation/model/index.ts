@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { startOfDay } from 'date-fns'
-import { uniqueId } from 'lodash'
+import { v4 as uuid } from 'uuid'
 
 import { operationDatabase } from '../database'
 import { IOperation } from '../types'
@@ -16,7 +16,7 @@ export const operationSlice = createSlice({
     name: 'operation',
     reducers: {
         addOperation: (state, { payload }: PayloadAction<Omit<IOperation, 'id'>>) => {
-            const id = uniqueId()
+            const id = uuid()
 
             operationDatabase.insertOperation(
                 id,

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { uniqueId } from 'lodash'
+import { v4 as uuid } from 'uuid'
 
 import { balanceDatabase } from '../database'
 import { IBalance } from '../types'
@@ -15,7 +15,7 @@ export const balanceSlice = createSlice({
     name: 'balance',
     reducers: {
         addBalance: (state, { payload }: PayloadAction<Omit<IBalance, 'id'>>) => {
-            const id = uniqueId()
+            const id = uuid()
 
             balanceDatabase.insertBalance(id, payload.amount, payload.name, payload.type)
 

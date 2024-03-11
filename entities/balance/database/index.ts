@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash'
+import { v4 as uuid } from 'uuid'
 
 import { db } from '@/shared/db'
 
@@ -65,7 +65,7 @@ const setupBalancesAsync = async () => {
         db.transaction((tx) => {
             tx.executeSql(
                 'INSERT INTO balances (id, amount, name, type) values (?,?,?,?)',
-                [uniqueId(), 0, 'Мой кошелек', 'bankAccount'],
+                [uuid(), 0, 'Мой кошелек', 'bankAccount'],
                 (_, result) => {
                     resolve(result)
                 },
