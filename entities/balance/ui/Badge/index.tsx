@@ -3,13 +3,13 @@ import { StyleSheet, Text, View } from 'react-native'
 import { COLORS } from '@/shared/constants'
 import { typographyStyles } from '@/shared/styles'
 
-interface IBankNameProps {
-    name: string
+interface IBadgeProps {
+    title: string
 }
 
-export const BankName = ({ name }: IBankNameProps) => (
+export const Badge = ({ title }: IBadgeProps) => (
     <View style={styles.container}>
-        <Text style={[typographyStyles.footnote, { color: COLORS.secondary }]}>{name}</Text>
+        <Text style={[typographyStyles.footnote, { color: COLORS.secondary }]}>{title}</Text>
     </View>
 )
 

@@ -59,9 +59,9 @@ export const Balances = () => {
                     <View key={index} style={styles.page}>
                         <Balance
                             amount={amount}
-                            bank='Тинькофф'
                             onAddExpense={handleAddExpense(id)}
                             onAddIncome={handleAddIncome(id)}
+                            subtitle='Тинькофф'
                             title={name}
                         />
                     </View>

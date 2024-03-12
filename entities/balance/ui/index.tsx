@@ -8,23 +8,23 @@ import { COLORS, CURRENT_CURRENCY } from '@/shared/constants'
 import { baseStyles, typographyStyles } from '@/shared/styles'
 import { Button } from '@/shared/uikit'
 
-import { BankName } from './BankName'
+import { Badge } from './Badge'
 
 interface IBalanceProps {
     amount: number
-    bank: string
     onAddExpense: () => void
     onAddIncome: () => void
+    subtitle: string
     title: string
 }
 
-export const Balance = memo(({ amount, bank, onAddExpense, onAddIncome, title }: IBalanceProps) => {
+export const Balance = memo(({ amount, onAddExpense, onAddIncome, subtitle, title }: IBalanceProps) => {
     return (
         <View style={[baseStyles.container, styles.container]}>
             <View style={styles.header}>
                 <Text style={[typographyStyles.subhedline, { color: COLORS.secondary }]}>{title}</Text>
 
-                <BankName name={bank} />
+                <Badge title={subtitle} />
             </View>
 
             <View style={styles.amount}>
