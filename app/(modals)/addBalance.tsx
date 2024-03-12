@@ -13,8 +13,8 @@ const AddBalance = () => {
 
     const dispatch = useTypedDispatch()
 
-    const handleSubmit = ({ amount, name }: IAddBalanceFormData) => {
-        dispatch(addBalance({ amount, name, type: 'bankAccount' }))
+    const handleSubmit = ({ amount, name, balanceType }: IAddBalanceFormData) => {
+        dispatch(addBalance({ amount, name, type: balanceType }))
 
         back()
     }

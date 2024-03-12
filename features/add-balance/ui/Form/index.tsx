@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
 
 import { AntDesign } from '@expo/vector-icons'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 
-import { BalanceType } from '@/entities/balance/types'
 import { COLORS } from '@/shared/constants'
 import { baseStyles } from '@/shared/styles'
 import { Button, Chips, TextInput } from '@/shared/uikit'
@@ -22,18 +21,19 @@ interface IFormProps {
 export const Form = ({ headerSlot, onSubmit }: IFormProps) => {
     const { formatMessage } = useIntl()
 
-    const [balanceType, setBalanceType] = useState<BalanceType>('bankAccount')
-
     const {
         formState: { errors },
         handleSubmit,
         register,
         setValue,
+        watch,
     } = useForm<IAddBalanceFormData>({
-        defaultValues: { amount: undefined, name: undefined },
+        defaultValues: { amount: undefined, balanceType: BALANCE_TYPES.bankAccount.id, name: undefined },
         mode: 'onChange',
         resolver: yupResolver(generateValidationSchema(formatMessage)),
     })
+
+    const balanceType = watch('balanceType')
 
     return (
         <KeyboardAvoidingView
@@ -48,13 +48,12 @@ export const Form = ({ headerSlot, onSubmit }: IFormProps) => {
                         <Chips
                             activeItem={BALANCE_TYPES[balanceType]}
                             items={CHIPS_ITEMS}
-                            onChange={({ id }) => setBalanceType(id)}
+                            onChange={({ id }) => setValue('balanceType', id)}
                         />
                     </View>
 
                     <View style={styles.form}>
                         <TextInput
-                            autoCapitalize='none'
                             error={errors?.name?.message}
                             label='Название счета'
                             placeholder='Мой счет'

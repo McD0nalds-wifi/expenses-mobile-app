@@ -3,6 +3,7 @@ import React, { ReactNode, forwardRef } from 'react'
 import { StyleSheet, Text, TextInput as TextInputBase, TextInputProps as TextInputBaseProps, View } from 'react-native'
 
 import { COLORS } from '@/shared/constants'
+import { useBoolean } from '@/shared/hooks/useBoolean'
 import { typographyStyles } from '@/shared/styles'
 
 interface ITextInputProps extends TextInputBaseProps {
@@ -13,7 +14,7 @@ interface ITextInputProps extends TextInputBaseProps {
 }
 
 export const TextInput = forwardRef<TextInputBase, ITextInputProps>(({ error, icon, label, ...props }, ref) => {
-    // const { value: focused, setTrue: setFocused, setFalse: setUnfocused } = useBoolean(false)
+    const { value: focused, setTrue: setFocused, setFalse: setUnfocused } = useBoolean(false)
 
     return (
         <View style={styles.wrapper}>
@@ -21,24 +22,30 @@ export const TextInput = forwardRef<TextInputBase, ITextInputProps>(({ error, ic
                 style={[
                     typographyStyles.caption,
                     { color: COLORS.secondary, marginBottom: 6 },
-                    // { color: focused ? COLORS.primary : COLORS.secondary, marginBottom: 6 },
+                    { color: focused ? COLORS.primary : COLORS.secondary, marginBottom: 6 },
                 ]}
             >
                 {label}
             </Text>
 
             <TextInputBase
-                // onBlur={setUnfocused}
-                // onFocus={setFocused}
                 placeholderTextColor={COLORS.tertiary}
                 ref={ref}
                 style={[
                     typographyStyles.body,
                     styles.textInput,
                     { borderBottomColor: COLORS.tertiary },
-                    // { borderBottomColor: focused ? COLORS.primary : COLORS.tertiary },
+                    { borderBottomColor: focused ? COLORS.primary : COLORS.tertiary },
                 ]}
                 {...props}
+                onBlur={(event) => {
+                    setUnfocused()
+                    props.onBlur && props.onBlur(event)
+                }}
+                onFocus={(event) => {
+                    setFocused()
+                    props.onFocus && props.onFocus(event)
+                }}
             />
 
             <Text style={[typographyStyles.caption, { color: COLORS.red, height: 16, marginTop: 6 }]}>{error}</Text>

@@ -10,4 +10,4 @@ export {
     balanceWithdrawal,
 } from './model'
 export { balanceDatabase } from './database'
-export { IBalance } from './types'
+export { IBalance, BalanceType } from './types'
