@@ -7,7 +7,7 @@ import { CATEGORIES, CategoryType } from '@/entities/category'
 import { IAddOperationFormData } from '../ui/Form/validationSchema'
 
 export const useUpdateCategoryValue = (
-    category: CategoryType | undefined,
+    category: CategoryType | null,
     setValue: UseFormSetValue<IAddOperationFormData>,
 ) => {
     useEffect(() => {

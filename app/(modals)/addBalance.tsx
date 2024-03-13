@@ -8,7 +8,7 @@ import { AddBalanceForm, IAddBalanceFormData } from '@/features/add-balance'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { ModalHeader } from '@/shared/uikit'
 
-const AddBalance = () => {
+const AddBalanceModal = () => {
     const { back } = useRouter()
 
     const dispatch = useTypedDispatch()
@@ -32,4 +32,4 @@ const AddBalance = () => {
     )
 }
 
-export default AddBalance
+export default AddBalanceModal

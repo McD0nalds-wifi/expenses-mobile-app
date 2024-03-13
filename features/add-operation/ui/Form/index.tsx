@@ -7,11 +7,8 @@ import { useForm } from 'react-hook-form'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 
-import { selectBalance } from '@/entities/balance'
 import { CATEGORIES, CategoryType } from '@/entities/category'
-import { OperationType } from '@/entities/operation'
 import { COLORS } from '@/shared/constants'
-import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ROUTES } from '@/shared/routes'
 import { baseStyles } from '@/shared/styles'
 import { Button, DateInput, TextInput } from '@/shared/uikit'
@@ -20,16 +17,15 @@ import { IAddOperationFormData, generateValidationSchema } from './validationSch
 import { useUpdateCategoryValue } from '../../hooks/useUpdateCategoryValue'
 
 interface IFormProps {
-    balanceId: string
-    category?: CategoryType
+    balanceTitle?: string
+    category: CategoryType | null
     headerSlot?: ReactNode
     onSubmit: (data: IAddOperationFormData) => void
-    operationType: OperationType
 }
 
 const TODAY = new Date()
 
-export const Form = ({ balanceId, category, headerSlot, onSubmit, operationType }: IFormProps) => {
+export const Form = ({ balanceTitle, category, headerSlot, onSubmit }: IFormProps) => {
     const { push } = useRouter()
     const { formatMessage, formatDate } = useIntl()
 
@@ -49,8 +45,6 @@ export const Form = ({ balanceId, category, headerSlot, onSubmit, operationType 
         resolver: yupResolver(generateValidationSchema(formatMessage)),
     })
 
-    const balance = useTypedSelector((state) => selectBalance(state, balanceId))
-
     const categoryValue = watch('category')
     const dateValue = watch('date')
 
@@ -66,12 +60,13 @@ export const Form = ({ balanceId, category, headerSlot, onSubmit, operationType 
                     {headerSlot}
 
                     <View style={styles.form}>
-                        {balance && (
+                        {balanceTitle && (
                             <TextInput
                                 editable={false}
                                 label='Название счета'
+                                onTouchEnd={() => push(ROUTES.balancesList.getRoute())}
                                 placeholder='Мой счет'
-                                value={balance.name}
+                                value={balanceTitle}
                             />
                         )}
 
@@ -93,7 +88,7 @@ export const Form = ({ balanceId, category, headerSlot, onSubmit, operationType 
                             error={errors?.category?.message}
                             icon={<AntDesign color={COLORS.secondary} name='down' size={24} />}
                             label='Выберите категорию'
-                            onTouchEnd={() => push(ROUTES.categoriesList.getRoute(balanceId, operationType))}
+                            onTouchEnd={() => push(ROUTES.categoriesList.getRoute())}
                             placeholder={CATEGORIES.car.title}
                             value={categoryValue}
                         />

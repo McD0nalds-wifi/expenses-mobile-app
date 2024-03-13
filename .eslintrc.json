@@ -5,6 +5,7 @@
     "plugin:typescript-sort-keys/recommended",
     "plugin:storybook/recommended",
     "prettier",
+    "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
@@ -15,6 +16,7 @@
   },
   "plugins": ["formatjs", "@typescript-eslint", "sort-keys-fix", "typescript-sort-keys", "@typescript-eslint", "import"],
   "rules": {
+    "react-hooks/exhaustive-deps": "error",
     "quotes": ["warn", "single"],
     "react/react-in-jsx-scope": "off",
     "jsx-quotes": ["warn", "prefer-single"],

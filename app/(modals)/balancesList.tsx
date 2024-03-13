@@ -4,33 +4,33 @@ import { useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 import { View } from 'react-native'
 
-import { CategoryType } from '@/entities/category'
-import { setSelectedCategoryType } from '@/features/add-operation'
+import { IBalance } from '@/entities/balance'
+import { setSelectedBalance } from '@/features/add-operation'
 import { COLORS } from '@/shared/constants'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { baseStyles } from '@/shared/styles'
 import { ModalHeader } from '@/shared/uikit'
-import { CategoriesList } from '@/widgets/categories-list'
+import { BalancesList } from '@/widgets/balances-list'
 
-const CategoriesListModal = () => {
+const BalancesListModal = () => {
     const { back } = useRouter()
 
     const dispatch = useTypedDispatch()
 
-    const handleSelectCategory = (categoryType: CategoryType) => {
-        dispatch(setSelectedCategoryType(categoryType))
+    const handleSelectBalance = (balance: IBalance) => {
+        dispatch(setSelectedBalance(balance))
         back()
     }
 
     return (
         <View style={{ backgroundColor: COLORS.white, flex: 1 }}>
             <View style={baseStyles.container}>
-                <ModalHeader onBack={back} title={<FormattedMessage defaultMessage='Список категорий' id='T+wLZf' />} />
+                <ModalHeader onBack={back} title={<FormattedMessage defaultMessage='Список счетов' id='BPmLdt' />} />
             </View>
 
-            <CategoriesList onSelectCategory={handleSelectCategory} />
+            <BalancesList onSelectBalance={handleSelectBalance} />
         </View>
     )
 }
 
-export default CategoriesListModal
+export default BalancesListModal

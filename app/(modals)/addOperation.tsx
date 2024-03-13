@@ -1,70 +1,21 @@
 import React from 'react'
 
-import { useLocalSearchParams, useRouter } from 'expo-router'
-import { FormattedMessage } from 'react-intl'
+import { useLocalSearchParams } from 'expo-router'
 
-import { balanceDeposit, balanceWithdrawal } from '@/entities/balance'
-import { CategoryType } from '@/entities/category'
-import { OperationType, addOperation, operationDatabase } from '@/entities/operation'
-import { AddOperationForm, IAddOperationFormData } from '@/features/add-operation'
-import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
-import { ModalHeader } from '@/shared/uikit'
+import { selectBalance } from '@/entities/balance'
+import { OperationType } from '@/entities/operation'
+import { AddOperation } from '@/features/add-operation'
+import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 
-const AddOperation = () => {
-    const { back } = useRouter()
-
-    const dispatch = useTypedDispatch()
-
-    const { balanceId, operationType, category } = useLocalSearchParams<{
+const AddOperationModal = () => {
+    const { balanceId, operationType } = useLocalSearchParams<{
         balanceId: string
-        category?: CategoryType
         operationType: OperationType
     }>()
 
-    const handleSubmit = ({ amount, date }: IAddOperationFormData) => {
-        if (!category) {
-            return
-        }
+    const balance = useTypedSelector((state) => selectBalance(state, balanceId))
 
-        dispatch(
-            addOperation({
-                amount,
-                balanceId,
-                category,
-                date: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0).getTime(),
-                operationType,
-            }),
-        )
-
-        if (operationType === 'income') {
-            dispatch(balanceDeposit({ amount, id: balanceId }))
-        } else {
-            dispatch(balanceWithdrawal({ amount, id: balanceId }))
-        }
-
-        back()
-    }
-
-    return (
-        <AddOperationForm
-            balanceId={balanceId}
-            category={category}
-            headerSlot={
-                <ModalHeader
-                    onClose={back}
-                    title={
-                        operationType === 'expenses' ? (
-                            <FormattedMessage defaultMessage='Добавить расход' id='NeCOyP' />
-                        ) : (
-                            <FormattedMessage defaultMessage='Добавить доход' id='tOHzbF' />
-                        )
-                    }
-                />
-            }
-            onSubmit={handleSubmit}
-            operationType={operationType}
-        />
-    )
+    return <AddOperation defaultBalance={balance} operationType={operationType} />
 }
 
-export default AddOperation
+export default AddOperationModal

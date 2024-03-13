@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { v4 as uuid } from 'uuid'
+
+import { uuid } from '@/shared/uuid'
 
 import { balanceDatabase } from '../database'
 import { IBalance } from '../types'

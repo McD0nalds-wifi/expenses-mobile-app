@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { startOfDay } from 'date-fns'
-import { v4 as uuid } from 'uuid'
+
+import { uuid } from '@/shared/uuid'
 
 import { operationDatabase } from '../database'
 import { IOperation } from '../types'

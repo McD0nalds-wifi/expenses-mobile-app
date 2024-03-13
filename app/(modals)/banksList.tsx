@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 
-const BanksList = () => {
+const BanksListModal = () => {
     return <View></View>
 }
 
-export default BanksList
+export default BanksListModal

@@ -1,6 +1,5 @@
-import { v4 as uuid } from 'uuid'
-
 import { db } from '@/shared/db'
+import { uuid } from '@/shared/uuid'
 
 import { BalanceType, IBalance } from '../types'
 
