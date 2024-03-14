@@ -18,6 +18,7 @@ export const CategoriesList = ({ onSelectCategory }: ICategoriesListProps) => {
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
                 <TouchableOpacity
+                    key={item.id}
                     onPress={() => onSelectCategory(item.id)}
                     style={{
                         paddingBottom: index + 1 === CATEGORIES_LIST.length ? CONTAINER_PADDING : 0,

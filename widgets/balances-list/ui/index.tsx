@@ -22,6 +22,7 @@ export const BalancesList = ({ onSelectBalance }: IBalancesListProps) => {
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
                 <TouchableOpacity
+                    key={item.id}
                     onPress={() => onSelectBalance(item)}
                     style={{
                         paddingBottom: index + 1 === balances.length ? CONTAINER_PADDING : 0,

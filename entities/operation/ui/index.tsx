@@ -5,16 +5,19 @@ import { COLORS, CURRENT_CURRENCY } from '@/shared/constants'
 import { typographyStyles } from '@/shared/styles'
 import { FontelloIcon, FontelloIconNameType } from '@/shared/uikit'
 
+import { OperationType } from '../types'
+
 interface IOperationProps {
     bankName?: string
     color: string
     icon: FontelloIconNameType
     subtitle: string
     title: string
+    type: OperationType
     value: number
 }
 
-export const Operation = ({ bankName, color, icon, subtitle, title, value }: IOperationProps) => {
+export const Operation = ({ bankName, color, icon, subtitle, title, type, value }: IOperationProps) => {
     return (
         <View style={styles.container}>
             <View style={[styles.icon, { backgroundColor: color }]}>
@@ -25,7 +28,13 @@ export const Operation = ({ bankName, color, icon, subtitle, title, value }: IOp
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>{title}</Text>
 
-                    <Text style={[typographyStyles.headline, { color: COLORS.primary }]}>
+                    <Text
+                        style={[
+                            typographyStyles.headline,
+                            { color: type === 'income' ? COLORS.green : COLORS.primary },
+                        ]}
+                    >
+                        {type === 'income' && '+ '}
                         <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={value} />
                     </Text>
                 </View>
