@@ -9,7 +9,8 @@ import { Operation, selectOperationsByDays } from '@/entities/operation'
 import { COLORS } from '@/shared/constants'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { baseStyles, typographyStyles } from '@/shared/styles'
-import { Header } from '@/widgets/operations/ui/Header'
+
+import { Header } from './Header'
 
 export const Operations = () => {
     const [currentMonthAndYear, setCurrentMonthAndYear] = useState<number>()

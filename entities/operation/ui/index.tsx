@@ -34,8 +34,14 @@ export const Operation = ({ bankName, color, icon, subtitle, title, type, value 
                             { color: type === 'income' ? COLORS.green : COLORS.primary },
                         ]}
                     >
-                        {type === 'income' && '+ '}
-                        <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={value} />
+                        {type === 'income' ? '+ ' : '- '}
+
+                        <FormattedNumber
+                            currency={CURRENT_CURRENCY}
+                            signDisplay='exceptZero'
+                            style='currency'
+                            value={value}
+                        />
                     </Text>
                 </View>
 

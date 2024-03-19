@@ -1,6 +1,7 @@
 export { Button } from './Button'
 export { Chips } from './Chips'
 export { DateInput } from './DateInput'
+export { DonutChart } from './DonutChart'
 export { FontelloIcon } from './FontelloIcon'
 export type { FontelloIconNameType } from './FontelloIcon'
 export { ModalHeader } from './ModalHeader'

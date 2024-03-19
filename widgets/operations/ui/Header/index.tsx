@@ -1,47 +1,96 @@
-import { isSameYear } from 'date-fns'
-import { FormattedDate, FormattedMessage, FormattedNumber } from 'react-intl'
-import { StyleSheet, Text, View } from 'react-native'
+import { useState } from 'react'
 
-import { COLORS, CURRENT_CURRENCY } from '@/shared/constants'
-import { baseStyles, typographyStyles } from '@/shared/styles'
+import { View } from 'react-native'
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 
-interface IHeader {
+import { CATEGORIES } from '@/entities/category'
+import { useBoolean } from '@/shared/hooks/useBoolean'
+import { baseStyles } from '@/shared/styles'
+import { DonutChart } from '@/shared/uikit'
+
+import { BarChart } from '../BarChart'
+import { Expenses } from '../Expenses'
+
+interface IHeaderProps {
     currentMonthAndYear?: number
 }
 
-export const Header = ({ currentMonthAndYear }: IHeader) => {
-    return (
-        <View style={[baseStyles.container, styles.wrapper]}>
-            {!currentMonthAndYear || isSameYear(currentMonthAndYear, new Date()) ? (
-                <Text style={[typographyStyles.title2, { color: COLORS.primary }]}>
-                    <FormattedMessage
-                        defaultMessage='Траты за {date}'
-                        id='TcUJkj'
-                        values={{ date: <FormattedDate month='long' value={currentMonthAndYear} /> }}
-                    />
-                </Text>
-            ) : (
-                <Text style={[typographyStyles.title3, { color: COLORS.primary }]}>
-                    <FormattedMessage
-                        defaultMessage='Траты за {date}'
-                        id='TcUJkj'
-                        values={{ date: <FormattedDate month='long' value={currentMonthAndYear} year='numeric' /> }}
-                    />
-                </Text>
-            )}
+const data = [
+    {
+        color: CATEGORIES.car.color,
+        value: 2300,
+    },
+    {
+        color: CATEGORIES.cafe.color,
+        value: 10,
+    },
+    {
+        color: CATEGORIES.education.color,
+        value: 7000,
+    },
+    {
+        color: CATEGORIES.products.color,
+        value: 4000,
+    },
+    {
+        color: CATEGORIES.entertainments.color,
+        value: 3000,
+    },
+]
 
-            <Text style={[typographyStyles.body, { color: COLORS.primary }]}>
-                <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={100000} />
-            </Text>
+export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
+    const { value: accordionOpen, toggle: handleExpensesPress } = useBoolean(false)
+    const [accordionContentHeight, setAccordionContentHeight] = useState(0)
+
+    const accordionAnimatedStyle = useAnimatedStyle(() => {
+        return {
+            height: accordionOpen
+                ? withTiming(accordionContentHeight, { duration: 500 })
+                : withTiming(0, { duration: 500 }),
+        }
+    })
+
+    const donutChartAnimatedStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{ scale: accordionOpen ? withTiming(1, { duration: 600 }) : withTiming(0, { duration: 300 }) }],
+        }
+    })
+
+    const testAnimatedStyle = useAnimatedStyle(() => {
+        return {
+            opacity: accordionOpen ? withTiming(0, { duration: 300 }) : withTiming(1, { duration: 600 }),
+        }
+    })
+
+    return (
+        <View style={[baseStyles.container, { paddingBottom: 16 }]}>
+            <Expenses currentMonthAndYear={currentMonthAndYear} onExpensesPress={handleExpensesPress} />
+
+            <Animated.View style={[accordionAnimatedStyle, { alignItems: 'center', overflow: 'hidden' }]}>
+                <View
+                    onLayout={(event) => {
+                        const layoutHeight = event.nativeEvent.layout.height
+
+                        if (layoutHeight > 0 && layoutHeight !== accordionContentHeight) {
+                            setAccordionContentHeight(layoutHeight)
+                        }
+                    }}
+                    style={{ position: 'absolute' }}
+                >
+                    <Animated.View style={donutChartAnimatedStyle}>
+                        <DonutChart
+                            items={accordionOpen ? data : []}
+                            outerStrokeWidth={20}
+                            radius={80}
+                            strokeWidth={20}
+                        />
+                    </Animated.View>
+                </View>
+            </Animated.View>
+
+            <Animated.View style={testAnimatedStyle}>
+                <BarChart items={data} />
+            </Animated.View>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    wrapper: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        height: 80,
-        justifyContent: 'space-between',
-    },
-})
