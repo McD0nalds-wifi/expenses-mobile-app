@@ -1,20 +1,18 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { startOfDay } from 'date-fns'
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
+import { RootStateType } from '@/shared/store/types'
 import { uuid } from '@/shared/uuid'
 
 import { operationDatabase } from '../database'
 import { IOperation } from '../types'
 
-interface ISliceState {
-    operations: Array<IOperation>
-}
-
-const initialState: ISliceState = { operations: [] }
-
-export const operationSlice = createSlice({
-    initialState,
-    name: 'operation',
+const operationsAdapter = createEntityAdapter({
+    selectId: (operation: IOperation) => operation.id,
+    sortComparer: (a, b) => b.date - a.date,
+})
+export const operationsSlice = createSlice({
+    initialState: operationsAdapter.getInitialState(),
+    name: 'operations',
     reducers: {
         addOperation: (state, { payload }: PayloadAction<Omit<IOperation, 'id'>>) => {
             const id = uuid()
@@ -28,38 +26,14 @@ export const operationSlice = createSlice({
                 payload.operationType,
             )
 
-            state.operations.push({ ...payload, id })
+            operationsAdapter.addOne(state, { ...payload, id })
         },
         initializeOperations: (state, { payload }: PayloadAction<Array<IOperation>>) => {
-            state.operations = payload
-        },
-    },
-    selectors: {
-        selectOperation: ({ operations }, operationId: string) => operations.find(({ id }) => id === operationId),
-        selectOperations: ({ operations }) => operations,
-        selectOperationsByDays: ({ operations }) => {
-            const operationsByDay: Record<number, Array<IOperation>> = {}
-            const days: Array<number> = []
-
-            operations.forEach((operation) => {
-                const day = startOfDay(operation.date).getTime()
-
-                if (operationsByDay[day]) {
-                    operationsByDay[day].push(operation)
-                } else {
-                    operationsByDay[day] = [operation]
-                    days.push(day)
-                }
-            })
-
-            return {
-                days: [...days].sort((a, b) => b - a),
-                operationsByDay,
-            }
+            operationsAdapter.setAll(state, payload)
         },
     },
 })
 
-export const { addOperation, initializeOperations } = operationSlice.actions
+export const { addOperation, initializeOperations } = operationsSlice.actions
 
-export const { selectOperations, selectOperation, selectOperationsByDays } = operationSlice.selectors
+export const operationsSelectors = operationsAdapter.getSelectors<RootStateType>((state) => state.operations)

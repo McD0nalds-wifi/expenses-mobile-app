@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react'
 
-import { isToday, isYesterday, startOfMonth } from 'date-fns'
+import { isToday, isYesterday, startOfDay, startOfMonth } from 'date-fns'
 import { FormattedDate, FormattedMessage } from 'react-intl'
 import { FlatList, Text, View, ViewToken } from 'react-native'
 
 import { CATEGORIES } from '@/entities/category'
-import { Operation, selectOperationsByDays } from '@/entities/operation'
+import { Operation, operationsSelectors } from '@/entities/operation'
 import { COLORS } from '@/shared/constants'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { baseStyles, typographyStyles } from '@/shared/styles'
@@ -15,13 +15,12 @@ import { Header } from './Header'
 export const Operations = () => {
     const [currentMonthAndYear, setCurrentMonthAndYear] = useState<number>()
 
-    // TODO Add pagination
-    const { days, operationsByDay } = useTypedSelector(selectOperationsByDays)
+    const operations = useTypedSelector(operationsSelectors.selectAll)
 
     const handleViewableItemsChanged = useCallback((info: { changed: ViewToken[]; viewableItems: ViewToken[] }) => {
-        const day = info.viewableItems[0].item as number
+        const date = info.viewableItems[0].item?.date as number
 
-        setCurrentMonthAndYear(startOfMonth(day).getTime())
+        setCurrentMonthAndYear(startOfMonth(date).getTime())
     }, [])
 
     return (
@@ -29,35 +28,34 @@ export const Operations = () => {
             <Header currentMonthAndYear={currentMonthAndYear} />
 
             <FlatList
-                data={days}
-                keyExtractor={(day) => String(day)}
+                data={operations}
+                keyExtractor={(operation) => operation.id}
                 onViewableItemsChanged={handleViewableItemsChanged}
-                renderItem={({ item: day }) => (
+                renderItem={({ item: operation, index }) => (
                     <View>
-                        <Text style={[typographyStyles.title3, { color: COLORS.primary, paddingVertical: 12 }]}>
-                            {isToday(day) ? (
-                                <FormattedMessage defaultMessage='Сегодня' id='+glFq7' />
-                            ) : isYesterday(day) ? (
-                                <FormattedMessage defaultMessage='Вчера' id='2AT3bI' />
-                            ) : (
-                                <FormattedDate day='2-digit' month='short' value={day} />
-                            )}
-                        </Text>
+                        {!operations[index - 1] ||
+                        startOfDay(operations[index - 1].date).getTime() !== startOfDay(operation.date).getTime() ? (
+                            <Text style={[typographyStyles.title3, { color: COLORS.primary, paddingVertical: 12 }]}>
+                                {isToday(operation.date) ? (
+                                    <FormattedMessage defaultMessage='Сегодня' id='+glFq7' />
+                                ) : isYesterday(operation.date) ? (
+                                    <FormattedMessage defaultMessage='Вчера' id='2AT3bI' />
+                                ) : (
+                                    <FormattedDate day='2-digit' month='short' value={operation.date} />
+                                )}
+                            </Text>
+                        ) : null}
 
-                        <View>
-                            {operationsByDay[day].map(({ amount, category, id, operationType }) => (
-                                <Operation
-                                    bankName='Тинькофф'
-                                    color={CATEGORIES[category].color}
-                                    icon={CATEGORIES[category].icon}
-                                    key={id}
-                                    subtitle='Some text'
-                                    title={CATEGORIES[category].title}
-                                    type={operationType}
-                                    value={amount}
-                                />
-                            ))}
-                        </View>
+                        <Operation
+                            bankName='Тинькофф'
+                            color={CATEGORIES[operation.category].color}
+                            icon={CATEGORIES[operation.category].icon}
+                            key={operation.id}
+                            subtitle='Some text'
+                            title={CATEGORIES[operation.category].title}
+                            type={operation.operationType}
+                            value={operation.amount}
+                        />
                     </View>
                 )}
                 style={baseStyles.container}
