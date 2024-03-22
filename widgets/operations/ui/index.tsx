@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 
 import { getDay, isToday, isYesterday, startOfMonth } from 'date-fns'
+import { isEmpty } from 'lodash'
 import { FormattedDate, FormattedMessage } from 'react-intl'
 import { FlatList, Text, View, ViewToken } from 'react-native'
 
@@ -10,6 +11,7 @@ import { COLORS } from '@/shared/constants'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { baseStyles, typographyStyles } from '@/shared/styles'
 
+import { EmptyState } from './EmptyState'
 import { Header } from './Header'
 
 export const Operations = () => {
@@ -22,6 +24,10 @@ export const Operations = () => {
 
         setCurrentMonthAndYear(startOfMonth(date).getTime())
     }, [])
+
+    if (isEmpty(operations)) {
+        return <EmptyState />
+    }
 
     return (
         <>
