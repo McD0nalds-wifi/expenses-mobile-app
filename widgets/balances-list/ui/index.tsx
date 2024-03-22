@@ -3,7 +3,7 @@ import React from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { FlatList, TouchableOpacity } from 'react-native'
 
-import { IBalance, selectBalances } from '@/entities/balance'
+import { IBalance, balancesSelectors } from '@/entities/balance'
 import { CONTAINER_PADDING } from '@/shared/constants'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 
@@ -14,7 +14,7 @@ interface IBalancesListProps {
 }
 
 export const BalancesList = ({ onSelectBalance }: IBalancesListProps) => {
-    const balances = useTypedSelector(selectBalances)
+    const balances = useTypedSelector(balancesSelectors.selectAll)
 
     return (
         <FlatList

@@ -1,65 +1,49 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
+import { RootStateType } from '@/shared/store/types'
 import { uuid } from '@/shared/uuid'
 
 import { balanceDatabase } from '../database'
 import { IBalance } from '../types'
 
-interface ISliceState {
-    balances: Array<IBalance>
-}
+const balancesAdapter = createEntityAdapter({
+    selectId: (balance: IBalance) => balance.id,
+})
 
-const initialState: ISliceState = { balances: [] }
-
-export const balanceSlice = createSlice({
-    initialState,
-    name: 'balance',
+export const balancesSlice = createSlice({
+    initialState: balancesAdapter.getInitialState(),
+    name: 'balances',
     reducers: {
         addBalance: (state, { payload }: PayloadAction<Omit<IBalance, 'id'>>) => {
             const id = uuid()
 
             balanceDatabase.insertBalance(id, payload.amount, payload.name, payload.type)
 
-            state.balances.push({ ...payload, id })
+            balancesAdapter.addOne(state, { ...payload, id })
         },
-        balanceDeposit: (state, { payload }: PayloadAction<{ amount: number; id: string }>) => {
-            state.balances = state.balances.map((balance) => {
-                if (payload.id !== balance.id) {
-                    return balance
-                }
-
-                balanceDatabase.updateBalanceAmount(balance.id, balance.amount + payload.amount)
-
-                return {
-                    ...balance,
-                    amount: balance.amount + payload.amount,
-                }
+        balanceDeposit: (state, { payload: { amount, id } }: PayloadAction<{ amount: number; id: string }>) => {
+            balancesAdapter.updateOne(state, {
+                changes: { amount: state.entities[id].amount + amount },
+                id,
             })
         },
-        balanceWithdrawal: (state, { payload }: PayloadAction<{ amount: number; id: string }>) => {
-            state.balances = state.balances.map((balance) => {
-                if (payload.id !== balance.id) {
-                    return balance
-                }
-
-                balanceDatabase.updateBalanceAmount(balance.id, balance.amount - payload.amount)
-
-                return {
-                    ...balance,
-                    amount: balance.amount - payload.amount,
-                }
+        balanceWithdrawal: (state, { payload: { amount, id } }: PayloadAction<{ amount: number; id: string }>) => {
+            balancesAdapter.updateOne(state, {
+                changes: { amount: state.entities[id].amount - amount },
+                id,
             })
         },
         initializeBalances: (state, { payload }: PayloadAction<Array<IBalance>>) => {
-            state.balances = payload
+            balancesAdapter.setAll(state, payload)
         },
-    },
-    selectors: {
-        selectBalance: ({ balances }, balanceId: string) => balances.find(({ id }) => id === balanceId),
-        selectBalances: ({ balances }) => balances,
     },
 })
 
-export const { addBalance, balanceDeposit, balanceWithdrawal, initializeBalances } = balanceSlice.actions
+export const { addBalance, balanceDeposit, balanceWithdrawal, initializeBalances } = balancesSlice.actions
 
-export const { selectBalances, selectBalance } = balanceSlice.selectors
+const adapterSelectors = balancesAdapter.getSelectors<RootStateType>((state) => state.balances)
+
+export const balancesSelectors = {
+    selectAll: adapterSelectors.selectAll,
+    selectById: adapterSelectors.selectById,
+}

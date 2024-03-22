@@ -1,13 +1,12 @@
 export { Balance } from './ui'
 export { AddBalance } from './ui/AddBalance'
 export {
-    balanceSlice,
-    selectBalances,
-    selectBalance,
+    balancesSlice,
     addBalance,
     initializeBalances,
     balanceDeposit,
     balanceWithdrawal,
+    balancesSelectors,
 } from './model'
 export { balanceDatabase } from './database'
 export { IBalance, BalanceType } from './types'

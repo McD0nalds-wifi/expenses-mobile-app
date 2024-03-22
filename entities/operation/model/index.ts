@@ -42,7 +42,10 @@ export const operationsSlice = createSlice({
         },
         selectTopExpensesByMonthAndYear: (state, top: number, date: number) => {
             const operationsByMonthAndYear = Object.values(state.entities).filter(
-                (operation) => getYear(operation.date) === getYear(date) && getMonth(operation.date) === getMonth(date),
+                (operation) =>
+                    operation.operationType === 'expenses' &&
+                    getYear(operation.date) === getYear(date) &&
+                    getMonth(operation.date) === getMonth(date),
             )
 
             const expenses = operationsByMonthAndYear.reduce<Record<string, number>>((acc, { amount, category }) => {
@@ -59,7 +62,10 @@ export const operationsSlice = createSlice({
 
             return {
                 otherExpensesAmount: sortedExpenses.slice(top).reduce((acc, [_, amount]) => acc + amount, 0),
-                topExpenses: sortedExpenses.slice(0, top) as [[CategoryType, number]],
+                topExpenses: sortedExpenses.slice(0, top).map(([category, amount]) => ({
+                    amount,
+                    category: category as CategoryType,
+                })),
             }
         },
     },

@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router'
 import { NativeSyntheticEvent, StyleSheet, TouchableOpacity, View } from 'react-native'
 import PagerView from 'react-native-pager-view'
 
-import { AddBalance, Balance, selectBalances } from '@/entities/balance'
+import { AddBalance, Balance, balancesSelectors } from '@/entities/balance'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ROUTES } from '@/shared/routes'
 import { baseStyles } from '@/shared/styles'
@@ -18,7 +18,7 @@ export const Balances = () => {
 
     const [currentPageIndex, setCurrentPageIndex] = useState(DEFAULT_PAGE_INDEX)
 
-    const balances = useTypedSelector(selectBalances)
+    const balances = useTypedSelector(balancesSelectors.selectAll)
 
     const handlePagerViewScroll = useCallback(
         ({ nativeEvent }: NativeSyntheticEvent<Readonly<{ offset: number; position: number }>>) => {
@@ -35,14 +35,14 @@ export const Balances = () => {
         (balanceId: string) => () => {
             push(ROUTES.addOperation.getRoute(balanceId, 'expenses'))
         },
-        [],
+        [push],
     )
 
     const handleAddIncome = useCallback(
         (balanceId: string) => () => {
             push(ROUTES.addOperation.getRoute(balanceId, 'income'))
         },
-        [],
+        [push],
     )
 
     return (

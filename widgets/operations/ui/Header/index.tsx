@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { View } from 'react-native'
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
@@ -26,6 +26,24 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
         operationsSelectors.selectTopExpensesByMonthAndYear(state, 5, currentMonthAndYear),
     )
 
+    const chartsData = useMemo(
+        () => [
+            ...topExpenses.map(({ amount, category }) => ({
+                color: CATEGORIES[category].color,
+                value: amount,
+            })),
+            ...(otherExpensesAmount > 0
+                ? [
+                      {
+                          color: CATEGORIES.other.color,
+                          value: otherExpensesAmount,
+                      },
+                  ]
+                : []),
+        ],
+        [otherExpensesAmount, topExpenses],
+    )
+
     const accordionAnimatedStyle = useAnimatedStyle(() => {
         return {
             height: accordionOpen
@@ -40,7 +58,7 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
         }
     })
 
-    const testAnimatedStyle = useAnimatedStyle(() => {
+    const barChartAnimatedStyle = useAnimatedStyle(() => {
         return {
             opacity: accordionOpen ? withTiming(0, { duration: 200 }) : withTiming(1, { duration: 500 }),
         }
@@ -63,20 +81,7 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
                 >
                     <Animated.View style={[donutChartAnimatedStyle, { alignItems: 'center' }]}>
                         <DonutChart
-                            items={
-                                accordionOpen
-                                    ? [
-                                          ...topExpenses.map(([category, amount]) => ({
-                                              color: CATEGORIES[category].color,
-                                              value: amount,
-                                          })),
-                                          {
-                                              color: CATEGORIES.other.color,
-                                              value: otherExpensesAmount,
-                                          },
-                                      ]
-                                    : []
-                            }
+                            items={accordionOpen ? chartsData : []}
                             outerStrokeWidth={20}
                             radius={70}
                             strokeWidth={20}
@@ -84,7 +89,7 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
                     </Animated.View>
 
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 24 }}>
-                        {topExpenses.map(([category, amount]) => (
+                        {topExpenses.map(({ amount, category }) => (
                             <Chip
                                 color={CATEGORIES[category].color}
                                 key={CATEGORIES[category].id}
@@ -92,23 +97,16 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
                                 value={amount}
                             />
                         ))}
+
+                        {otherExpensesAmount > 0 && (
+                            <Chip color={CATEGORIES.other.color} title='Прочее' value={otherExpensesAmount} />
+                        )}
                     </View>
                 </View>
             </Animated.View>
 
-            <Animated.View style={testAnimatedStyle}>
-                <BarChart
-                    items={[
-                        ...topExpenses.map(([category, amount]) => ({
-                            color: CATEGORIES[category].color,
-                            value: amount,
-                        })),
-                        {
-                            color: CATEGORIES.other.color,
-                            value: otherExpensesAmount,
-                        },
-                    ]}
-                />
+            <Animated.View style={barChartAnimatedStyle}>
+                <BarChart items={chartsData} />
             </Animated.View>
         </View>
     )

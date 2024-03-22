@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { Canvas, Path, Skia } from '@shopify/react-native-skia'
-import { Text, View } from 'react-native'
-import Animated, {
-    FadeIn,
-    SlideOutLeft,
-    ZoomIn,
-    ZoomOut,
-    useAnimatedStyle,
-    useSharedValue,
-    withTiming,
-} from 'react-native-reanimated'
+import { View } from 'react-native'
+import { useSharedValue } from 'react-native-reanimated'
 
 import { COLORS } from '@/shared/constants'
 
@@ -55,12 +47,6 @@ export const DonutChart = ({ items, outerStrokeWidth, radius, strokeWidth }: IDo
 
     const path = Skia.Path.Make()
     path.addCircle(radius, radius, innerRadius)
-
-    useEffect(() => {
-        return () => {
-            console.log('unmount')
-        }
-    }, [])
 
     return (
         <View

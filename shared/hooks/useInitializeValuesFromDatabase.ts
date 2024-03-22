@@ -8,17 +8,17 @@ import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { store } from '@/shared/store'
 
 export const useInitializeValuesFromDatabase = () => {
-    const { balance: balanceSlice, operations: operationsSlice } = store.getState()
+    const { balances: balancesSlice, operations: operationsSlice } = store.getState()
 
     const dispatch = useTypedDispatch()
 
     useEffect(() => {
-        if (!isEmpty(balanceSlice.balances)) {
+        if (!isEmpty(balancesSlice.ids)) {
             return
         }
 
         balanceDatabase.getBalances((balances) => dispatch(initializeBalances(balances)))
-    }, [dispatch, balanceSlice])
+    }, [dispatch, balancesSlice.ids])
 
     useEffect(() => {
         if (!isEmpty(operationsSlice.ids)) {
@@ -26,5 +26,5 @@ export const useInitializeValuesFromDatabase = () => {
         }
 
         operationDatabase.getOperations((operations) => dispatch(initializeOperations(operations)))
-    }, [dispatch, operationsSlice])
+    }, [dispatch, operationsSlice.ids])
 }

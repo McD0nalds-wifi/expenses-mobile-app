@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 import { AntDesign } from '@expo/vector-icons'
-import { FormattedNumber } from 'react-intl'
+import { FormattedMessage, FormattedNumber } from 'react-intl'
 import { StyleSheet, Text, View } from 'react-native'
 
 import { COLORS, CURRENT_CURRENCY } from '@/shared/constants'
@@ -43,7 +43,7 @@ export const Balance = memo(({ amount, onAddExpense, onAddIncome, subtitle, titl
                     style={{ flexGrow: 1 }}
                     type='primary'
                 >
-                    Потратить
+                    <FormattedMessage defaultMessage='Потратить' id='4u9zlX' />
                 </Button>
 
                 <Button
@@ -53,7 +53,7 @@ export const Balance = memo(({ amount, onAddExpense, onAddIncome, subtitle, titl
                     style={{ flexGrow: 1 }}
                     type='primary'
                 >
-                    Пополнить
+                    <FormattedMessage defaultMessage='Пополнить' id='VITanR' />
                 </Button>
             </View>
         </View>
