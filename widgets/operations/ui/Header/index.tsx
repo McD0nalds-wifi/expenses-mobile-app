@@ -4,7 +4,9 @@ import { View } from 'react-native'
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 
 import { CATEGORIES } from '@/entities/category'
+import { operationsSelectors } from '@/entities/operation'
 import { useBoolean } from '@/shared/hooks/useBoolean'
+import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { baseStyles } from '@/shared/styles'
 import { DonutChart } from '@/shared/uikit'
 
@@ -13,35 +15,16 @@ import { Chip } from '../Chip'
 import { Expenses } from '../Expenses'
 
 interface IHeaderProps {
-    currentMonthAndYear?: number
+    currentMonthAndYear: number
 }
-
-const data = [
-    {
-        color: CATEGORIES.car.color,
-        value: 2300,
-    },
-    {
-        color: CATEGORIES.cafe.color,
-        value: 10,
-    },
-    {
-        color: CATEGORIES.education.color,
-        value: 7000,
-    },
-    {
-        color: CATEGORIES.products.color,
-        value: 4000,
-    },
-    {
-        color: CATEGORIES.entertainments.color,
-        value: 3000,
-    },
-]
 
 export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
     const { value: accordionOpen, toggle: handleExpensesPress } = useBoolean(false)
     const [accordionContentHeight, setAccordionContentHeight] = useState(0)
+
+    const { topExpenses, otherExpensesAmount } = useTypedSelector((state) =>
+        operationsSelectors.selectTopExpensesByMonthAndYear(state, 5, currentMonthAndYear),
+    )
 
     const accordionAnimatedStyle = useAnimatedStyle(() => {
         return {
@@ -80,7 +63,20 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
                 >
                     <Animated.View style={[donutChartAnimatedStyle, { alignItems: 'center' }]}>
                         <DonutChart
-                            items={accordionOpen ? data : []}
+                            items={
+                                accordionOpen
+                                    ? [
+                                          ...topExpenses.map(([category, amount]) => ({
+                                              color: CATEGORIES[category].color,
+                                              value: amount,
+                                          })),
+                                          {
+                                              color: CATEGORIES.other.color,
+                                              value: otherExpensesAmount,
+                                          },
+                                      ]
+                                    : []
+                            }
                             outerStrokeWidth={20}
                             radius={70}
                             strokeWidth={20}
@@ -88,17 +84,31 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
                     </Animated.View>
 
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 24 }}>
-                        {Object.values(CATEGORIES)
-                            .slice(0, 6)
-                            .map(({ color, title, id }) => (
-                                <Chip color={color} key={id} title={title} value={10000} />
-                            ))}
+                        {topExpenses.map(([category, amount]) => (
+                            <Chip
+                                color={CATEGORIES[category].color}
+                                key={CATEGORIES[category].id}
+                                title={CATEGORIES[category].title}
+                                value={amount}
+                            />
+                        ))}
                     </View>
                 </View>
             </Animated.View>
 
             <Animated.View style={testAnimatedStyle}>
-                <BarChart items={data} />
+                <BarChart
+                    items={[
+                        ...topExpenses.map(([category, amount]) => ({
+                            color: CATEGORIES[category].color,
+                            value: amount,
+                        })),
+                        {
+                            color: CATEGORIES.other.color,
+                            value: otherExpensesAmount,
+                        },
+                    ]}
+                />
             </Animated.View>
         </View>
     )

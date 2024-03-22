@@ -1,5 +1,7 @@
 import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { getMonth, getYear } from 'date-fns'
 
+import { CategoryType } from '@/entities/category'
 import { RootStateType } from '@/shared/store/types'
 import { uuid } from '@/shared/uuid'
 
@@ -32,8 +34,44 @@ export const operationsSlice = createSlice({
             operationsAdapter.setAll(state, payload)
         },
     },
+    selectors: {
+        selectExpensesByMonthAndYear: (state, date: number) => {
+            return Object.values(state.entities).filter(
+                (operation) => getYear(operation.date) === getYear(date) && getMonth(operation.date) === getMonth(date),
+            )
+        },
+        selectTopExpensesByMonthAndYear: (state, top: number, date: number) => {
+            const operationsByMonthAndYear = Object.values(state.entities).filter(
+                (operation) => getYear(operation.date) === getYear(date) && getMonth(operation.date) === getMonth(date),
+            )
+
+            const expenses = operationsByMonthAndYear.reduce<Record<string, number>>((acc, { amount, category }) => {
+                if (acc[category]) {
+                    acc[category] += amount
+                } else {
+                    acc[category] = amount
+                }
+
+                return acc
+            }, {})
+
+            const sortedExpenses = Object.entries(expenses).sort((a, b) => a[1] - b[1])
+
+            return {
+                otherExpensesAmount: sortedExpenses.slice(top).reduce((acc, [_, amount]) => acc + amount, 0),
+                topExpenses: sortedExpenses.slice(0, top) as [[CategoryType, number]],
+            }
+        },
+    },
 })
 
 export const { addOperation, initializeOperations } = operationsSlice.actions
 
-export const operationsSelectors = operationsAdapter.getSelectors<RootStateType>((state) => state.operations)
+const adapterSelectors = operationsAdapter.getSelectors<RootStateType>((state) => state.operations)
+
+export const operationsSelectors = {
+    selectAll: adapterSelectors.selectAll,
+    selectById: adapterSelectors.selectById,
+    selectExpensesByMonthAndYear: operationsSlice.selectors.selectExpensesByMonthAndYear,
+    selectTopExpensesByMonthAndYear: operationsSlice.selectors.selectTopExpensesByMonthAndYear,
+}

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-import { isToday, isYesterday, startOfDay, startOfMonth } from 'date-fns'
+import { getDay, isToday, isYesterday, startOfMonth } from 'date-fns'
 import { FormattedDate, FormattedMessage } from 'react-intl'
 import { FlatList, Text, View, ViewToken } from 'react-native'
 
@@ -25,7 +25,7 @@ export const Operations = () => {
 
     return (
         <>
-            <Header currentMonthAndYear={currentMonthAndYear} />
+            <Header currentMonthAndYear={currentMonthAndYear || 0} />
 
             <FlatList
                 data={operations}
@@ -33,8 +33,7 @@ export const Operations = () => {
                 onViewableItemsChanged={handleViewableItemsChanged}
                 renderItem={({ item: operation, index }) => (
                     <View>
-                        {!operations[index - 1] ||
-                        startOfDay(operations[index - 1].date).getTime() !== startOfDay(operation.date).getTime() ? (
+                        {!operations[index - 1] || getDay(operations[index - 1].date) !== getDay(operation.date) ? (
                             <Text style={[typographyStyles.title3, { color: COLORS.primary, paddingVertical: 12 }]}>
                                 {isToday(operation.date) ? (
                                     <FormattedMessage defaultMessage='Сегодня' id='+glFq7' />

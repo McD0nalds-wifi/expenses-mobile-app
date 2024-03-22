@@ -18,7 +18,7 @@ export const BarChart = memo(({ items }: IBarChartProps) => {
     return (
         <View style={styles.wrapper}>
             {orderedItems.map(({ value, color }, index) => {
-                const percent = Math.round((value / sumOfAllValues) * 100)
+                const percent = Math.ceil((value / sumOfAllValues) * 100)
 
                 return (
                     <View
@@ -39,6 +39,7 @@ BarChart.displayName = 'BarChart'
 
 const styles = StyleSheet.create({
     wrapper: {
+        backgroundColor: 'red',
         borderRadius: 12,
         flexDirection: 'row',
         height: 14,
