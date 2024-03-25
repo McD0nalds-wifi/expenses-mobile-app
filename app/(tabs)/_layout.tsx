@@ -15,9 +15,9 @@ const TABS = [
         title: 'Операции',
     },
     {
-        iconName: 'user',
-        name: 'profile',
-        title: 'Профиль',
+        iconName: 'form',
+        name: 'plan',
+        title: 'План',
     },
 ] as const
 
