@@ -10,8 +10,8 @@ import { Operation, operationsSelectors } from '@/entities/operation'
 import { COLORS } from '@/shared/constants'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { baseStyles, typographyStyles } from '@/shared/styles'
+import { Empty } from '@/shared/uikit'
 
-import { EmptyState } from './EmptyState'
 import { Header } from './Header'
 
 export const Operations = () => {
@@ -26,7 +26,13 @@ export const Operations = () => {
     }, [])
 
     if (isEmpty(operations)) {
-        return <EmptyState />
+        return (
+            <Empty
+                description={<FormattedMessage defaultMessage='Вы еще не сделали ни одной операции.' id='fvLsMA' />}
+                iconVariant='wallet'
+                title={<FormattedMessage defaultMessage='Нет операций' id='AFqHBG' />}
+            />
+        )
     }
 
     return (

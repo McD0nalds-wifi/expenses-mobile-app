@@ -26,7 +26,12 @@ export const Budget = ({ amount, categoryType, limit }: IBudgetProps) => {
                     </Text>
 
                     <View style={{ flexDirection: 'row', gap: 4 }}>
-                        <Text style={[typographyStyles.subhedline, { color: COLORS.primary }]}>
+                        <Text
+                            style={[
+                                typographyStyles.subhedline,
+                                { color: amount === 0 ? COLORS.secondary : COLORS.primary },
+                            ]}
+                        >
                             <FormattedNumber minimumFractionDigits={2} value={amount} />
                         </Text>
 
