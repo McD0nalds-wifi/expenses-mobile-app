@@ -22,16 +22,20 @@ export const balancesSlice = createSlice({
             balancesAdapter.addOne(state, { ...payload, id })
         },
         balanceDeposit: (state, { payload: { amount, id } }: PayloadAction<{ amount: number; id: string }>) => {
-            balancesAdapter.updateOne(state, {
+            const { entities } = balancesAdapter.updateOne(state, {
                 changes: { amount: state.entities[id].amount + amount },
                 id,
             })
+
+            balanceDatabase.updateBalanceAmount(id, entities[id].amount)
         },
         balanceWithdrawal: (state, { payload: { amount, id } }: PayloadAction<{ amount: number; id: string }>) => {
-            balancesAdapter.updateOne(state, {
+            const { entities } = balancesAdapter.updateOne(state, {
                 changes: { amount: state.entities[id].amount - amount },
                 id,
             })
+
+            balanceDatabase.updateBalanceAmount(id, entities[id].amount)
         },
         initializeBalances: (state, { payload }: PayloadAction<Array<IBalance>>) => {
             balancesAdapter.setAll(state, payload)

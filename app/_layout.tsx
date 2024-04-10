@@ -91,6 +91,8 @@ function RootLayoutNav() {
 
             <Stack.Screen name={ROUTES.addOperation.name} options={{ headerShown: false, presentation: 'modal' }} />
 
+            <Stack.Screen name={ROUTES.addBudget.name} options={{ headerShown: false, presentation: 'modal' }} />
+
             <Stack.Screen name={ROUTES.categoriesList.name} options={{ headerShown: false, presentation: 'modal' }} />
 
             <Stack.Screen name={ROUTES.balancesList.name} options={{ headerShown: false, presentation: 'modal' }} />

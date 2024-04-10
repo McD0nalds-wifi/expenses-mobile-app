@@ -7,6 +7,10 @@ export const ROUTES = {
         getRoute: () => '/(modals)/addBalance' as Href<unknown>,
         name: '(modals)/addBalance',
     },
+    addBudget: {
+        getRoute: () => '/(modals)/addBudget' as Href<unknown>,
+        name: '(modals)/addBudget',
+    },
     addOperation: {
         getRoute: (balanceId: string, operationType: OperationType) =>
             ({

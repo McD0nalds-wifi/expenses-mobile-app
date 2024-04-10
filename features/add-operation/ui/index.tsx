@@ -8,10 +8,11 @@ import { OperationType, addOperation } from '@/entities/operation'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ModalHeader } from '@/shared/uikit'
+import { resetBalance, selectBalance, selectSelectedBalance } from '@/widgets/balances-list'
+import { resetCategoryType, selectSelectedCategoryType } from '@/widgets/categories-list'
 
 import { Form } from './Form'
 import { IAddOperationFormData } from './Form/validationSchema'
-import { resetSelectedValues, selectSelectedBalance, selectSelectedCategoryType, setSelectedBalance } from '../model'
 
 interface IAddOperationProps {
     defaultBalance?: IBalance
@@ -30,12 +31,13 @@ export const AddOperation = ({ defaultBalance, operationType }: IAddOperationPro
             return
         }
 
-        dispatch(setSelectedBalance(defaultBalance))
+        dispatch(selectBalance(defaultBalance))
     }, [defaultBalance, dispatch])
 
     useEffect(() => {
         return () => {
-            dispatch(resetSelectedValues())
+            dispatch(resetCategoryType())
+            dispatch(resetBalance())
         }
     }, [dispatch])
 

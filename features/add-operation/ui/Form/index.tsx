@@ -63,6 +63,7 @@ export const Form = ({ balanceTitle, category, headerSlot, onSubmit }: IFormProp
                         {balanceTitle && (
                             <TextInput
                                 editable={false}
+                                icon={<AntDesign color={COLORS.secondary} name='down' size={24} />}
                                 label='Название счета'
                                 onTouchEnd={() => push(ROUTES.balancesList.getRoute())}
                                 placeholder='Мой счет'

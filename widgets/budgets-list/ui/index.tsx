@@ -1,7 +1,9 @@
+import { Link } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 import { Text, View } from 'react-native'
 
 import { Budget } from '@/entities/budget'
+import { ROUTES } from '@/shared/routes'
 import { baseStyles, typographyStyles } from '@/shared/styles'
 import { Button, Empty } from '@/shared/uikit'
 
@@ -16,9 +18,11 @@ export const BudgetsList = () => {
                 {/*<Budget amount={12000} categoryType='car' limit={20000} />*/}
                 <Empty
                     action={
-                        <Button size='medium' type='primary'>
-                            <FormattedMessage defaultMessage='Добавить бюджет' id='kIQnR4' />
-                        </Button>
+                        <Link asChild href={ROUTES.addBudget.getRoute()}>
+                            <Button size='medium' type='primary'>
+                                <FormattedMessage defaultMessage='Добавить бюджет' id='kIQnR4' />
+                            </Button>
+                        </Link>
                     }
                     description={<FormattedMessage defaultMessage='Вы еще не создали ни один бюджет' id='CYySQ4' />}
                     iconVariant='ufo'

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, forwardRef } from 'react'
 
 import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native'
 
@@ -21,17 +21,21 @@ const TEXT_COLOR_BY_TYPE = {
     secondary: COLORS.primary,
 } as const
 
-export const Button = ({ children, iconEnd, iconStart, onPress, size, style, type }: IButtonProps) => {
-    return (
-        <TouchableOpacity onPress={onPress} style={[buttonsStyles[type], buttonsStyles[size], style]}>
-            {iconStart}
+export const Button = forwardRef<TouchableOpacity, IButtonProps>(
+    ({ children, iconEnd, iconStart, onPress, size, style, type }, ref) => {
+        return (
+            <TouchableOpacity onPress={onPress} ref={ref} style={[buttonsStyles[type], buttonsStyles[size], style]}>
+                {iconStart}
 
-            <Text style={{ ...typographyStyles.headline, color: TEXT_COLOR_BY_TYPE[type] }}>{children}</Text>
+                <Text style={{ ...typographyStyles.headline, color: TEXT_COLOR_BY_TYPE[type] }}>{children}</Text>
 
-            {iconEnd}
-        </TouchableOpacity>
-    )
-}
+                {iconEnd}
+            </TouchableOpacity>
+        )
+    },
+)
+
+Button.displayName = 'Button'
 
 const buttonsStyles = StyleSheet.create({
     danger: {

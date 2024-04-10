@@ -4,11 +4,11 @@ import { UseFormSetValue } from 'react-hook-form'
 
 import { CATEGORIES, CategoryType } from '@/entities/category'
 
-import { IAddOperationFormData } from '../ui/Form/validationSchema'
+import { IAddBudgetFormData } from '../ui/Form/validationSchema'
 
 export const useUpdateCategoryValue = (
     category: CategoryType | null,
-    setValue: UseFormSetValue<IAddOperationFormData>,
+    setValue: UseFormSetValue<IAddBudgetFormData>,
 ) => {
     useEffect(() => {
         if (!category || !CATEGORIES[category]) {
