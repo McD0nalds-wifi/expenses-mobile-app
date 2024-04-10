@@ -1,15 +1,17 @@
 import React, { ReactNode } from 'react'
 
+import { AntDesign } from '@expo/vector-icons'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'expo-router'
 import { useForm } from 'react-hook-form'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 
 import { CATEGORIES, CategoryType } from '@/entities/category'
 import { COLORS } from '@/shared/constants'
+import { ROUTES } from '@/shared/routes'
 import { baseStyles } from '@/shared/styles'
-import { TextInput } from '@/shared/uikit'
+import { Button, TextInput } from '@/shared/uikit'
 
 import { IAddBudgetFormData, generateValidationSchema } from './validationSchema'
 import { useUpdateCategoryValue } from '../../hooks/useUpdateCategoryValue'
@@ -52,16 +54,32 @@ export const Form = ({ category, headerSlot, onSubmit }: IFormProps) => {
                 <View style={styles.inner}>
                     {headerSlot}
 
-                    <TextInput
-                        error={errors?.limit?.message}
-                        inputMode='numeric'
-                        label='Лимит'
-                        placeholder='0 руб'
-                        {...register('limit')}
-                        onChangeText={(value) => setValue('limit', Number(value), { shouldValidate: true })}
-                    />
+                    <View style={styles.form}>
+                        <TextInput
+                            editable={false}
+                            error={errors?.category?.message}
+                            icon={<AntDesign color={COLORS.secondary} name='down' size={24} />}
+                            label='Выберите категорию'
+                            onTouchEnd={() => push(ROUTES.categoriesList.getRoute())}
+                            placeholder={CATEGORIES.car.title}
+                            value={categoryValue}
+                        />
 
-                    <View style={styles.space} />
+                        <View style={styles.space} />
+
+                        <TextInput
+                            error={errors?.limit?.message}
+                            inputMode='numeric'
+                            label='Лимит'
+                            placeholder='0 руб'
+                            {...register('limit')}
+                            onChangeText={(value) => setValue('limit', Number(value), { shouldValidate: true })}
+                        />
+                    </View>
+
+                    <Button onPress={handleSubmit(onSubmit)} size='large' style={{ marginTop: 'auto' }} type='primary'>
+                        <FormattedMessage defaultMessage='Добавить' id='zXkVd5' />
+                    </Button>
                 </View>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
