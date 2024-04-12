@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { balancesSlice } from '@/entities/balance'
+import { budgetsSlice } from '@/entities/budget'
 import { operationsSlice } from '@/entities/operation'
 import { APP_REDUCER_PATH, appApi } from '@/shared/api'
 import { balancesListSlice } from '@/widgets/balances-list'
@@ -13,6 +14,7 @@ export const store = configureStore({
         [operationsSlice.reducerPath]: operationsSlice.reducer,
         [categoriesListSlice.name]: categoriesListSlice.reducer,
         [balancesListSlice.name]: balancesListSlice.reducer,
+        [budgetsSlice.name]: budgetsSlice.reducer,
         [APP_REDUCER_PATH]: appApi.reducer,
     },
 })

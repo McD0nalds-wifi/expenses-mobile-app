@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { balanceDatabase } from '@/entities/balance'
+import { budgetDatabase } from '@/entities/budget'
 import { operationDatabase } from '@/entities/operation'
 
 export const useSetupDatabase = () => {
@@ -15,6 +16,9 @@ export const useSetupDatabase = () => {
 
                 // await operationDatabase.dropOperationsTablesAsync()
                 await operationDatabase.setupDatabaseAsync()
+
+                // await budgetDatabase.dropOperationsTablesAsync()
+                await budgetDatabase.setupDatabaseAsync()
 
                 setDBLoadingComplete(true)
             } catch (e) {
