@@ -2,12 +2,15 @@ import { Link } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 import { Text, View } from 'react-native'
 
-import { Budget } from '@/entities/budget'
+import { Budget, budgetsSelectors } from '@/entities/budget'
+import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ROUTES } from '@/shared/routes'
 import { baseStyles, typographyStyles } from '@/shared/styles'
 import { Button, Empty } from '@/shared/uikit'
 
 export const BudgetsList = () => {
+    const budgets = useTypedSelector(budgetsSelectors.selectAll)
+
     return (
         <View style={[baseStyles.container, { flex: 1 }]}>
             <Text style={[typographyStyles.title2, { paddingBottom: 12 }]}>
@@ -15,7 +18,10 @@ export const BudgetsList = () => {
             </Text>
 
             <View style={{ flex: 1, marginTop: 20 }}>
-                {/*<Budget amount={12000} categoryType='car' limit={20000} />*/}
+                {budgets.map(({ amount, category, spendingLimit, id }) => (
+                    <Budget amount={amount} categoryType={category} key={id} spendingLimit={spendingLimit} />
+                ))}
+
                 <Empty
                     action={
                         <Link asChild href={ROUTES.addBudget.getRoute()}>

@@ -16,7 +16,7 @@ export const budgetsSlice = createSlice({
         addBudget: (state, { payload }: PayloadAction<Omit<IBudget, 'id'>>) => {
             const id = uuid()
 
-            budgetDatabase.insertBudget(id, payload.amount, payload.limit, payload.category)
+            budgetDatabase.insertBudget(id, payload.amount, payload.spendingLimit, payload.category)
 
             budgetsAdapter.addOne(state, { ...payload, id })
         },

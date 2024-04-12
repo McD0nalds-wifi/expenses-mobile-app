@@ -9,10 +9,10 @@ import { FontelloIcon } from '@/shared/uikit'
 interface IBudgetProps {
     amount: number
     categoryType: CategoryType
-    limit: number
+    spendingLimit: number
 }
 
-export const Budget = ({ amount, categoryType, limit }: IBudgetProps) => {
+export const Budget = ({ amount, categoryType, spendingLimit }: IBudgetProps) => {
     return (
         <View style={styles.wrapper}>
             <View style={[styles.icon, { backgroundColor: CATEGORIES[categoryType].color }]}>
@@ -42,7 +42,7 @@ export const Budget = ({ amount, categoryType, limit }: IBudgetProps) => {
                                 currency={CURRENT_CURRENCY}
                                 minimumFractionDigits={2}
                                 style='currency'
-                                value={limit}
+                                value={spendingLimit}
                             />
                         </Text>
                     </View>
@@ -54,7 +54,7 @@ export const Budget = ({ amount, categoryType, limit }: IBudgetProps) => {
                             styles.barPercentLine,
                             {
                                 backgroundColor: CATEGORIES[categoryType].color,
-                                width: `${Math.round(amount / (limit * 0.01))}%`,
+                                width: `${Math.round(amount / (spendingLimit * 0.01))}%`,
                             },
                         ]}
                     />

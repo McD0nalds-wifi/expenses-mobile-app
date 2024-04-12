@@ -17,7 +17,7 @@ export const useSetupDatabase = () => {
                 // await operationDatabase.dropOperationsTablesAsync()
                 await operationDatabase.setupDatabaseAsync()
 
-                // await budgetDatabase.dropOperationsTablesAsync()
+                // await budgetDatabase.dropBudgetsTablesAsync()
                 await budgetDatabase.setupDatabaseAsync()
 
                 setDBLoadingComplete(true)

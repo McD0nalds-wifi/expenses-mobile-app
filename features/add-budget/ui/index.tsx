@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 
+import { useAddBudget } from '@/entities/budget'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ModalHeader } from '@/shared/uikit'
@@ -17,27 +18,20 @@ export const AddBudget = () => {
 
     const selectedCategoryType = useTypedSelector(selectSelectedCategoryType)
 
+    const addBudget = useAddBudget()
+
     useEffect(() => {
         return () => {
             dispatch(resetCategoryType())
         }
     }, [dispatch])
 
-    const handleSubmit = ({}: IAddBudgetFormData) => {
+    const handleSubmit = ({ limit }: IAddBudgetFormData) => {
         if (!selectedCategoryType) {
             return
         }
 
-        // TODO
-        // dispatch(
-        //     addOperation({
-        //         amount,
-        //         balanceId: selectedBalance.id,
-        //         category: selectedCategoryType,
-        //         date: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0).getTime(),
-        //         operationType,
-        //     }),
-        // )
+        addBudget({ category: selectedCategoryType, spendingLimit: limit })
 
         back()
     }

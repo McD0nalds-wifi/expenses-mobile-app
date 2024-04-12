@@ -4,5 +4,5 @@ export interface IBudget {
     amount: number
     category: CategoryType
     id: string
-    limit: number
+    spendingLimit: number
 }

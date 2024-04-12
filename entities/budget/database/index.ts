@@ -11,20 +11,20 @@ const getBudgets = (setBudgetsFunc: (budgets: Array<IBudget>) => void) => {
     })
 }
 
-const insertBudget = (id: string, amount: number, limit: number, category: CategoryType) => {
+const insertBudget = (id: string, amount: number, spendingLimit: number, category: CategoryType) => {
     db.transaction((tx) => {
-        tx.executeSql('INSERT INTO budgets (id, amount, limit, category) values (?,?,?,?)', [
+        tx.executeSql('INSERT INTO budgets (id, amount, spendingLimit, category) values (?,?,?,?)', [
             id,
             amount,
-            limit,
+            spendingLimit,
             category,
         ])
     })
 }
 
-const updateBudgetLimit = (id: string, limit: number) => {
+const updateBudgetSpendingLimit = (id: string, spendingLimit: number) => {
     db.transaction((tx) => {
-        tx.executeSql('UPDATE budgets SET limit = ? WHERE id = ?', [limit, id])
+        tx.executeSql('UPDATE budgets SET spendingLimit = ? WHERE id = ?', [spendingLimit, id])
     })
 }
 
@@ -56,7 +56,7 @@ const setupDatabaseAsync = async () => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS budgets (id TEXT PRIMARY KEY NOT null, amount INT, limit INT, category TEXT)',
+                'CREATE TABLE IF NOT EXISTS budgets (id TEXT PRIMARY KEY NOT null, amount INT, spendingLimit INT, category TEXT)',
                 [],
                 (_, result) => {
                     resolve(result)
@@ -76,5 +76,5 @@ export const budgetDatabase = {
     insertBudget,
     setupDatabaseAsync,
     updateBudgetAmount,
-    updateBudgetLimit,
+    updateBudgetSpendingLimit,
 }
