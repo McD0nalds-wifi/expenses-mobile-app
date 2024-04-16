@@ -3,8 +3,8 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 
-import { IBalance, balanceDeposit, balanceWithdrawal } from '@/entities/balance'
-import { OperationType, addOperation } from '@/entities/operation'
+import { IBalance } from '@/entities/balance'
+import { OperationType, useAddOperation } from '@/entities/operation'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ModalHeader } from '@/shared/uikit'
@@ -22,6 +22,8 @@ interface IAddOperationProps {
 export const AddOperation = ({ defaultBalance, operationType }: IAddOperationProps) => {
     const { back } = useRouter()
     const dispatch = useTypedDispatch()
+
+    const addOperation = useAddOperation()
 
     const selectedCategoryType = useTypedSelector(selectSelectedCategoryType)
     const selectedBalance = useTypedSelector(selectSelectedBalance)
@@ -46,21 +48,7 @@ export const AddOperation = ({ defaultBalance, operationType }: IAddOperationPro
             return
         }
 
-        dispatch(
-            addOperation({
-                amount,
-                balanceId: selectedBalance.id,
-                category: selectedCategoryType,
-                date: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0).getTime(),
-                operationType,
-            }),
-        )
-
-        if (operationType === 'income') {
-            dispatch(balanceDeposit({ amount, id: selectedBalance.id }))
-        } else {
-            dispatch(balanceWithdrawal({ amount, id: selectedBalance.id }))
-        }
+        addOperation(amount, date, selectedBalance.id, selectedCategoryType, operationType)
 
         back()
     }

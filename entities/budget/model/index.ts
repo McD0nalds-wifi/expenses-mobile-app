@@ -20,13 +20,21 @@ export const budgetsSlice = createSlice({
 
             budgetsAdapter.addOne(state, { ...payload, id })
         },
+        increaseBudgetAmount: (state, { payload: { amount, id } }: PayloadAction<{ amount: number; id: string }>) => {
+            const { entities } = budgetsAdapter.updateOne(state, {
+                changes: { amount: state.entities[id].amount + amount },
+                id,
+            })
+
+            budgetDatabase.updateBudgetAmount(id, entities[id].amount)
+        },
         initializeBudgets: (state, { payload }: PayloadAction<Array<IBudget>>) => {
             budgetsAdapter.setAll(state, payload)
         },
     },
 })
 
-export const { addBudget, initializeBudgets } = budgetsSlice.actions
+export const { addBudget, initializeBudgets, increaseBudgetAmount } = budgetsSlice.actions
 
 const adapterSelectors = budgetsAdapter.getSelectors<RootStateType>((state) => state.budgets)
 
