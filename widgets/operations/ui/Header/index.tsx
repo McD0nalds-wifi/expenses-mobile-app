@@ -77,7 +77,7 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
                             setAccordionContentHeight(layoutHeight)
                         }
                     }}
-                    style={{ position: 'absolute' }}
+                    style={{ position: 'absolute', width: '100%' }}
                 >
                     <Animated.View style={[donutChartAnimatedStyle, { alignItems: 'center' }]}>
                         <DonutChart
