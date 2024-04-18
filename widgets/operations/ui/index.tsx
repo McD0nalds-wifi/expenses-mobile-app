@@ -37,7 +37,7 @@ export const Operations = () => {
 
     return (
         <>
-            <Header currentMonthAndYear={currentMonthAndYear || 0} />
+            <Header currentMonthAndYear={currentMonthAndYear} />
 
             <FlatList
                 data={operations}

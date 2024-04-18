@@ -9,11 +9,12 @@ import { useBoolean } from '@/shared/hooks/useBoolean'
 import { typographyStyles } from '@/shared/styles'
 
 interface IExpenses {
+    amount: number
     currentMonthAndYear?: number
     onExpensesPress?: () => void
 }
 
-export const Expenses = ({ currentMonthAndYear, onExpensesPress = noop }: IExpenses) => {
+export const Expenses = ({ amount, currentMonthAndYear, onExpensesPress = noop }: IExpenses) => {
     const { value: expensesArrowUp, toggle: handleExpensesArrowClick } = useBoolean(false)
 
     return (
@@ -44,7 +45,7 @@ export const Expenses = ({ currentMonthAndYear, onExpensesPress = noop }: IExpen
                 style={{ alignItems: 'center', flexDirection: 'row', gap: 8 }}
             >
                 <Text style={[typographyStyles.body, { color: COLORS.blue }]}>
-                    <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={100000} />
+                    <FormattedNumber currency={CURRENT_CURRENCY} style='currency' value={amount} />
                 </Text>
 
                 <AntDesign color={COLORS.blue} name={expensesArrowUp ? 'up' : 'down'} size={14} />

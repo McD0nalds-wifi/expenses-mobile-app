@@ -60,12 +60,28 @@ export const operationsSlice = createSlice({
 
             const sortedExpenses = Object.entries(expenses).sort((a, b) => a[1] - b[1])
 
+            const { otherExpensesAmount, topExpenses, topExpensesAmount } = sortedExpenses.slice(0, top).reduce<{
+                otherExpensesAmount: number
+                topExpenses: Array<{ amount: number; category: CategoryType }>
+                topExpensesAmount: number
+            }>(
+                (acc, [category, amount], index) => {
+                    if (index + 1 >= top) {
+                        acc.otherExpensesAmount += amount
+                    } else {
+                        acc.topExpensesAmount += amount
+                        acc.topExpenses.push({ amount, category: category as CategoryType })
+                    }
+
+                    return acc
+                },
+                { otherExpensesAmount: 0, topExpenses: [], topExpensesAmount: 0 },
+            )
+
             return {
-                otherExpensesAmount: sortedExpenses.slice(top).reduce((acc, [_, amount]) => acc + amount, 0),
-                topExpenses: sortedExpenses.slice(0, top).map(([category, amount]) => ({
-                    amount,
-                    category: category as CategoryType,
-                })),
+                otherExpensesAmount,
+                topExpenses,
+                topExpensesAmount,
             }
         },
     },

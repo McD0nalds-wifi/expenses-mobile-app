@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 
+import { startOfToday } from 'date-fns'
 import { View } from 'react-native'
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 
@@ -15,14 +16,16 @@ import { Chip } from '../Chip'
 import { Expenses } from '../Expenses'
 
 interface IHeaderProps {
-    currentMonthAndYear: number
+    currentMonthAndYear?: number
 }
 
-export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
+const today = startOfToday().getTime()
+
+export const Header = ({ currentMonthAndYear = today }: IHeaderProps) => {
     const { value: accordionOpen, toggle: handleExpensesPress } = useBoolean(false)
     const [accordionContentHeight, setAccordionContentHeight] = useState(0)
 
-    const { topExpenses, otherExpensesAmount } = useTypedSelector((state) =>
+    const { topExpenses, topExpensesAmount, otherExpensesAmount } = useTypedSelector((state) =>
         operationsSelectors.selectTopExpensesByMonthAndYear(state, 5, currentMonthAndYear),
     )
 
@@ -66,7 +69,11 @@ export const Header = ({ currentMonthAndYear }: IHeaderProps) => {
 
     return (
         <View style={[baseStyles.container, { paddingBottom: 16 }]}>
-            <Expenses currentMonthAndYear={currentMonthAndYear} onExpensesPress={handleExpensesPress} />
+            <Expenses
+                amount={topExpensesAmount + otherExpensesAmount}
+                currentMonthAndYear={currentMonthAndYear}
+                onExpensesPress={handleExpensesPress}
+            />
 
             <Animated.View style={[accordionAnimatedStyle, { overflow: 'hidden' }]}>
                 <View
