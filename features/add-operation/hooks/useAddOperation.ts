@@ -1,11 +1,9 @@
 import { balanceDeposit, balanceWithdrawal } from '@/entities/balance'
 import { budgetsSelectors, increaseBudgetAmount } from '@/entities/budget'
 import { CategoryType } from '@/entities/category'
+import { OperationType, addOperation } from '@/entities/operation'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
-
-import { addOperation } from '../model'
-import { OperationType } from '../types'
 
 export const useAddOperation = () => {
     const dispatch = useTypedDispatch()

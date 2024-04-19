@@ -1,2 +1,2 @@
 export { BalancesList } from './ui'
-export { balancesListSlice, selectBalance, resetBalance, selectSelectedBalance } from './model'
+export { balancesListSlice, selectBalance, resetBalance, balancesListSelectors } from './model'

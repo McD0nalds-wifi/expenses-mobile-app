@@ -1,16 +1,12 @@
-import { IBudget } from '@/entities/budget'
+import { IBudget, addBudget } from '@/entities/budget'
 import { operationsSelectors } from '@/entities/operation'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 
-import { addBudget } from '../model'
-
 export const useAddBudget = () => {
     const dispatch = useTypedDispatch()
 
-    const operations = useTypedSelector((state) =>
-        operationsSelectors.selectExpensesByMonthAndYear(state, new Date().getTime()),
-    )
+    const operations = useTypedSelector(operationsSelectors.selectExpensesByMonthAndYear(new Date().getTime()))
 
     return ({ category, spendingLimit }: Omit<IBudget, 'id' | 'amount'>) => {
         const amount = operations.reduce(

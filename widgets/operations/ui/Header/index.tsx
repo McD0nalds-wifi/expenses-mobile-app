@@ -25,8 +25,8 @@ export const Header = ({ currentMonthAndYear = today }: IHeaderProps) => {
     const { value: accordionOpen, toggle: handleExpensesPress } = useBoolean(false)
     const [accordionContentHeight, setAccordionContentHeight] = useState(0)
 
-    const { topExpenses, topExpensesAmount, otherExpensesAmount } = useTypedSelector((state) =>
-        operationsSelectors.selectTopExpensesByMonthAndYear(state, 5, currentMonthAndYear),
+    const { topExpenses, topExpensesAmount, otherExpensesAmount } = useTypedSelector(
+        operationsSelectors.selectTopExpensesByMonthAndYear(5, currentMonthAndYear),
     )
 
     const chartsData = useMemo(

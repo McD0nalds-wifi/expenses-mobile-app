@@ -4,15 +4,16 @@ import { useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 
 import { IBalance } from '@/entities/balance'
-import { OperationType, useAddOperation } from '@/entities/operation'
+import { OperationType } from '@/entities/operation'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ModalHeader } from '@/shared/uikit'
-import { resetBalance, selectBalance, selectSelectedBalance } from '@/widgets/balances-list'
-import { resetCategoryType, selectSelectedCategoryType } from '@/widgets/categories-list'
+import { balancesListSelectors, resetBalance, selectBalance } from '@/widgets/balances-list'
+import { categoriesListSelectors, resetCategoryType } from '@/widgets/categories-list'
 
 import { Form } from './Form'
 import { IAddOperationFormData } from './Form/validationSchema'
+import { useAddOperation } from '../hooks/useAddOperation'
 
 interface IAddOperationProps {
     defaultBalance?: IBalance
@@ -25,8 +26,8 @@ export const AddOperation = ({ defaultBalance, operationType }: IAddOperationPro
 
     const addOperation = useAddOperation()
 
-    const selectedCategoryType = useTypedSelector(selectSelectedCategoryType)
-    const selectedBalance = useTypedSelector(selectSelectedBalance)
+    const selectedCategoryType = useTypedSelector(categoriesListSelectors.selectSelectedCategoryType)
+    const selectedBalance = useTypedSelector(balancesListSelectors.selectSelectedBalance)
 
     useEffect(() => {
         if (!defaultBalance) {

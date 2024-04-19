@@ -3,20 +3,20 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'expo-router'
 import { FormattedMessage } from 'react-intl'
 
-import { useAddBudget } from '@/entities/budget'
 import { useTypedDispatch } from '@/shared/hooks/useTypedDispatch'
 import { useTypedSelector } from '@/shared/hooks/useTypedSelector'
 import { ModalHeader } from '@/shared/uikit'
-import { resetCategoryType, selectSelectedCategoryType } from '@/widgets/categories-list'
+import { categoriesListSelectors, resetCategoryType } from '@/widgets/categories-list'
 
 import { Form } from './Form'
 import { IAddBudgetFormData } from './Form/validationSchema'
+import { useAddBudget } from '../hooks/useAddBudget'
 
 export const AddBudget = () => {
     const { back } = useRouter()
     const dispatch = useTypedDispatch()
 
-    const selectedCategoryType = useTypedSelector(selectSelectedCategoryType)
+    const selectedCategoryType = useTypedSelector(categoriesListSelectors.selectSelectedCategoryType)
 
     const addBudget = useAddBudget()
 

@@ -1,6 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit'
 
 import { IBalance } from '@/entities/balance'
+import { RootStateType } from '@/shared/store/types'
 
 interface ISliceState {
     selectedBalance: IBalance | null
@@ -19,11 +20,14 @@ export const balancesListSlice = createSlice({
             state.selectedBalance = payload
         },
     },
-    selectors: {
-        selectSelectedBalance: ({ selectedBalance }) => selectedBalance,
-    },
 })
+
+const selectBalancesListSliceState = (state: RootStateType) => state.balancesList
+
+const selectSelectedBalance = createSelector([selectBalancesListSliceState], ({ selectedBalance }) => selectedBalance)
 
 export const { selectBalance, resetBalance } = balancesListSlice.actions
 
-export const { selectSelectedBalance } = balancesListSlice.selectors
+export const balancesListSelectors = {
+    selectSelectedBalance,
+}

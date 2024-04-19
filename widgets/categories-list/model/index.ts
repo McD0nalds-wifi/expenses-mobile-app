@@ -1,6 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit'
 
 import { CategoryType } from '@/entities/category'
+import { RootStateType } from '@/shared/store/types'
 
 interface ISliceState {
     selectedCategoryType: CategoryType | null
@@ -19,11 +20,17 @@ export const categoriesListSlice = createSlice({
             state.selectedCategoryType = payload
         },
     },
-    selectors: {
-        selectSelectedCategoryType: ({ selectedCategoryType }) => selectedCategoryType,
-    },
 })
+
+const selectCategoriesListSliceState = (state: RootStateType) => state.categoriesList
+
+const selectSelectedCategoryType = createSelector(
+    [selectCategoriesListSliceState],
+    ({ selectedCategoryType }) => selectedCategoryType,
+)
 
 export const { selectCategoryType, resetCategoryType } = categoriesListSlice.actions
 
-export const { selectSelectedCategoryType } = categoriesListSlice.selectors
+export const categoriesListSelectors = {
+    selectSelectedCategoryType,
+}
