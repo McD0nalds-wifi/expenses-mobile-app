@@ -52,7 +52,6 @@ export const BudgetsList = () => {
                                 categoryType={category}
                                 key={id}
                                 onDeleteButtonPress={() => null}
-                                onEditButtonPress={() => null}
                                 spendingLimit={spendingLimit}
                             />
                         ))}

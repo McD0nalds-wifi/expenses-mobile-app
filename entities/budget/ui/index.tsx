@@ -12,17 +12,10 @@ interface IBudgetProps {
     amount: number
     categoryType: CategoryType
     onDeleteButtonPress: () => void
-    onEditButtonPress: () => void
     spendingLimit: number
 }
 
-export const Budget = ({
-    amount,
-    categoryType,
-    onDeleteButtonPress,
-    onEditButtonPress,
-    spendingLimit,
-}: IBudgetProps) => {
+export const Budget = ({ amount, categoryType, onDeleteButtonPress, spendingLimit }: IBudgetProps) => {
     return (
         <GestureHandlerRootView>
             <Swipeable
@@ -30,18 +23,8 @@ export const Budget = ({
                 containerStyle={{ overflow: 'visible' }}
                 renderRightActions={() => (
                     <View style={styles.actions}>
-                        <TouchableOpacity
-                            onPress={onEditButtonPress}
-                            style={[styles.actionButton, { backgroundColor: COLORS.blue }]}
-                        >
-                            <AntDesign color={COLORS.white} name='edit' size={20} />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            onPress={onDeleteButtonPress}
-                            style={[styles.actionButton, { backgroundColor: COLORS.red }]}
-                        >
-                            <AntDesign color={COLORS.white} name='delete' size={20} />
+                        <TouchableOpacity onPress={onDeleteButtonPress} style={styles.actionButton}>
+                            <AntDesign color={COLORS.red} name='delete' size={24} />
                         </TouchableOpacity>
                     </View>
                 )}
@@ -101,8 +84,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 120,
         display: 'flex',
+        // elevation: 16,
         height: 44,
         justifyContent: 'center',
+
+        // shadowColor: COLORS.primary,
+        // shadowOffset: {
+        //     height: 2,
+        //     width: 0,
+        // },
+        // shadowOpacity: 0.2,
+        // shadowRadius: 6,
         width: 44,
     },
     actions: {
