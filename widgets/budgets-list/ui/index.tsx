@@ -45,9 +45,16 @@ export const BudgetsList = () => {
                         title={<FormattedMessage defaultMessage='Нет бюджетов' id='EJPAfB' />}
                     />
                 ) : (
-                    <View style={{ gap: 20 }}>
+                    <View style={{ gap: 24 }}>
                         {budgets.map(({ amount, category, spendingLimit, id }) => (
-                            <Budget amount={amount} categoryType={category} key={id} spendingLimit={spendingLimit} />
+                            <Budget
+                                amount={amount}
+                                categoryType={category}
+                                key={id}
+                                onDeleteButtonPress={() => null}
+                                onEditButtonPress={() => null}
+                                spendingLimit={spendingLimit}
+                            />
                         ))}
                     </View>
                 )}
