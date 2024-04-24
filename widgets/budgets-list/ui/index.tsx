@@ -47,13 +47,7 @@ export const BudgetsList = () => {
                 ) : (
                     <View style={{ gap: 24 }}>
                         {budgets.map(({ amount, category, spendingLimit, id }) => (
-                            <Budget
-                                amount={amount}
-                                categoryType={category}
-                                key={id}
-                                onDeleteButtonPress={() => null}
-                                spendingLimit={spendingLimit}
-                            />
+                            <Budget amount={amount} categoryType={category} key={id} spendingLimit={spendingLimit} />
                         ))}
                     </View>
                 )}
